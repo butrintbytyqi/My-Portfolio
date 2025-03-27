@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import {
   Box,
   Container,
@@ -15,6 +15,7 @@ import {
   DialogActions,
   CssBaseline,
   Paper,
+  useMediaQuery,
 } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion, AnimatePresence } from "framer-motion";
@@ -29,6 +30,7 @@ import StorageIcon from '@mui/icons-material/Storage';
 import CloudIcon from '@mui/icons-material/Cloud';
 import BuildIcon from '@mui/icons-material/Build';
 import SecurityIcon from '@mui/icons-material/Security';
+import LaunchIcon from '@mui/icons-material/Launch';
 import { TypeAnimation } from "react-type-animation";
 import Tilt from "react-parallax-tilt";
 import {
@@ -45,6 +47,18 @@ import "react-vertical-timeline-component/style.min.css";
 import "./App.css";
 import cv from "./downloads/ButrintBytyqiCV.pdf";
 
+// Import components
+import CodeRainAnimation from "./components/CodeRainAnimation";
+import GlitchText from "./components/GlitchText";
+import InteractiveTerminal from "./components/InteractiveTerminal";
+import TechStackCube from "./components/TechStackCube";
+import NeonSkillMeter from "./components/NeonSkillMeter";
+
+// Import new coding-themed components
+import CodeTypingAnimation from "./components/CodeTypingAnimation";
+import PageTransition from "./components/PageTransition";
+import CodeDivider from "./components/CodeDivider";
+
 // Register ChartJS components
 ChartJS.register(
   RadialLinearScale,
@@ -60,18 +74,83 @@ function App() {
     palette: {
       mode: 'dark',
       primary: {
-        main: '#2196f3',
+        main: '#ff7edb',
       },
       secondary: {
-        main: '#f50057',
+        main: '#00ffc8',
+      },
+      error: {
+        main: '#ffcc00',
       },
       background: {
-        default: '#121212',
-        paper: '#1e1e1e',
+        default: '#0a0e17',
+        paper: '#1a1f2e',
+      },
+      text: {
+        primary: '#f0f6fc',
+        secondary: '#a0a8b7',
       },
     },
     typography: {
-      fontFamily: 'Orbitron, sans-serif',
+      fontFamily: '"JetBrains Mono", "Fira Code", monospace',
+      h1: {
+        fontWeight: 700,
+      },
+      h2: {
+        fontWeight: 600,
+      },
+      h3: {
+        fontWeight: 600,
+      },
+      button: {
+        textTransform: 'none',
+        fontWeight: 500,
+      },
+    },
+    shape: {
+      borderRadius: 8,
+    },
+    components: {
+      MuiPaper: {
+        styleOverrides: {
+          root: {
+            backgroundImage: 'none',
+            border: '1px solid #252a3a',
+          },
+        },
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            textTransform: 'none',
+            borderRadius: 8,
+            padding: '8px 16px',
+            '&:hover': {
+              borderColor: '#ff7edb',
+              boxShadow: '0 0 15px rgba(255, 126, 219, 0.5)',
+            },
+          },
+          contained: {
+            boxShadow: 'none',
+            '&:hover': {
+              boxShadow: '0 0 15px rgba(255, 126, 219, 0.5)',
+            },
+          },
+        },
+      },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            borderRadius: 4,
+            backgroundColor: 'rgba(255, 126, 219, 0.1)',
+            color: '#ff7edb',
+            border: '1px solid rgba(255, 126, 219, 0.3)',
+            '&:hover': {
+              backgroundColor: 'rgba(255, 126, 219, 0.2)',
+            },
+          },
+        },
+      },
     },
   });
 
@@ -82,25 +161,91 @@ function App() {
   const particlesConfig = {
     particles: {
       number: {
-        value: 50,
+        value: 40,
         density: {
           enable: true,
           value_area: 800
         }
       },
       color: {
-        value: theme.palette.primary.main
+        value: ["#ff7edb", "#00ffc8", "#ffcc00"]
       },
-      links: {
+      shape: {
+        type: ["circle", "triangle", "polygon"],
+        options: {
+          polygon: {
+            sides: 6
+          }
+        }
+      },
+      opacity: {
+        value: 0.6,
+        random: true,
+        anim: {
+          enable: true,
+          speed: 1,
+          opacity_min: 0.1,
+          sync: false
+        }
+      },
+      size: {
+        value: 3,
+        random: true,
+        anim: {
+          enable: true,
+          speed: 2,
+          size_min: 0.1,
+          sync: false
+        }
+      },
+      line_linked: {
         enable: true,
-        color: theme.palette.primary.main,
-        opacity: 0.5
+        distance: 150,
+        color: "#252a3a",
+        opacity: 0.4,
+        width: 1
       },
       move: {
         enable: true,
-        speed: 1
+        speed: 1.5,
+        direction: "none",
+        random: true,
+        straight: false,
+        out_mode: "out",
+        bounce: false,
+        attract: {
+          enable: true,
+          rotateX: 600,
+          rotateY: 1200
+        }
       }
-    }
+    },
+    interactivity: {
+      detect_on: "canvas",
+      events: {
+        onhover: {
+          enable: true,
+          mode: "grab"
+        },
+        onclick: {
+          enable: true,
+          mode: "push"
+        },
+        resize: true
+      },
+      modes: {
+        grab: {
+          distance: 140,
+          line_linked: {
+            opacity: 0.8
+          }
+        },
+        push: {
+          particles_nb: 4
+        }
+      }
+    },
+    retina_detect: true
   };
 
   const skills = [
@@ -202,14 +347,18 @@ function App() {
     }
   ];
 
-  const skillsData = {
-    labels: ['Frontend', 'Backend', 'DevOps', 'Cloud', 'Database', 'Architecture'],
+  const radarData = {
+    labels: ['Frontend', 'Backend', 'DevOps', 'Problem Solving', 'Database', 'Team Leadership'],
     datasets: [{
       label: 'Skills Proficiency',
       data: [90, 85, 88, 90, 85, 85],
-      backgroundColor: 'rgba(33, 150, 243, 0.2)',
-      borderColor: '#2196f3',
+      backgroundColor: 'rgba(255, 126, 219, 0.2)',
+      borderColor: '#ff7edb',
       borderWidth: 2,
+      pointBackgroundColor: '#00ffc8',
+      pointBorderColor: '#fff',
+      pointHoverBackgroundColor: '#fff',
+      pointHoverBorderColor: '#ff7edb'
     }]
   };
 
@@ -223,10 +372,14 @@ function App() {
           color: 'rgba(255, 255, 255, 0.1)'
         },
         pointLabels: {
-          color: '#fff'
+          color: '#a0a8b7',
+          font: {
+            family: '"JetBrains Mono", monospace',
+            size: 12
+          }
         },
         ticks: {
-          color: '#fff',
+          color: '#a0a8b7',
           backdropColor: 'transparent'
         }
       }
@@ -248,19 +401,12 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Particles
-        id="tsparticles"
-        init={particlesInit}
-        options={particlesConfig}
-        style={{
-          position: "fixed",
-          top: 0,
-          left: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: -1
-        }}
-      />
+      
+      {/* Replace CyberpunkBackground with CodeRainAnimation */}
+      <CodeRainAnimation opacity={0.15} speed={1.2} density={0.6} />
+      
+      <Particles id="tsparticles" init={particlesInit} options={particlesConfig} />
+      
       <Container maxWidth={false} sx={{ overflow: "hidden" }}>
         {/* Navigation */}
         <Box
@@ -344,24 +490,40 @@ function App() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.8 }}
                 >
-                  <Typography variant="h1" component="h1" gutterBottom>
+                  <GlitchText
+                    text="Butrint Bytyqi"
+                    variant="h1"
+                    component="h1"
+                    intensity="medium"
+                    sx={{ 
+                      fontWeight: 700, 
+                      mb: 2,
+                      fontSize: { xs: '3rem', md: '4.5rem' }
+                    }}
+                  />
+                  <Box sx={{ mb: 4 }}>
                     <TypeAnimation
                       sequence={[
-                        "Hi, I'm Butrint Bytyqi",
-                        1000,
-                        "I'm a Full Stack Developer",
-                        1000,
-                        "I'm a Problem Solver",
-                        1000,
+                        "Full Stack Developer",
+                        2000,
+                        "DevOps Engineer",
+                        2000,
+                        "Cloud Architect",
+                        2000,
+                        "Problem Solver",
+                        2000,
                       ]}
                       wrapper="span"
-                      speed={50}
+                      cursor={true}
                       repeat={Infinity}
+                      style={{ 
+                        fontSize: "1.5rem",
+                        display: "inline-block",
+                        color: theme.palette.secondary.main,
+                        textShadow: `0 0 10px ${theme.palette.secondary.main}`
+                      }}
                     />
-                  </Typography>
-                  <Typography variant="h5" sx={{ mb: 4 }}>
-                    Turning ideas into reality through code
-                  </Typography>
+                  </Box>
                   <Box sx={{ display: "flex", gap: 2 }}>
                     <Button
                       variant="contained"
@@ -477,7 +639,7 @@ function App() {
           <Grid container spacing={4}>
             <Grid item xs={12} md={6}>
               <Box sx={{ height: 400, maxWidth: 600, margin: 'auto' }}>
-                <Radar data={skillsData} options={radarOptions} />
+                <Radar data={radarData} options={radarOptions} />
               </Box>
             </Grid>
             <Grid item xs={12} md={6}>
@@ -605,158 +767,258 @@ function App() {
         </Box>
 
         {/* Experience Timeline */}
-        <Box sx={{ py: 8, position: 'relative' }}>
-          <Typography 
-            variant="h2" 
-            align="center" 
-            gutterBottom
-            sx={{
-              color: theme.palette.text.primary,
-              position: 'relative',
-              zIndex: 2,
-            }}
-          >
-            Experience
-          </Typography>
-          <VerticalTimeline>
-            <VerticalTimelineElement
-              className="vertical-timeline-element--education"
-              contentStyle={{
-                background: theme.palette.background.paper,
-                color: theme.palette.text.primary,
-                border: `1px solid ${theme.palette.divider}`,
-                boxShadow: 'none',
-              }}
-              contentArrowStyle={{
-                borderRight: `7px solid ${theme.palette.background.paper}`
-              }}
-              date="2021 - Present"
-              iconStyle={{ 
-                background: theme.palette.primary.main,
-                color: theme.palette.primary.contrastText,
-                boxShadow: 'none',
-              }}
-              icon={<SchoolIcon />}
-            >
-              <h3>Bachelor Software Design</h3>
-              <h4>UPZ - Universiteti i Prizrenit</h4>
-              <p>
-                Studying advanced software development and computer science principles.
-              </p>
-              <a href="www.uni-prizren.com" target="_blank" rel="noopener noreferrer">
-                www.uni-prizren.com
-              </a>
-            </VerticalTimelineElement>
+        <Box id="experience" sx={{ py: 10 }}>
+          <CodeDivider text="experience.js" color="#ffcc00" />
+          <PageTransition direction="up" delay={0.2}>
+            <Box sx={{ textAlign: "center", mb: 6 }}>
+              <GlitchText
+                text="Experience & Education"
+                variant="h2"
+                component="h2"
+                intensity="low"
+                sx={{ fontWeight: 700, mb: 2 }}
+              />
+              <Typography variant="body1" color="text.secondary" sx={{ maxWidth: "800px", mx: "auto" }}>
+                My professional journey and educational background.
+              </Typography>
+            </Box>
+            <VerticalTimeline>
+              <VerticalTimelineElement
+                className="vertical-timeline-element--work"
+                contentStyle={{ background: theme.palette.background.paper, color: theme.palette.text.primary }}
+                contentArrowStyle={{ borderRight: `7px solid ${theme.palette.background.paper}` }}
+                date="2023 - Present"
+                iconStyle={{ background: theme.palette.primary.main, color: '#fff' }}
+                icon={<SchoolIcon />}
+              >
+                <Typography variant="h6" component="h3">
+                  Masters of Computer Science
+                </Typography>
+                <Typography variant="subtitle1" component="h4">
+                  UPZ - Ukshin Hoti University
+                </Typography>
+                <Typography variant="body2">
+                  Advanced studies in computer science, focusing on cutting-edge technologies and research methodologies.
+                </Typography>
+                <Box sx={{ mt: 2 }}>
+                  <Button 
+                    size="small" 
+                    href="https://uni-prizren.com/" 
+                    target="_blank"
+                    variant="outlined"
+                    sx={{ 
+                      borderColor: theme.palette.primary.main,
+                      color: theme.palette.primary.main,
+                      '&:hover': {
+                        borderColor: theme.palette.primary.main,
+                        backgroundColor: 'rgba(255, 126, 219, 0.1)'
+                      }
+                    }}
+                  >
+                    University Website
+                  </Button>
+                </Box>
+              </VerticalTimelineElement>
 
-            <VerticalTimelineElement
-              className="vertical-timeline-element--work"
-              contentStyle={{
-                background: theme.palette.background.paper,
-                color: theme.palette.text.primary,
-                border: `1px solid ${theme.palette.divider}`,
-                boxShadow: 'none',
-              }}
-              date="01/2021 - 04/2021"
-              iconStyle={{ 
-                background: theme.palette.primary.main,
-                color: theme.palette.primary.contrastText,
-                boxShadow: 'none',
-              }}
-              icon={<WorkIcon />}
-            >
-              <h3>Web Development Training</h3>
-              <h4>Maker Space</h4>
-              <p>
-                Intensive training in HTML, CSS, JavaScript, Bootstrap, and React development.
-              </p>
-              <a href="makerspaceprizren.com" target="_blank" rel="noopener noreferrer">
-                makerspaceprizren.com
-              </a>
-            </VerticalTimelineElement>
+              <VerticalTimelineElement
+                className="vertical-timeline-element--work"
+                contentStyle={{ background: theme.palette.background.paper, color: theme.palette.text.primary }}
+                contentArrowStyle={{ borderRight: `7px solid ${theme.palette.background.paper}` }}
+                date="July 2022 - Present"
+                iconStyle={{ background: theme.palette.secondary.main, color: '#fff' }}
+                icon={<WorkIcon />}
+              >
+                <Typography variant="h6" component="h3">
+                  Co-Founder & Executive Director
+                </Typography>
+                <Typography variant="subtitle1" component="h4">
+                  DOA (Digital Ordering Application)
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  Led the development and implementation of DOA, a QR-based digital ordering system for restaurants.
+                </Typography>
+                <Typography variant="body2" component="div">
+                  <ul style={{ paddingLeft: '20px', margin: '0' }}>
+                    <li>Managed business strategy, partnerships, and expansion, targeting the European market.</li>
+                    <li>Developed and maintained the web application using Vue.js, Laravel, and MySQL.</li>
+                    <li>Negotiated sales and partnership deals with restaurant owners to drive product adoption.</li>
+                    <li>Conducted market research to analyze restaurant industry trends and customer behavior.</li>
+                    <li>Implemented digital payment solutions and POS integrations for seamless transactions.</li>
+                    <li>Managed customer acquisition, sales processes, and pricing strategies.</li>
+                  </ul>
+                </Typography>
+                <Box sx={{ mt: 2 }}>
+                  <Chip 
+                    label="Vue.js" 
+                    size="small" 
+                    sx={{ mr: 1, mb: 1, background: 'rgba(255, 126, 219, 0.2)' }} 
+                  />
+                  <Chip 
+                    label="Laravel" 
+                    size="small" 
+                    sx={{ mr: 1, mb: 1, background: 'rgba(0, 255, 200, 0.2)' }} 
+                  />
+                  <Chip 
+                    label="MySQL" 
+                    size="small" 
+                    sx={{ mr: 1, mb: 1, background: 'rgba(255, 204, 0, 0.2)' }} 
+                  />
+                  <Chip 
+                    label="QR Technology" 
+                    size="small" 
+                    sx={{ mr: 1, mb: 1, background: 'rgba(255, 126, 219, 0.2)' }} 
+                  />
+                </Box>
+                <Box sx={{ mt: 2 }}>
+                  <Button 
+                    size="small" 
+                    href="https://appdoa.com/" 
+                    target="_blank"
+                    variant="contained"
+                    startIcon={<LaunchIcon />}
+                    sx={{ 
+                      backgroundColor: theme.palette.secondary.main,
+                      color: '#fff',
+                      '&:hover': {
+                        backgroundColor: theme.palette.secondary.dark,
+                        boxShadow: `0 0 15px ${theme.palette.secondary.main}`
+                      }
+                    }}
+                  >
+                    Visit DOA Website
+                  </Button>
+                </Box>
+              </VerticalTimelineElement>
 
-            <VerticalTimelineElement
-              className="vertical-timeline-element--work"
-              contentStyle={{
-                background: theme.palette.background.paper,
-                color: theme.palette.text.primary,
-                border: `1px solid ${theme.palette.divider}`,
-                boxShadow: 'none',
-              }}
-              date="06/2022 - 10/2022"
-              iconStyle={{ 
-                background: theme.palette.primary.main,
-                color: theme.palette.primary.contrastText,
-                boxShadow: 'none',
-              }}
-              icon={<WorkIcon />}
-            >
-              <h3>Software Developer Intern</h3>
-              <h4>JCODERS</h4>
-              <ul style={{ listStyle: 'none', padding: 0 }}>
-                <li>• Taught programming basics to young children</li>
-                <li>• Assisted in developing web applications using React</li>
-                <li>• Participated in code reviews and debugging</li>
-                <li>• Maintained and updated software applications</li>
-                <li>• Used Git for version control and documentation</li>
-              </ul>
-            </VerticalTimelineElement>
+              <VerticalTimelineElement
+                className="vertical-timeline-element--work"
+                contentStyle={{ background: theme.palette.background.paper, color: theme.palette.text.primary }}
+                contentArrowStyle={{ borderRight: `7px solid ${theme.palette.background.paper}` }}
+                date="July 2022 - Present"
+                iconStyle={{ background: theme.palette.primary.main, color: '#fff' }}
+                icon={<WorkIcon />}
+              >
+                <Typography variant="h6" component="h3">
+                  Programming Trainer (Internship)
+                </Typography>
+                <Typography variant="subtitle1" component="h4">
+                  Akademia JCODERS
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  Teaching programming fundamentals to students and helping develop their technical skills.
+                </Typography>
+                <Typography variant="body2" component="div">
+                  <ul style={{ paddingLeft: '20px', margin: '0' }}>
+                    <li>Instructing students in programming basics and advanced concepts</li>
+                    <li>Developing curriculum and learning materials</li>
+                    <li>Providing mentorship and guidance for student projects</li>
+                    <li>Evaluating student progress and providing constructive feedback</li>
+                  </ul>
+                </Typography>
+              </VerticalTimelineElement>
 
-            <VerticalTimelineElement
-              className="vertical-timeline-element--education"
-              contentStyle={{
-                background: theme.palette.background.paper,
-                color: theme.palette.text.primary,
-                border: `1px solid ${theme.palette.divider}`,
-                boxShadow: 'none',
-              }}
-              date="11/2023"
-              iconStyle={{ 
-                background: theme.palette.secondary.main,
-                color: theme.palette.primary.contrastText,
-                boxShadow: 'none',
-              }}
-              icon={<SchoolIcon />}
-            >
-              <h3>Bridge Conference 2023</h3>
-              <h4>Presentation Certification</h4>
-              <p>
-                Presented research paper on "A Proposed System for Real-Time Face Recognition: 
-                Enhancing Access Control, Security, and Efficiency in Cross-Domain Applications"
-              </p>
-              <a href="https://uni-prizren.com/en/bridge-2023/" target="_blank" rel="noopener noreferrer">
-                View Conference Details
-              </a>
-            </VerticalTimelineElement>
+              <VerticalTimelineElement
+                className="vertical-timeline-element--education"
+                contentStyle={{ background: theme.palette.background.paper, color: theme.palette.text.primary }}
+                contentArrowStyle={{ borderRight: `7px solid ${theme.palette.background.paper}` }}
+                date="November 9-10, 2023"
+                iconStyle={{ background: theme.palette.secondary.main, color: '#fff' }}
+                icon={<CodeIcon />}
+              >
+                <Typography variant="h6" component="h3">
+                  BRIDGE 2023 Conference Presenter
+                </Typography>
+                <Typography variant="subtitle1" component="h4">
+                  Research Paper Presentation
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  Presented research on "A Proposed System for Real-Time Face Recognition: Enhancing Access Control, Security, and Efficiency in Cross-Domain Applications."
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  Engaged with researchers and industry professionals on AI-driven security applications and gained insights into the latest developments in the field.
+                </Typography>
+                <Box sx={{ mt: 2 }}>
+                  <Button 
+                    size="small" 
+                    href="https://uni-prizren.com/en/bridge-2023/" 
+                    target="_blank"
+                    variant="outlined"
+                    sx={{ 
+                      borderColor: theme.palette.secondary.main,
+                      color: theme.palette.secondary.main,
+                      '&:hover': {
+                        borderColor: theme.palette.secondary.main,
+                        backgroundColor: 'rgba(0, 255, 200, 0.1)'
+                      }
+                    }}
+                  >
+                    Conference Details
+                  </Button>
+                </Box>
+              </VerticalTimelineElement>
+              
+              <VerticalTimelineElement
+                className="vertical-timeline-element--education"
+                contentStyle={{ background: theme.palette.background.paper, color: theme.palette.text.primary }}
+                contentArrowStyle={{ borderRight: `7px solid ${theme.palette.background.paper}` }}
+                date="Bachelor's Degree"
+                iconStyle={{ background: theme.palette.primary.main, color: '#fff' }}
+                icon={<SchoolIcon />}
+              >
+                <Typography variant="h6" component="h3">
+                  Bachelor in Software Design
+                </Typography>
+                <Typography variant="subtitle1" component="h4">
+                  UPZ - Universiteti i Prizrenit
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  Studied software design and development, building a strong foundation in computer science principles and programming practices.
+                </Typography>
+                <Box sx={{ mt: 2 }}>
+                  <Button 
+                    size="small" 
+                    href="http://www.uni-prizren.com" 
+                    target="_blank"
+                    variant="outlined"
+                    sx={{ 
+                      borderColor: theme.palette.primary.main,
+                      color: theme.palette.primary.main,
+                      '&:hover': {
+                        borderColor: theme.palette.primary.main,
+                        backgroundColor: 'rgba(255, 126, 219, 0.1)'
+                      }
+                    }}
+                  >
+                    University Website
+                  </Button>
+                </Box>
+              </VerticalTimelineElement>
 
-            <VerticalTimelineElement
-              className="vertical-timeline-element--education"
-              contentStyle={{
-                background: theme.palette.background.paper,
-                color: theme.palette.text.primary,
-                border: `1px solid ${theme.palette.divider}`,
-                boxShadow: 'none',
-              }}
-              date="12/2022"
-              iconStyle={{ 
-                background: theme.palette.secondary.main,
-                color: theme.palette.primary.contrastText,
-                boxShadow: 'none',
-              }}
-              icon={<WorkIcon />}
-            >
-              <h3>Idea-To-Scale Startup Competition Winner</h3>
-              <h4>Innovation Training Park - ITP</h4>
-              <p>
-                Won with an innovative digital ordering system for gastronomic businesses. 
-                The solution features contactless experience, upselling opportunities, 
-                data insights, and integration with loyalty programs.
-              </p>
-            </VerticalTimelineElement>
-          </VerticalTimeline>
+              <VerticalTimelineElement
+                className="vertical-timeline-element--education"
+                contentStyle={{ background: theme.palette.background.paper, color: theme.palette.text.primary }}
+                contentArrowStyle={{ borderRight: `7px solid ${theme.palette.background.paper}` }}
+                date="January 2021 - April 2022"
+                iconStyle={{ background: theme.palette.secondary.main, color: '#fff' }}
+                icon={<CodeIcon />}
+              >
+                <Typography variant="h6" component="h3">
+                  Web Development Training
+                </Typography>
+                <Typography variant="subtitle1" component="h4">
+                  Maker Space
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  Intensive training in web development technologies including HTML, CSS, JavaScript, Bootstrap, and React.
+                </Typography>
+              </VerticalTimelineElement>
+            </VerticalTimeline>
+          </PageTransition>
         </Box>
 
         {/* Projects Section with Filtering */}
-        <Box id="projects" sx={{ py: 8 }}>
+        <Box id="projects" sx={{ py: 10 }}>
+          <CodeDivider text="projects.js" color="secondary" />
           <Typography variant="h2" align="center" gutterBottom>
             Projects
           </Typography>
@@ -888,7 +1150,10 @@ function App() {
                       sx={{
                         backgroundColor: 'rgba(33, 150, 243, 0.1)',
                         borderColor: '#2196f3',
-                        color: '#fff'
+                        color: '#fff',
+                        '&:hover': {
+                          backgroundColor: 'rgba(33, 150, 243, 0.2)',
+                        }
                       }}
                     />
                   ))}
@@ -937,7 +1202,7 @@ function App() {
         <Box
           id="aboutme"
           sx={{
-            py: 8,
+            py: 10,
             background: 'linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%)',
             borderRadius: '20px',
             my: 4,
@@ -945,28 +1210,26 @@ function App() {
             overflow: 'hidden'
           }}
         >
+          <CodeDivider text="about.js" color="primary" />
           <Container maxWidth="lg">
             <Grid container spacing={4} alignItems="center">
               <Grid item xs={12} md={6}>
                 <Box sx={{ position: 'relative', zIndex: 2 }}>
-                  <Typography
+                  <GlitchText
+                    text="About Me"
                     variant="h2"
-                    gutterBottom
-                    sx={{
-                      fontWeight: 700,
-                      background: 'linear-gradient(45deg, #2196f3, #64b5f6)',
-                      backgroundClip: 'text',
-                      WebkitBackgroundClip: 'text',
-                      color: 'transparent',
-                      mb: 4
-                    }}
-                  >
-                    About Me
-                  </Typography>
+                    component="h2"
+                    intensity="low"
+                    sx={{ fontWeight: 700, mb: 4 }}
+                  />
                   
-                  <Typography variant="h5" sx={{ mb: 3, color: '#2196f3', fontWeight: 500 }}>
-                    Full-Stack Developer | Data Science Enthusiast | Tech Entrepreneur
-                  </Typography>
+                  <GlitchText
+                    text="Full-Stack Developer | Data Science Enthusiast | Tech Entrepreneur"
+                    variant="h5"
+                    component="h5"
+                    intensity="low"
+                    sx={{ mb: 3, color: '#2196f3', fontWeight: 500 }}
+                  />
 
                   <Box sx={{ mb: 4 }}>
                     <Typography variant="body1" paragraph sx={{ color: 'rgba(255, 255, 255, 0.9)' }}>
@@ -984,7 +1247,7 @@ function App() {
                           elevation={0}
                           sx={{
                             p: 2,
-                            background: 'rgba(33, 150, 243, 0.1)',
+                            background: 'rgba(33, 150, 243, 0.05)',
                             border: '1px solid rgba(33, 150, 243, 0.2)',
                             borderRadius: '10px',
                             height: '100%'
@@ -1004,7 +1267,7 @@ function App() {
                           elevation={0}
                           sx={{
                             p: 2,
-                            background: 'rgba(33, 150, 243, 0.1)',
+                            background: 'rgba(33, 150, 243, 0.05)',
                             border: '1px solid rgba(33, 150, 243, 0.2)',
                             borderRadius: '10px',
                             height: '100%'
@@ -1162,87 +1425,206 @@ function App() {
           />
         </Box>
 
+        <Box sx={{ mt: 8, mb: 4, width: '100%', maxWidth: '800px', mx: 'auto' }}>
+          <PageTransition direction="up" delay={0.2}>
+            <CodeTypingAnimation 
+              language="javascript"
+              codeSnippets={[
+                `// Welcome to my portfolio
+const developer = {
+  name: "Butrint Bytyqi",
+  role: "Full Stack Developer & DevOps Engineer",
+  skills: ["JavaScript", "React", "Vue.js", "Laravel", "MySQL", "AWS"],
+  passions: ["Clean Code", "Problem Solving", "Innovation"],
+  
+  sayHello: function() {
+    console.log("Thanks for visiting my portfolio!");
+    return this.startCodingJourney();
+  },
+  
+  startCodingJourney: function() {
+    // Let's build something amazing together
+    return true;
+  }
+};
+
+developer.sayHello();`,
+                `// DOA - Digital Ordering Application
+class DigitalOrderingApp {
+  constructor() {
+    this.technologies = ["Vue.js", "Laravel", "MySQL"];
+    this.features = [
+      "QR-based ordering system",
+      "Digital payments",
+      "POS integration",
+      "Customer analytics"
+    ];
+  }
+  
+  initialize() {
+    this.setupDatabase();
+    this.createUserInterface();
+    this.implementPaymentGateway();
+    console.log("DOA is ready to revolutionize restaurant ordering!");
+  }
+  
+  // Visit https://appdoa.com/ to learn more
+}
+
+const doa = new DigitalOrderingApp();
+doa.initialize();`
+              ]}
+            />
+          </PageTransition>
+        </Box>
+        
+        <Box sx={{ mt: 8, textAlign: 'center' }}>
+          <GlitchText
+            text="Tech Stack"
+            variant="h3"
+            component="h3"
+            intensity="low"
+            sx={{ fontWeight: 700, mb: 4 }}
+          />
+          <TechStackCube 
+            technologies={[
+              "JavaScript", "React", "Node.js", "TypeScript", "HTML", "CSS",
+              "Python", "Express", "MongoDB", "MySQL", "PostgreSQL", "Redis",
+              "Docker", "Kubernetes", "AWS", "GCP", "CI/CD", "Git",
+              "REST API", "GraphQL", "Webpack", "Jest", "Linux", "Nginx"
+            ]}
+          />
+        </Box>
+        
         {/* Contact Section */}
         <Box
           id="contact"
-          component={motion.div}
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
           sx={{
-            minHeight: "100vh",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            textAlign: "center",
-            pt: 8,
+            py: 8,
+            background: 'linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%)',
+            borderRadius: '20px',
+            my: 4,
+            position: 'relative',
+            overflow: 'hidden'
           }}
         >
-          <Box>
-            <motion.h1
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              style={{ fontSize: "3.5rem", marginBottom: "1rem" }}
-            >
-              Contact
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.7 }}
-              style={{ fontSize: "1.5rem", marginBottom: "2rem" }}
-            >
-              If you'd like to get in touch, please fill out the form below.
-            </motion.p>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.9 }}
-            >
-              <Box sx={{ display: "flex", justifyContent: "center", gap: 2 }}>
-                <motion.form
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 1 }}
-                  style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-                >
-                  <motion.input
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.1 }}
-                    type="text"
-                    placeholder="Name"
-                    style={{ padding: "1rem", borderRadius: "10px", border: "none" }}
-                  />
-                  <motion.input
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.2 }}
-                    type="email"
-                    placeholder="Email"
-                    style={{ padding: "1rem", borderRadius: "10px", border: "none" }}
-                  />
-                  <motion.textarea
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.3 }}
-                    placeholder="Message"
-                    style={{ padding: "1rem", borderRadius: "10px", border: "none" }}
-                  />
-                  <motion.button
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.4 }}
-                    type="submit"
-                    style={{ padding: "1rem", borderRadius: "10px", border: "none", backgroundColor: theme.palette.primary.main, color: "#fff" }}
+          <CodeDivider text="contact.js" color="primary" />
+          
+          <PageTransition direction="up" delay={0.2}>
+            <Container maxWidth="lg">
+              <Grid container spacing={4}>
+                <Grid item xs={12} md={6}>
+                  <Box sx={{ position: 'relative', zIndex: 2 }}>
+                    <Typography
+                      variant="h2"
+                      gutterBottom
+                      sx={{
+                        fontWeight: 700,
+                        background: 'linear-gradient(45deg, #2196f3, #64b5f6)',
+                        backgroundClip: 'text',
+                        WebkitBackgroundClip: 'text',
+                        color: 'transparent',
+                        mb: 4
+                      }}
+                    >
+                      Contact Me
+                    </Typography>
+                    <Typography variant="body1" paragraph sx={{ color: 'rgba(255, 255, 255, 0.9)' }}>
+                      If you'd like to get in touch, please fill out the form below.
+                    </Typography>
+                    <Box sx={{ display: 'flex', gap: 2 }}>
+                      <Button
+                        variant="contained"
+                        size="large"
+                        component="a"
+                        href="mailto:butrinti022@gmail.com"
+                        sx={{
+                          borderRadius: "30px",
+                          textTransform: "none",
+                          fontSize: "1.1rem",
+                          py: 1.5,
+                          px: 4
+                        }}
+                      >
+                        Send Email
+                      </Button>
+                      <Button
+                        variant="outlined"
+                        size="large"
+                        component="a"
+                        href="https://www.linkedin.com/in/butrint-bytyqi-37859a235/"
+                        target="_blank"
+                        sx={{
+                          borderRadius: "30px",
+                          textTransform: "none",
+                          fontSize: "1.1rem",
+                          py: 1.5,
+                          px: 4
+                        }}
+                      >
+                        LinkedIn
+                      </Button>
+                    </Box>
+                  </Box>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Box
+                    sx={{
+                      position: 'relative',
+                      zIndex: 2,
+                      p: 4,
+                      background: 'rgba(33, 150, 243, 0.03)',
+                      borderRadius: '20px',
+                      border: '1px solid rgba(33, 150, 243, 0.1)',
+                    }}
                   >
-                    Send Message
-                  </motion.button>
-                </motion.form>
-              </Box>
-            </motion.div>
-          </Box>
+                    <Typography variant="h5" gutterBottom sx={{ color: '#2196f3' }}>
+                      Get in Touch
+                    </Typography>
+                    <motion.form
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ delay: 0.5 }}
+                      style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
+                    >
+                      <motion.input
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.6 }}
+                        type="text"
+                        placeholder="Name"
+                        style={{ padding: "1rem", borderRadius: "10px", border: "none" }}
+                      />
+                      <motion.input
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.7 }}
+                        type="email"
+                        placeholder="Email"
+                        style={{ padding: "1rem", borderRadius: "10px", border: "none" }}
+                      />
+                      <motion.textarea
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.8 }}
+                        placeholder="Message"
+                        style={{ padding: "1rem", borderRadius: "10px", border: "none" }}
+                      />
+                      <motion.button
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ delay: 0.9 }}
+                        type="submit"
+                        style={{ padding: "1rem", borderRadius: "10px", border: "none", backgroundColor: theme.palette.primary.main, color: "#fff" }}
+                      >
+                        Send Message
+                      </motion.button>
+                    </motion.form>
+                  </Box>
+                </Grid>
+              </Grid>
+            </Container>
+          </PageTransition>
         </Box>
       </Container>
     </ThemeProvider>
