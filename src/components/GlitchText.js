@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { Typography, Box } from '@mui/material';
 
 const GlitchText = ({ 
@@ -43,15 +43,15 @@ const GlitchText = ({
       pauseDuration = 3000;
   }
   
-  // Function to create a glitched version of the text
-  const glitchText = (originalText) => {
+  // Function to create a glitched version of the text - wrapped in useCallback to prevent recreation on every render
+  const glitchText = useCallback((originalText) => {
     return originalText.split('').map(char => {
       if (Math.random() < glitchProbability) {
         return glitchChars[Math.floor(Math.random() * glitchChars.length)];
       }
       return char;
     }).join('');
-  };
+  }, [glitchProbability]);
   
   // Effect to trigger glitch at random intervals
   useEffect(() => {
