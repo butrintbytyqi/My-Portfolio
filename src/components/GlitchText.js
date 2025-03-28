@@ -103,7 +103,7 @@ const GlitchText = ({
       clearTimeout(glitchTimeout);
       window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [text, isGlitching, glitchDuration, pauseDuration, glitchProbability]);
+  }, [text, isGlitching, glitchDuration, pauseDuration, glitchProbability, glitchText]);
   
   return (
     <Box

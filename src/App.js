@@ -1,27 +1,38 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback } from "react";
 import {
   Box,
   Container,
   Typography,
+  Grid,
+  Button,
   Card,
   CardContent,
-  Grid,
+  CardMedia,
+  Link,
+  Divider,
+  Avatar,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  Paper,
   Chip,
-  LinearProgress,
-  Button,
+  ThemeProvider,
+  createTheme,
+  responsiveFontSizes,
+  CssBaseline,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
-  CssBaseline,
-  Paper,
-  useMediaQuery,
+  LinearProgress,
 } from "@mui/material";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { motion, AnimatePresence } from "framer-motion";
 import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
 import Particles from "react-particles";
 import { loadFull } from "tsparticles";
+import { TypeAnimation } from "react-type-animation";
+import Tilt from "react-parallax-tilt";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import WorkIcon from "@mui/icons-material/Work";
 import SchoolIcon from "@mui/icons-material/School";
@@ -31,8 +42,6 @@ import CloudIcon from '@mui/icons-material/Cloud';
 import BuildIcon from '@mui/icons-material/Build';
 import SecurityIcon from '@mui/icons-material/Security';
 import LaunchIcon from '@mui/icons-material/Launch';
-import { TypeAnimation } from "react-type-animation";
-import Tilt from "react-parallax-tilt";
 import {
   Chart as ChartJS,
   RadialLinearScale,
@@ -48,16 +57,12 @@ import "./App.css";
 import cv from "./downloads/ButrintBytyqiCV.pdf";
 
 // Import components
+import CodeDivider from "./components/CodeDivider";
 import CodeRainAnimation from "./components/CodeRainAnimation";
-import GlitchText from "./components/GlitchText";
-import InteractiveTerminal from "./components/InteractiveTerminal";
-import TechStackCube from "./components/TechStackCube";
-import NeonSkillMeter from "./components/NeonSkillMeter";
-
-// Import new coding-themed components
 import CodeTypingAnimation from "./components/CodeTypingAnimation";
 import PageTransition from "./components/PageTransition";
-import CodeDivider from "./components/CodeDivider";
+import GlitchText from "./components/GlitchText";
+import TechStackCube from "./components/TechStackCube";
 
 // Register ChartJS components
 ChartJS.register(

@@ -6,8 +6,6 @@ const TechStackCube = ({ technologies = [] }) => {
   const theme = useTheme();
   const controls = useAnimation();
   const [isHovered, setIsHovered] = useState(false);
-  const [autoRotate, setAutoRotate] = useState(true);
-  const [rotationSpeed, setRotationSpeed] = useState(10); // seconds per rotation
 
   // Group technologies into 6 categories for cube faces
   const groupedTech = {
@@ -46,7 +44,7 @@ const TechStackCube = ({ technologies = [] }) => {
   useEffect(() => {
     let interval;
     
-    if (autoRotate && !isHovered) {
+    if (!isHovered) {
       let rotationX = 0;
       let rotationY = 0;
       
@@ -65,7 +63,7 @@ const TechStackCube = ({ technologies = [] }) => {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [autoRotate, isHovered, controls]);
+  }, [isHovered, controls]);
 
   const cubeFaces = [
     { name: 'Front', color: '#ff7edb', technologies: groupedTech.frontend, rotateX: 0, rotateY: 0, category: 'Frontend' },
