@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useRef } from "react";
 import {
   Box,
   Container,
@@ -24,6 +24,7 @@ import Particles from "react-particles";
 import { loadFull } from "tsparticles";
 import { TypeAnimation } from "react-type-animation";
 import Tilt from "react-parallax-tilt";
+import emailjs from '@emailjs/browser';
 import GitHubIcon from "@mui/icons-material/GitHub";
 import WorkIcon from "@mui/icons-material/Work";
 import SchoolIcon from "@mui/icons-material/School";
@@ -394,6 +395,96 @@ function App() {
     }
   };
 
+  // Form state
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+  const [formStatus, setFormStatus] = useState({
+    submitting: false,
+    success: false,
+    error: false,
+    message: ''
+  });
+  const formRef = useRef();
+
+  // Handle form submission with EmailJS
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    
+    // Validate form
+    if (!formData.name || !formData.email || !formData.message) {
+      setFormStatus({
+        submitting: false,
+        success: false,
+        error: true,
+        message: 'Please fill out all fields'
+      });
+      return;
+    }
+    
+    // Set submitting state
+    setFormStatus({
+      submitting: true,
+      success: false,
+      error: false,
+      message: 'Sending message...'
+    });
+    
+    // Initialize EmailJS with your public key
+    emailjs.init('r3gRnZ6XVat2N2Lsi');
+    
+    // Replace these with your actual EmailJS service, template, and user IDs
+    const serviceId = 'service_q02df5d';
+    const templateId = 'template_28odamw';
+    
+    // Create template parameters
+    const templateParams = {
+      from_name: formData.name,
+      from_email: formData.email,
+      message: formData.message
+    };
+    
+    // Use send method instead of sendForm for more reliable delivery
+    emailjs.send(serviceId, templateId, templateParams)
+      .then((result) => {
+        // Success
+        setFormStatus({
+          submitting: false,
+          success: true,
+          error: false,
+          message: `Message sent successfully!\n\nName: ${formData.name}\nEmail: ${formData.email}\nMessage: ${formData.message.substring(0, 50)}${formData.message.length > 50 ? '...' : ''}`
+        });
+        
+        // Reset form
+        setFormData({
+          name: '',
+          email: '',
+          message: ''
+        });
+        
+        // Clear success message after 5 seconds
+        setTimeout(() => {
+          setFormStatus(prev => ({
+            ...prev,
+            success: false,
+            message: ''
+          }));
+        }, 5000);
+      })
+      .catch((error) => {
+        // Error
+        setFormStatus({
+          submitting: false,
+          success: false,
+          error: true,
+          message: 'Failed to send message. Please try again.'
+        });
+        console.error('EmailJS error:', error);
+      });
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -646,22 +737,26 @@ function App() {
                       <Typography>{skill.name}</Typography>
                       <Typography>{skill.level}%</Typography>
                     </Box>
-                    <Box sx={{
-                      height: "10px",
-                      background: "#e0e0e0",
-                      borderRadius: "5px",
-                      mt: 2
-                    }}>
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1 }}
-                        style={{
-                          height: "100%",
-                          background: theme.palette.primary.main,
-                          borderRadius: "5px"
+                    <Box sx={{ width: '100%', mt: 2 }}>
+                      <LinearProgress
+                        variant="determinate"
+                        value={skill.level}
+                        sx={{
+                          height: 8,
+                          borderRadius: 4,
+                          backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                          '& .MuiLinearProgress-bar': {
+                            backgroundColor: '#ff7edb'
+                          }
                         }}
                       />
+                      <Typography
+                        variant="body2"
+                        align="right"
+                        sx={{ mt: 1, color: 'text.secondary' }}
+                      >
+                        {skill.level}%
+                      </Typography>
                     </Box>
                   </Box>
                 ))}
@@ -1576,45 +1671,166 @@ doa.initialize();`
                     <Typography variant="h5" gutterBottom sx={{ color: '#2196f3' }}>
                       Get in Touch
                     </Typography>
-                    <motion.form
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ delay: 0.5 }}
-                      style={{ display: "flex", flexDirection: "column", gap: "1rem" }}
-                    >
-                      <motion.input
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.6 }}
-                        type="text"
-                        placeholder="Name"
-                        style={{ padding: "1rem", borderRadius: "10px", border: "none" }}
-                      />
-                      <motion.input
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.7 }}
-                        type="email"
-                        placeholder="Email"
-                        style={{ padding: "1rem", borderRadius: "10px", border: "none" }}
-                      />
-                      <motion.textarea
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.8 }}
-                        placeholder="Message"
-                        style={{ padding: "1rem", borderRadius: "10px", border: "none" }}
-                      />
-                      <motion.button
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.9 }}
-                        type="submit"
-                        style={{ padding: "1rem", borderRadius: "10px", border: "none", backgroundColor: theme.palette.primary.main, color: "#fff" }}
-                      >
-                        Send Message
-                      </motion.button>
-                    </motion.form>
+                    <form ref={formRef} onSubmit={handleSubmit}>
+                      <Box sx={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.1 }}
+                        >
+                          <input
+                            type="text"
+                            name="name"
+                            placeholder="Name"
+                            value={formData.name}
+                            onChange={(e) => {
+                              const { name, value } = e.target;
+                              setFormData(prev => ({
+                                ...prev,
+                                [name]: value
+                              }));
+                            }}
+                            style={{ 
+                              padding: "1rem", 
+                              borderRadius: "10px", 
+                              border: "none",
+                              width: "100%",
+                              backgroundColor: "rgba(30, 30, 30, 0.8)",
+                              color: "#fff",
+                              boxShadow: "0 0 10px rgba(33, 150, 243, 0.1)"
+                            }}
+                          />
+                        </motion.div>
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.2 }}
+                        >
+                          <input
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                            value={formData.email}
+                            onChange={(e) => {
+                              const { name, value } = e.target;
+                              setFormData(prev => ({
+                                ...prev,
+                                [name]: value
+                              }));
+                            }}
+                            style={{ 
+                              padding: "1rem", 
+                              borderRadius: "10px", 
+                              border: "none",
+                              width: "100%",
+                              backgroundColor: "rgba(30, 30, 30, 0.8)",
+                              color: "#fff",
+                              boxShadow: "0 0 10px rgba(33, 150, 243, 0.1)"
+                            }}
+                          />
+                        </motion.div>
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.3 }}
+                        >
+                          <textarea
+                            name="message"
+                            placeholder="Message"
+                            value={formData.message}
+                            onChange={(e) => {
+                              const { name, value } = e.target;
+                              setFormData(prev => ({
+                                ...prev,
+                                [name]: value
+                              }));
+                            }}
+                            style={{ 
+                              padding: "1rem", 
+                              borderRadius: "10px", 
+                              border: "none",
+                              width: "100%",
+                              minHeight: "120px",
+                              backgroundColor: "rgba(30, 30, 30, 0.8)",
+                              color: "#fff",
+                              boxShadow: "0 0 10px rgba(33, 150, 243, 0.1)",
+                              resize: "vertical"
+                            }}
+                          />
+                        </motion.div>
+                        <motion.div
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.4 }}
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
+                        >
+                          <button
+                            type="submit"
+                            disabled={formStatus.submitting}
+                            style={{ 
+                              padding: "1rem", 
+                              borderRadius: "10px", 
+                              border: "none", 
+                              backgroundColor: theme.palette.primary.main, 
+                              color: "#fff",
+                              width: "100%",
+                              cursor: "pointer",
+                              fontWeight: "bold",
+                              boxShadow: "0 0 15px rgba(255, 126, 219, 0.5)",
+                              transition: "all 0.3s ease"
+                            }}
+                          >
+                            {formStatus.submitting ? 'Sending...' : 'Send Message'}
+                          </button>
+                        </motion.div>
+                        
+                        <AnimatePresence>
+                          {formStatus.message && (
+                            <motion.div
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              exit={{ opacity: 0 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              <Box 
+                                sx={{ 
+                                  p: 2, 
+                                  borderRadius: '10px',
+                                  backgroundColor: formStatus.error 
+                                    ? 'rgba(244, 67, 54, 0.1)' 
+                                    : formStatus.success 
+                                      ? 'rgba(76, 175, 80, 0.1)' 
+                                      : 'rgba(33, 150, 243, 0.1)',
+                                  borderLeft: `4px solid ${
+                                    formStatus.error 
+                                      ? '#f44336' 
+                                      : formStatus.success 
+                                        ? '#4caf50' 
+                                        : '#2196f3'
+                                  }`,
+                                  mt: 2
+                                }}
+                              >
+                                <Typography 
+                                  variant="body2" 
+                                  sx={{ 
+                                    color: formStatus.error 
+                                      ? '#f44336' 
+                                      : formStatus.success 
+                                        ? '#4caf50' 
+                                        : '#2196f3',
+                                    whiteSpace: 'pre-line'
+                                  }}
+                                >
+                                  {formStatus.message}
+                                </Typography>
+                              </Box>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </Box>
+                    </form>
                   </Box>
                 </Grid>
               </Grid>
