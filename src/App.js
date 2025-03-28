@@ -831,12 +831,11 @@ function App() {
                   DOA (Digital Ordering Application)
                 </Typography>
                 <Typography variant="body2" paragraph>
-                  Led the development and implementation of DOA, a QR-based digital ordering system for restaurants.
+                  Co-founded DOA, a QR-based digital ordering system for restaurants that is now live and serving clients across the market.
                 </Typography>
                 <Typography variant="body2" component="div">
                   <ul style={{ paddingLeft: '20px', margin: '0' }}>
                     <li>Managed business strategy, partnerships, and expansion, targeting the European market.</li>
-                    <li>Developed and maintained the web application using Vue.js, Laravel, and MySQL.</li>
                     <li>Negotiated sales and partnership deals with restaurant owners to drive product adoption.</li>
                     <li>Conducted market research to analyze restaurant industry trends and customer behavior.</li>
                     <li>Implemented digital payment solutions and POS integrations for seamless transactions.</li>
