@@ -555,8 +555,8 @@ function ScrollToTop() {
         role="presentation"
         sx={{
           position: 'fixed',
-          bottom: 24,
-          right: 24,
+          bottom: { xs: 16, md: 24 },
+          right: { xs: 16, md: 24 },
           zIndex: 1000,
         }}
       >
@@ -565,8 +565,8 @@ function ScrollToTop() {
           sx={{
             backgroundColor: 'primary.main',
             color: 'white',
-            width: 56,
-            height: 56,
+            width: { xs: 48, md: 56 },
+            height: { xs: 48, md: 56 },
             boxShadow: '0 8px 32px rgba(0, 122, 255, 0.3)',
             '&:hover': {
               backgroundColor: 'primary.dark',
@@ -678,17 +678,17 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       
-        {/* Navigation */}
+              {/* Navigation */}
       <AppBar 
         position="fixed" 
-          sx={{
+        sx={{ 
           backgroundColor: 'rgba(255, 255, 255, 0.8)',
           backdropFilter: 'blur(20px)',
           borderBottom: '1px solid rgba(0, 0, 0, 0.06)',
           boxShadow: 'none'
         }}
       >
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Toolbar sx={{ justifyContent: 'space-between', px: { xs: 2, md: 3 } }}>
           <Typography 
             variant="h6" 
             component="div" 
@@ -696,13 +696,16 @@ function App() {
               color: 'text.primary',
               fontWeight: 600,
               cursor: 'pointer',
-              fontSize: '1.125rem'
+              fontSize: { xs: '1rem', md: '1.125rem' }
             }}
-                onClick={() => scrollToSection('introduction')}
+            onClick={() => scrollToSection('introduction')}
           >
             Butrint Bytyqi
           </Typography>
-          <Box sx={{ display: 'flex', gap: 3 }}>
+          <Box sx={{ 
+            display: { xs: 'none', md: 'flex' }, 
+            gap: { xs: 1, md: 3 }
+          }}>
             {['Projects', 'Education', 'Certifications', 'Awards', 'Experience', 'Skills', 'Languages', 'Interests', 'Contact'].map((item) => (
               <Button
                 key={item}
@@ -710,8 +713,9 @@ function App() {
                 sx={{ 
                   color: 'text.primary',
                   fontWeight: 500,
-                  fontSize: '0.95rem',
-                  padding: '8px 16px',
+                  fontSize: { xs: '0.8rem', md: '0.95rem' },
+                  padding: { xs: '6px 8px', md: '8px 16px' },
+                  minWidth: { xs: 'auto', md: '64px' },
                   '&:hover': { 
                     color: 'primary.main',
                     backgroundColor: 'rgba(0, 122, 255, 0.04)'
@@ -721,30 +725,41 @@ function App() {
                 {item}
               </Button>
             ))}
-            </Box>
+          </Box>
+          
+          {/* Mobile Menu Button */}
+          <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+            <IconButton
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              sx={{ color: 'text.primary' }}
+            >
+              <KeyboardArrowUp />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
 
-        {/* Hero Section */}
-        <Box
-          id="home"
-          sx={{
-          minHeight: '100vh',
+              {/* Hero Section */}
+      <Box
+        id="home"
+        sx={{
+          minHeight: { xs: '90vh', md: '100vh' },
           display: 'flex',
           alignItems: 'center',
           background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
           position: 'relative',
-          overflow: 'hidden'
+          overflow: 'hidden',
+          pt: { xs: 8, md: 0 }
         }}
       >
         {/* Subtle background pattern */}
         <Box
           sx={{
             position: 'absolute',
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
             backgroundImage: `
               radial-gradient(circle at 25% 25%, rgba(0, 122, 255, 0.05) 0%, transparent 70%),
               radial-gradient(circle at 75% 75%, rgba(126, 91, 239, 0.05) 0%, transparent 70%)
@@ -753,21 +768,22 @@ function App() {
           }}
         />
         
-        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
-          <Box sx={{ textAlign: 'center', maxWidth: '800px', margin: '0 auto' }}>
-                <motion.div
+        <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, px: { xs: 2, md: 3 } }}>
+          <Box sx={{ textAlign: 'center', maxWidth: { xs: '100%', md: '800px' }, margin: '0 auto' }}>
+            <motion.div
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut" }}
             >
               <Typography 
-                    variant="h1"
-                    sx={{ 
-                  mb: 3,
-                  fontSize: { xs: '2.5rem', md: '4rem' },
+                variant="h1" 
+                sx={{ 
+                  mb: { xs: 2, md: 3 },
+                  fontSize: { xs: '2rem', sm: '2.5rem', md: '4rem' },
                   color: 'text.primary',
-                      fontWeight: 700, 
-                  lineHeight: 1.1
+                  fontWeight: 700,
+                  lineHeight: { xs: 1.2, md: 1.1 },
+                  px: { xs: 1, md: 0 }
                 }}
               >
                 I Build Scalable Software with{' '}
@@ -777,7 +793,7 @@ function App() {
                 and{' '}
                 <Box component="span" sx={{ color: 'secondary.main' }}>
                   Bold Ideas
-                  </Box>
+                </Box>
               </Typography>
             </motion.div>
             
@@ -789,10 +805,11 @@ function App() {
               <Typography 
                 variant="h5" 
                 sx={{ 
-                  mb: 6,
+                  mb: { xs: 4, md: 6 },
                   color: 'text.secondary',
                   fontWeight: 500,
-                  fontSize: { xs: '1.25rem', md: '1.5rem' }
+                  fontSize: { xs: '1.125rem', sm: '1.25rem', md: '1.5rem' },
+                  px: { xs: 1, md: 0 }
                 }}
               >
                 Full-Stack Software Engineer
@@ -804,51 +821,60 @@ function App() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, delay: 0.6, ease: "easeOut" }}
             >
-              <Box sx={{ display: 'flex', gap: 3, justifyContent: 'center', flexWrap: 'wrap' }}>
-                    <Button
-                      variant="contained"
-                      size="large"
+              <Box sx={{ 
+                display: 'flex', 
+                gap: { xs: 2, md: 3 }, 
+                justifyContent: 'center', 
+                flexWrap: 'wrap',
+                px: { xs: 1, md: 0 }
+              }}>
+                <Button
+                  variant="contained"
+                  size="large"
                   onClick={() => scrollToSection('projects')}
-                      sx={{
-                    fontSize: '1.125rem',
-                    padding: '16px 32px',
-                    borderRadius: '16px'
+                  sx={{ 
+                    fontSize: { xs: '1rem', md: '1.125rem' },
+                    padding: { xs: '12px 24px', md: '16px 32px' },
+                    borderRadius: '16px',
+                    minWidth: { xs: '140px', md: 'auto' }
                   }}
                 >
                   📂 View Projects
-                    </Button>
-                    <Button
-                      variant="outlined"
-                      size="large"
+                </Button>
+                <Button
+                  variant="outlined"
+                  size="large"
                   onClick={() => scrollToSection('contact')}
-                      sx={{
-                    fontSize: '1.125rem',
-                    padding: '16px 32px',
-                    borderRadius: '16px'
+                  sx={{ 
+                    fontSize: { xs: '1rem', md: '1.125rem' },
+                    padding: { xs: '12px 24px', md: '16px 32px' },
+                    borderRadius: '16px',
+                    minWidth: { xs: '140px', md: 'auto' }
                   }}
                 >
                   📧 Contact Me
-                    </Button>
-                  </Box>
-                </motion.div>
+                </Button>
+              </Box>
+            </motion.div>
           </Box>
-                  </Container>
+        </Container>
       </Box>
 
-      {/* Introduction Section */}
-      <Box id="introduction" sx={{ py: 12, backgroundColor: '#ffffff' }}>
-        <Container maxWidth="lg">
-          <Grid container spacing={8} alignItems="center">
+            {/* Introduction Section */}
+      <Box id="introduction" sx={{ py: { xs: 8, md: 12 }, backgroundColor: '#ffffff' }}>
+        <Container maxWidth="lg" sx={{ px: { xs: 2, md: 3 } }}>
+          <Grid container spacing={{ xs: 4, md: 8 }} alignItems="center">
             <Grid item xs={12} md={6}>
               <AnimatedSection>
                 <Typography 
                   variant="h2" 
                   sx={{ 
-                    mb: 4,
-                    fontSize: { xs: '2.5rem', md: '3.5rem' },
+                    mb: { xs: 2, md: 4 },
+                    fontSize: { xs: '2rem', sm: '2.5rem', md: '3.5rem' },
                     color: 'text.primary',
                     fontWeight: 700,
-                    lineHeight: 1.2
+                    lineHeight: 1.2,
+                    textAlign: { xs: 'center', md: 'left' }
                   }}
                 >
                   Hi, I'm{' '}
@@ -859,10 +885,11 @@ function App() {
                 <Typography 
                   variant="h5" 
                   sx={{ 
-                    mb: 4,
+                    mb: { xs: 3, md: 4 },
                     color: 'text.secondary',
                     fontWeight: 500,
-                    fontSize: { xs: '1.25rem', md: '1.5rem' }
+                    fontSize: { xs: '1.125rem', sm: '1.25rem', md: '1.5rem' },
+                    textAlign: { xs: 'center', md: 'left' }
                   }}
                 >
                   Software Engineer | Problem Solver | Startup Builder
@@ -870,10 +897,11 @@ function App() {
                 <Typography 
                   variant="body1" 
                   sx={{ 
-                    mb: 3, 
-                    fontSize: '1.125rem', 
+                    mb: { xs: 2, md: 3 },
+                    fontSize: { xs: '1rem', md: '1.125rem' },
                     lineHeight: 1.8,
-                    color: 'text.primary'
+                    color: 'text.primary',
+                    textAlign: { xs: 'center', md: 'left' }
                   }}
                 >
                   I'm a computer science graduate and software engineer passionate about building impactful, 
@@ -884,10 +912,11 @@ function App() {
                 <Typography 
                   variant="body1" 
                   sx={{ 
-                    mb: 3, 
-                    fontSize: '1.125rem', 
+                    mb: { xs: 2, md: 3 },
+                    fontSize: { xs: '1rem', md: '1.125rem' },
                     lineHeight: 1.8,
-                    color: 'text.primary'
+                    color: 'text.primary',
+                    textAlign: { xs: 'center', md: 'left' }
                   }}
                 >
                   My work spans everything from AI-powered tools to automation workflows and full product 
@@ -897,17 +926,23 @@ function App() {
                 <Typography 
                   variant="body1" 
                   sx={{ 
-                    mb: 5, 
-                    fontSize: '1.125rem', 
+                    mb: { xs: 4, md: 5 },
+                    fontSize: { xs: '1rem', md: '1.125rem' },
                     lineHeight: 1.8,
-                    color: 'text.primary'
+                    color: 'text.primary',
+                    textAlign: { xs: 'center', md: 'left' }
                   }}
                 >
                   I'm always learning, always building, and constantly exploring how technology can drive 
                   meaningful impact.
                 </Typography>
                 
-                <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
+                <Box sx={{ 
+                  display: 'flex', 
+                  gap: { xs: 2, md: 3 }, 
+                  flexWrap: 'wrap',
+                  justifyContent: { xs: 'center', md: 'flex-start' }
+                }}>
                   <Button
                     variant="contained"
                     size="large"
@@ -915,9 +950,10 @@ function App() {
                     href={cv}
                     target="_blank"
                     sx={{ 
-                      fontSize: '1.125rem',
-                      padding: '16px 32px',
-                      borderRadius: '16px'
+                      fontSize: { xs: '1rem', md: '1.125rem' },
+                      padding: { xs: '12px 24px', md: '16px 32px' },
+                      borderRadius: '16px',
+                      minWidth: { xs: '140px', md: 'auto' }
                     }}
                   >
                     Download CV
@@ -929,9 +965,10 @@ function App() {
                     href="https://www.linkedin.com/in/butrint-bytyqi-37859a235/"
                     target="_blank"
                     sx={{ 
-                      fontSize: '1.125rem',
-                      padding: '16px 32px',
-                      borderRadius: '16px'
+                      fontSize: { xs: '1rem', md: '1.125rem' },
+                      padding: { xs: '12px 24px', md: '16px 32px' },
+                      borderRadius: '16px',
+                      minWidth: { xs: '130px', md: 'auto' }
                     }}
                   >
                     LinkedIn
@@ -942,44 +979,44 @@ function App() {
             
             <Grid item xs={12} md={6}>
               <AnimatedSection delay={0.3}>
-                <Card sx={{ p: 4, textAlign: 'center' }}>
-                  <Typography variant="h6" sx={{ mb: 3, fontWeight: 600 }}>
+                <Card sx={{ p: { xs: 3, md: 4 }, textAlign: 'center' }}>
+                  <Typography variant="h6" sx={{ mb: 3, fontWeight: 600, fontSize: { xs: '1.125rem', md: '1.25rem' } }}>
                     Quick Facts
                   </Typography>
                   <Stack spacing={2}>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                       <LocationOn color="primary" />
                       <Box sx={{ textAlign: 'left' }}>
-                        <Typography variant="body2" sx={{ fontWeight: 600 }}>Location</Typography>
-                        <Typography variant="body2" color="text.secondary">Prishtina, Kosovo</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 600, fontSize: { xs: '0.875rem', md: '1rem' } }}>Location</Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>Prishtina, Kosovo</Typography>
                       </Box>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                       <Email color="primary" />
                       <Box sx={{ textAlign: 'left' }}>
-                        <Typography variant="body2" sx={{ fontWeight: 600 }}>Email</Typography>
-                        <Typography variant="body2" color="text.secondary">butrinti022@gmail.com</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 600, fontSize: { xs: '0.875rem', md: '1rem' } }}>Email</Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>butrinti022@gmail.com</Typography>
                       </Box>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                       <Phone color="primary" />
                       <Box sx={{ textAlign: 'left' }}>
-                        <Typography variant="body2" sx={{ fontWeight: 600 }}>Phone</Typography>
-                        <Typography variant="body2" color="text.secondary">+383 49 153 433</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 600, fontSize: { xs: '0.875rem', md: '1rem' } }}>Phone</Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>+383 49 153 433</Typography>
                       </Box>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                       <School color="primary" />
                       <Box sx={{ textAlign: 'left' }}>
-                        <Typography variant="body2" sx={{ fontWeight: 600 }}>Education</Typography>
-                        <Typography variant="body2" color="text.secondary">BS Software Design, UPZ</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 600, fontSize: { xs: '0.875rem', md: '1rem' } }}>Education</Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>BS Software Design, UPZ</Typography>
                       </Box>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                       <Language color="primary" />
                       <Box sx={{ textAlign: 'left' }}>
-                        <Typography variant="body2" sx={{ fontWeight: 600 }}>Languages</Typography>
-                        <Typography variant="body2" color="text.secondary">Albanian, English, German, French</Typography>
+                        <Typography variant="body2" sx={{ fontWeight: 600, fontSize: { xs: '0.875rem', md: '1rem' } }}>Languages</Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>Albanian, English, German, French</Typography>
                       </Box>
                     </Box>
                   </Stack>
@@ -991,28 +1028,29 @@ function App() {
       </Box>
 
       {/* Projects Section */}
-      <Box id="projects" sx={{ py: 10, backgroundColor: '#f9f9f9' }}>
-        <Container maxWidth="lg">
+      <Box id="projects" sx={{ py: { xs: 8, md: 10 }, backgroundColor: '#f9f9f9' }}>
+        <Container maxWidth="lg" sx={{ px: { xs: 2, md: 3 } }}>
           <AnimatedSection>
             <Typography 
               variant="h2" 
               sx={{ 
-                mb: 8, 
+                mb: { xs: 6, md: 8 },
                 textAlign: 'center',
                 color: 'text.primary',
-                fontWeight: 700
+                fontWeight: 700,
+                fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }
               }}
             >
               Featured Projects
-          </Typography>
+            </Typography>
           </AnimatedSection>
           
-          <Grid container spacing={4}>
+          <Grid container spacing={{ xs: 3, md: 4 }}>
             {projects.map((project, index) => (
               <Grid item xs={12} md={6} key={project.id}>
-                <AnimatedSection delay={index * 0.1}>
-                  <Card
-                    sx={{
+                                <AnimatedSection delay={index * 0.1}>
+                  <Card 
+                    sx={{ 
                       height: '100%',
                       display: 'flex',
                       flexDirection: 'column',
@@ -1020,17 +1058,17 @@ function App() {
                       borderLeft: `4px solid ${project.color}`,
                       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                       '&:hover': {
-                        transform: 'translateY(-12px)',
+                        transform: { xs: 'translateY(-4px)', md: 'translateY(-12px)' },
                         boxShadow: `0 25px 50px 0 ${project.color}20`,
                       }
                     }}
                   >
-                    <CardContent sx={{ flexGrow: 1, p: 4 }}>
-                      <Box sx={{ display: 'flex', alignItems: 'center', mb: 3 }}>
-                      <Box
-                        sx={{
-                            width: 56,
-                            height: 56,
+                    <CardContent sx={{ flexGrow: 1, p: { xs: 3, md: 4 } }}>
+                      <Box sx={{ display: 'flex', alignItems: 'center', mb: { xs: 2, md: 3 } }}>
+                        <Box
+                          sx={{
+                            width: { xs: 48, md: 56 },
+                            height: { xs: 48, md: 56 },
                             borderRadius: 2,
                             backgroundColor: `${project.color}15`,
                             display: 'flex',
@@ -1041,38 +1079,57 @@ function App() {
                           }}
                         >
                           {project.icon}
-                      </Box>
+                        </Box>
                         <Box>
-                          <Typography variant="h6" component="h3" sx={{ fontWeight: 600, mb: 0.5 }}>
+                          <Typography variant="h6" component="h3" sx={{ 
+                            fontWeight: 600, 
+                            mb: 0.5,
+                            fontSize: { xs: '1.125rem', md: '1.25rem' }
+                          }}>
                             {project.title}
-          </Typography>
-                          <Typography variant="body2" color="text.secondary">
+                        </Typography>
+                          <Typography variant="body2" color="text.secondary" sx={{ 
+                            fontSize: { xs: '0.875rem', md: '1rem' } 
+                          }}>
                             {project.subtitle}
                           </Typography>
               </Box>
                     </Box>
                       
-                      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: 3 }}>
+                                            <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: { xs: 2, md: 3 } }}>
                         <Chip
                           label={project.status}
                           size="small"
-                        sx={{
+                          sx={{
                             backgroundColor: project.status === 'Live' ? '#34c759' : '#ff9500',
                             color: 'white',
-                            fontWeight: 500
+                            fontWeight: 500,
+                            fontSize: { xs: '0.7rem', md: '0.75rem' },
+                            height: { xs: 24, md: 28 }
                           }}
                         />
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography variant="body2" color="text.secondary" sx={{ 
+                          fontSize: { xs: '0.875rem', md: '1rem' } 
+                        }}>
                           {project.period}
-                      </Typography>
-        </Box>
+                          </Typography>
+                        </Box>
 
-                      <Typography variant="body2" sx={{ mb: 3, lineHeight: 1.6 }}>
+                      <Typography variant="body2" sx={{ 
+                        mb: { xs: 2, md: 3 },
+                        lineHeight: 1.6,
+                        fontSize: { xs: '0.875rem', md: '1rem' }
+                      }}>
                         {project.description}
-            </Typography>
+              </Typography>
             
-                      <Box sx={{ mb: 3 }}>
-                        <Typography variant="body2" sx={{ mb: 2, fontWeight: 600, color: 'text.primary' }}>
+                      <Box sx={{ mb: { xs: 2, md: 3 } }}>
+                        <Typography variant="body2" sx={{ 
+                          mb: 2, 
+                          fontWeight: 600, 
+                          color: 'text.primary',
+                          fontSize: { xs: '0.875rem', md: '1rem' }
+                        }}>
                           Key Features:
                 </Typography>
                         <Stack spacing={1}>
@@ -1087,37 +1144,50 @@ function App() {
                                   flexShrink: 0
                                 }}
                               />
-                              <Typography variant="body2" color="text.secondary">
+                              <Typography variant="body2" color="text.secondary" sx={{ 
+                                fontSize: { xs: '0.875rem', md: '1rem' } 
+                              }}>
                                 {feature}
-                          </Typography>
-                        </Box>
+              </Typography>
+            </Box>
                   ))}
                         </Stack>
               </Box>
                       
-                      <Box sx={{ mb: 3 }}>
-                        <Typography variant="body2" sx={{ mb: 2, fontWeight: 600, color: 'text.primary' }}>
+                      <Box sx={{ mb: { xs: 2, md: 3 } }}>
+                        <Typography variant="body2" sx={{ 
+                          mb: 2, 
+                          fontWeight: 600, 
+                          color: 'text.primary',
+                          fontSize: { xs: '0.875rem', md: '1rem' }
+                        }}>
                           Tech Stack:
-              </Typography>
+                </Typography>
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                           {project.techStack.map((tech, techIndex) => (
                             <Chip
                               key={techIndex}
                               label={tech}
-                              size="small"
-                              variant="outlined"
-                              sx={{ 
-                                fontSize: '0.75rem',
+                    size="small" 
+                    variant="outlined"
+                    sx={{ 
+                                fontSize: { xs: '0.7rem', md: '0.75rem' },
                                 backgroundColor: `${project.color}08`,
                                 borderColor: `${project.color}30`,
-                                color: project.color
+                                color: project.color,
+                                height: { xs: 24, md: 28 }
                               }}
                             />
                           ))}
-            </Box>
+                </Box>
         </Box>
 
-                      <Box sx={{ display: 'flex', gap: 2, mt: 'auto' }}>
+                      <Box sx={{ 
+                        display: 'flex', 
+                        gap: 2, 
+                        mt: 'auto',
+                        flexWrap: 'wrap'
+                      }}>
                         {project.github && (
                   <Button 
                     size="small" 
@@ -1125,7 +1195,11 @@ function App() {
                             href={project.github}
                     target="_blank"
                             rel="noopener noreferrer"
-                            sx={{ color: 'text.secondary' }}
+                            sx={{ 
+                              color: 'text.secondary',
+                              fontSize: { xs: '0.75rem', md: '0.875rem' },
+                              padding: { xs: '4px 8px', md: '6px 12px' }
+                            }}
                           >
                             Code
                   </Button>
@@ -1140,6 +1214,8 @@ function App() {
                     variant="contained"
                     sx={{ 
                               backgroundColor: project.color,
+                              fontSize: { xs: '0.75rem', md: '0.875rem' },
+                              padding: { xs: '4px 8px', md: '6px 12px' },
                       '&:hover': {
                                 backgroundColor: project.color,
                                 filter: 'brightness(0.9)'
@@ -1458,24 +1534,25 @@ function App() {
         </Container>
                   </Box>
 
-      {/* Skills Section */}
-      <Box id="skills" sx={{ py: 10, backgroundColor: '#ffffff' }}>
-        <Container maxWidth="lg">
+            {/* Skills Section */}
+      <Box id="skills" sx={{ py: { xs: 8, md: 10 }, backgroundColor: '#ffffff' }}>
+        <Container maxWidth="lg" sx={{ px: { xs: 2, md: 3 } }}>
           <AnimatedSection>
             <Typography 
               variant="h2" 
               sx={{ 
-                mb: 8, 
+                mb: { xs: 6, md: 8 },
                 textAlign: 'center',
                 color: 'text.primary',
-                fontWeight: 700
+                fontWeight: 700,
+                fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }
               }}
             >
               Technical Skills
-                    </Typography>
+            </Typography>
           </AnimatedSection>
           
-          <Grid container spacing={3}>
+          <Grid container spacing={{ xs: 2, md: 3 }}>
             {techStack.map((tech, index) => (
               <Grid item xs={6} sm={4} md={3} key={tech.name}>
                 <AnimatedSection delay={index * 0.05}>
@@ -1484,43 +1561,46 @@ function App() {
                     placement="top"
                   >
                     <Card 
-                            sx={{
-                        p: 3,
+                      sx={{ 
+                        p: { xs: 2, md: 3 },
                         textAlign: 'center',
                         cursor: 'pointer',
                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                              '&:hover': {
-                          transform: 'translateY(-8px)',
+                        '&:hover': {
+                          transform: { xs: 'translateY(-4px)', md: 'translateY(-8px)' },
                           boxShadow: '0 20px 40px rgba(0, 122, 255, 0.15)',
                         }
                       }}
                     >
                       <Box
                         sx={{
-                          width: 56,
-                          height: 56,
+                          width: { xs: 40, md: 56 },
+                          height: { xs: 40, md: 56 },
                           borderRadius: 2,
                           backgroundColor: 'rgba(0, 122, 255, 0.1)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          margin: '0 auto 12px',
+                          margin: { xs: '0 auto 8px', md: '0 auto 12px' },
                           color: 'primary.main'
                         }}
                       >
                         {tech.icon}
                       </Box>
-                      <Typography variant="body2" sx={{ fontWeight: 600 }}>
+                      <Typography variant="body2" sx={{ 
+                        fontWeight: 600,
+                        fontSize: { xs: '0.875rem', md: '1rem' }
+                      }}>
                         {tech.name}
                       </Typography>
                     </Card>
                   </Tooltip>
                 </AnimatedSection>
-                        </Grid>
-                      ))}
-                    </Grid>
+              </Grid>
+            ))}
+          </Grid>
         </Container>
-                  </Box>
+      </Box>
 
       {/* Languages Section */}
       <Box id="languages" sx={{ py: 10, backgroundColor: '#f9f9f9' }}>
@@ -1633,28 +1713,34 @@ function App() {
         </Container>
       </Box>
 
-      {/* Contact Section */}
-      <Box id="contact" sx={{ py: 10, backgroundColor: '#f9f9f9' }}>
-        <Container maxWidth="lg">
+            {/* Contact Section */}
+      <Box id="contact" sx={{ py: { xs: 8, md: 10 }, backgroundColor: '#f9f9f9' }}>
+        <Container maxWidth="lg" sx={{ px: { xs: 2, md: 3 } }}>
           <AnimatedSection>
             <Typography 
               variant="h2" 
-                    sx={{
-                mb: 8, 
+              sx={{ 
+                mb: { xs: 6, md: 8 },
                 textAlign: 'center',
                 color: 'text.primary',
-                fontWeight: 700
+                fontWeight: 700,
+                fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }
               }}
             >
               Let's Work Together
-                    </Typography>
+            </Typography>
           </AnimatedSection>
           
-          <Grid container spacing={6} justifyContent="center">
+          <Grid container spacing={{ xs: 4, md: 6 }} justifyContent="center">
             <Grid item xs={12} md={8}>
               <AnimatedSection delay={0.2}>
-                <Card sx={{ p: 6 }}>
-                  <Typography variant="h5" sx={{ mb: 3, textAlign: 'center', fontWeight: 600 }}>
+                <Card sx={{ p: { xs: 4, md: 6 } }}>
+                  <Typography variant="h5" sx={{ 
+                    mb: 3, 
+                    textAlign: 'center', 
+                    fontWeight: 600,
+                    fontSize: { xs: '1.25rem', md: '1.5rem' }
+                  }}>
                     Ready to Build Something Amazing?
                   </Typography>
                   <Typography variant="body1" sx={{ mb: 4, textAlign: 'center', color: 'text.secondary' }}>
