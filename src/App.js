@@ -24,11 +24,7 @@ import {
   Drawer,
   List,
   ListItem,
-  ListItemText,
-  ListItemIcon,
-  Divider,
-  useTheme,
-  useMediaQuery
+  ListItemText
 } from '@mui/material';
 import {
   GitHub,
@@ -605,8 +601,6 @@ function App() {
     message: ''
   });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 
   // Handle form submission
