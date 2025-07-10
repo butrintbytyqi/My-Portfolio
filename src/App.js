@@ -20,7 +20,15 @@ import {
   Tooltip,
   Link as MuiLink,
   CircularProgress,
-  Stack
+  Stack,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  Divider,
+  useTheme,
+  useMediaQuery
 } from '@mui/material';
 import {
   GitHub,
@@ -46,7 +54,9 @@ import {
   AutoAwesome,
   Terminal,
   DataObject,
-  IntegrationInstructions
+  IntegrationInstructions,
+  Menu as MenuIcon,
+  Close
 } from '@mui/icons-material';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import emailjs from '@emailjs/browser';
@@ -594,6 +604,9 @@ function App() {
     error: false,
     message: ''
   });
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
 
   // Handle form submission
@@ -674,14 +687,27 @@ function App() {
     }
   };
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const closeMobileMenu = () => {
+    setMobileMenuOpen(false);
+  };
+
+  const handleMobileMenuItemClick = (sectionId) => {
+    scrollToSection(sectionId);
+    closeMobileMenu();
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       
-              {/* Navigation */}
+        {/* Navigation */}
       <AppBar 
         position="fixed" 
-        sx={{ 
+          sx={{
           backgroundColor: 'rgba(255, 255, 255, 0.8)',
           backdropFilter: 'blur(20px)',
           borderBottom: '1px solid rgba(0, 0, 0, 0.06)',
@@ -730,19 +756,80 @@ function App() {
           {/* Mobile Menu Button */}
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              onClick={toggleMobileMenu}
               sx={{ color: 'text.primary' }}
+              aria-label="menu"
             >
-              <KeyboardArrowUp />
+              {mobileMenuOpen ? <Close /> : <MenuIcon />}
             </IconButton>
-          </Box>
+            </Box>
         </Toolbar>
       </AppBar>
 
-              {/* Hero Section */}
-      <Box
-        id="home"
+      {/* Mobile Navigation Drawer */}
+      <Drawer
+        anchor="top"
+        open={mobileMenuOpen}
+        onClose={closeMobileMenu}
         sx={{
+          display: { xs: 'block', md: 'none' },
+          '& .MuiDrawer-paper': {
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(20px)',
+            borderRadius: '0 0 20px 20px',
+            borderTop: 'none',
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+            marginTop: '64px',
+            width: '100%',
+            maxHeight: '80vh',
+            overflow: 'auto'
+          }
+        }}
+      >
+        <List sx={{ py: 2 }}>
+          {[
+            { label: 'Projects', id: 'projects' },
+            { label: 'Education', id: 'education' },
+            { label: 'Certifications', id: 'certifications' },
+            { label: 'Awards', id: 'awards' },
+            { label: 'Experience', id: 'experience' },
+            { label: 'Skills', id: 'skills' },
+            { label: 'Languages', id: 'languages' },
+            { label: 'Interests', id: 'interests' },
+            { label: 'Contact', id: 'contact' }
+          ].map((item) => (
+            <ListItem
+              key={item.label}
+              onClick={() => handleMobileMenuItemClick(item.id)}
+              sx={{
+                cursor: 'pointer',
+                py: 1.5,
+                px: 3,
+                '&:hover': {
+                  backgroundColor: 'rgba(0, 122, 255, 0.04)',
+                  '& .MuiTypography-root': {
+                    color: 'primary.main'
+                  }
+                }
+              }}
+            >
+              <ListItemText
+                primary={item.label}
+                primaryTypographyProps={{
+                  fontSize: '1.1rem',
+                  fontWeight: 500,
+                  color: 'text.primary'
+                }}
+              />
+            </ListItem>
+          ))}
+        </List>
+      </Drawer>
+
+        {/* Hero Section */}
+        <Box
+          id="home"
+          sx={{
           minHeight: { xs: '90vh', md: '100vh' },
           display: 'flex',
           alignItems: 'center',
@@ -756,10 +843,10 @@ function App() {
         <Box
           sx={{
             position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            bottom: 0,
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
             backgroundImage: `
               radial-gradient(circle at 25% 25%, rgba(0, 122, 255, 0.05) 0%, transparent 70%),
               radial-gradient(circle at 75% 75%, rgba(126, 91, 239, 0.05) 0%, transparent 70%)
@@ -770,18 +857,18 @@ function App() {
         
         <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, px: { xs: 2, md: 3 } }}>
           <Box sx={{ textAlign: 'center', maxWidth: { xs: '100%', md: '800px' }, margin: '0 auto' }}>
-            <motion.div
+                <motion.div
               initial={{ opacity: 0, y: 60 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1, ease: "easeOut" }}
             >
               <Typography 
-                variant="h1" 
-                sx={{ 
+                    variant="h1"
+                    sx={{ 
                   mb: { xs: 2, md: 3 },
                   fontSize: { xs: '2rem', sm: '2.5rem', md: '4rem' },
                   color: 'text.primary',
-                  fontWeight: 700,
+                      fontWeight: 700, 
                   lineHeight: { xs: 1.2, md: 1.1 },
                   px: { xs: 1, md: 0 }
                 }}
@@ -793,7 +880,7 @@ function App() {
                 and{' '}
                 <Box component="span" sx={{ color: 'secondary.main' }}>
                   Bold Ideas
-                </Box>
+                  </Box>
               </Typography>
             </motion.div>
             
@@ -828,11 +915,11 @@ function App() {
                 flexWrap: 'wrap',
                 px: { xs: 1, md: 0 }
               }}>
-                <Button
-                  variant="contained"
-                  size="large"
+                    <Button
+                      variant="contained"
+                      size="large"
                   onClick={() => scrollToSection('projects')}
-                  sx={{ 
+                      sx={{
                     fontSize: { xs: '1rem', md: '1.125rem' },
                     padding: { xs: '12px 24px', md: '16px 32px' },
                     borderRadius: '16px',
@@ -840,12 +927,12 @@ function App() {
                   }}
                 >
                   📂 View Projects
-                </Button>
-                <Button
-                  variant="outlined"
-                  size="large"
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      size="large"
                   onClick={() => scrollToSection('contact')}
-                  sx={{ 
+                      sx={{
                     fontSize: { xs: '1rem', md: '1.125rem' },
                     padding: { xs: '12px 24px', md: '16px 32px' },
                     borderRadius: '16px',
@@ -853,12 +940,12 @@ function App() {
                   }}
                 >
                   📧 Contact Me
-                </Button>
-              </Box>
-            </motion.div>
+                    </Button>
+                  </Box>
+                </motion.div>
           </Box>
-        </Container>
-      </Box>
+          </Container>
+        </Box>
 
             {/* Introduction Section */}
       <Box id="introduction" sx={{ py: { xs: 8, md: 12 }, backgroundColor: '#ffffff' }}>
@@ -881,10 +968,10 @@ function App() {
                   <Box component="span" sx={{ color: 'primary.main' }}>
                     Butrint Bytyqi
                   </Box>
-                </Typography>
+          </Typography>
                 <Typography 
                   variant="h5" 
-                  sx={{ 
+                    sx={{
                     mb: { xs: 3, md: 4 },
                     color: 'text.secondary',
                     fontWeight: 500,
@@ -893,10 +980,10 @@ function App() {
                   }}
                 >
                   Software Engineer | Problem Solver | Startup Builder
-                </Typography>
+                      </Typography>
                 <Typography 
                   variant="body1" 
-                  sx={{ 
+                        sx={{
                     mb: { xs: 2, md: 3 },
                     fontSize: { xs: '1rem', md: '1.125rem' },
                     lineHeight: 1.8,
@@ -973,9 +1060,9 @@ function App() {
                   >
                     LinkedIn
                   </Button>
-                </Box>
+                      </Box>
               </AnimatedSection>
-            </Grid>
+              </Grid>
             
             <Grid item xs={12} md={6}>
               <AnimatedSection delay={0.3}>
@@ -989,21 +1076,21 @@ function App() {
                       <Box sx={{ textAlign: 'left' }}>
                         <Typography variant="body2" sx={{ fontWeight: 600, fontSize: { xs: '0.875rem', md: '1rem' } }}>Location</Typography>
                         <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>Prishtina, Kosovo</Typography>
-                      </Box>
+              </Box>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                       <Email color="primary" />
                       <Box sx={{ textAlign: 'left' }}>
                         <Typography variant="body2" sx={{ fontWeight: 600, fontSize: { xs: '0.875rem', md: '1rem' } }}>Email</Typography>
                         <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>butrinti022@gmail.com</Typography>
-                      </Box>
                     </Box>
+                  </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                       <Phone color="primary" />
                       <Box sx={{ textAlign: 'left' }}>
                         <Typography variant="body2" sx={{ fontWeight: 600, fontSize: { xs: '0.875rem', md: '1rem' } }}>Phone</Typography>
                         <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>+383 49 153 433</Typography>
-                      </Box>
+              </Box>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                       <School color="primary" />
@@ -1025,7 +1112,7 @@ function App() {
             </Grid>
           </Grid>
         </Container>
-      </Box>
+        </Box>
 
       {/* Projects Section */}
       <Box id="projects" sx={{ py: { xs: 8, md: 10 }, backgroundColor: '#f9f9f9' }}>
@@ -1049,11 +1136,11 @@ function App() {
             {projects.map((project, index) => (
               <Grid item xs={12} md={6} key={project.id}>
                                 <AnimatedSection delay={index * 0.1}>
-                  <Card 
-                    sx={{ 
-                      height: '100%',
-                      display: 'flex',
-                      flexDirection: 'column',
+                      <Card
+                        sx={{
+                          height: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
                       cursor: 'pointer',
                       borderLeft: `4px solid ${project.color}`,
                       transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
@@ -1093,14 +1180,14 @@ function App() {
                           }}>
                             {project.subtitle}
                           </Typography>
+                        </Box>
               </Box>
-                    </Box>
                       
                                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, mb: { xs: 2, md: 3 } }}>
                         <Chip
                           label={project.status}
-                          size="small"
-                          sx={{
+                    size="small" 
+                    sx={{ 
                             backgroundColor: project.status === 'Live' ? '#34c759' : '#ff9500',
                             color: 'white',
                             fontWeight: 500,
@@ -1113,7 +1200,7 @@ function App() {
                         }}>
                           {project.period}
                           </Typography>
-                        </Box>
+                </Box>
 
                       <Typography variant="body2" sx={{ 
                         mb: { xs: 2, md: 3 },
@@ -1121,7 +1208,7 @@ function App() {
                         fontSize: { xs: '0.875rem', md: '1rem' }
                       }}>
                         {project.description}
-              </Typography>
+                </Typography>
             
                       <Box sx={{ mb: { xs: 2, md: 3 } }}>
                         <Typography variant="body2" sx={{ 
@@ -1136,7 +1223,7 @@ function App() {
                           {project.features.slice(0, 3).map((feature, idx) => (
                             <Box key={idx} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
                         <Box
-                          sx={{
+                    sx={{ 
                                   width: 6,
                                   height: 6,
                                   borderRadius: '50%',
@@ -1148,12 +1235,12 @@ function App() {
                                 fontSize: { xs: '0.875rem', md: '1rem' } 
                               }}>
                                 {feature}
-              </Typography>
-            </Box>
+                </Typography>
+                </Box>
                   ))}
                         </Stack>
-              </Box>
-                      
+        </Box>
+
                       <Box sx={{ mb: { xs: 2, md: 3 } }}>
                         <Typography variant="body2" sx={{ 
                           mb: 2, 
@@ -1162,24 +1249,24 @@ function App() {
                           fontSize: { xs: '0.875rem', md: '1rem' }
                         }}>
                           Tech Stack:
-                </Typography>
+          </Typography>
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                           {project.techStack.map((tech, techIndex) => (
-                            <Chip
+                          <Chip
                               key={techIndex}
-                              label={tech}
-                    size="small" 
+                            label={tech}
+                            size="small"
                     variant="outlined"
-                    sx={{ 
+                            sx={{
                                 fontSize: { xs: '0.7rem', md: '0.75rem' },
                                 backgroundColor: `${project.color}08`,
                                 borderColor: `${project.color}30`,
                                 color: project.color,
                                 height: { xs: 24, md: 28 }
-                              }}
-                            />
-                          ))}
-                </Box>
+                            }}
+                          />
+                        ))}
+                      </Box>
         </Box>
 
                       <Box sx={{ 
@@ -1189,51 +1276,51 @@ function App() {
                         flexWrap: 'wrap'
                       }}>
                         {project.github && (
-                  <Button 
+                        <Button
                     size="small" 
                             startIcon={<GitHub />}
-                            href={project.github}
-                    target="_blank"
+                          href={project.github}
+                          target="_blank"
                             rel="noopener noreferrer"
-                            sx={{ 
+                          sx={{
                               color: 'text.secondary',
                               fontSize: { xs: '0.75rem', md: '0.875rem' },
                               padding: { xs: '4px 8px', md: '6px 12px' }
                             }}
                           >
                             Code
-                  </Button>
+                        </Button>
                         )}
                         {project.live && (
-                  <Button 
+                          <Button
                     size="small" 
                             startIcon={<Launch />}
                             href={project.live}
-                    target="_blank"
+                            target="_blank"
                             rel="noopener noreferrer"
                     variant="contained"
-                    sx={{ 
+                            sx={{
                               backgroundColor: project.color,
                               fontSize: { xs: '0.75rem', md: '0.875rem' },
                               padding: { xs: '4px 8px', md: '6px 12px' },
-                      '&:hover': {
+                              '&:hover': {
                                 backgroundColor: project.color,
                                 filter: 'brightness(0.9)'
-                      }
-                    }}
-                  >
+                              }
+                            }}
+                          >
                             Live Demo
-                  </Button>
+                          </Button>
                         )}
-                </Box>
+                      </Box>
                     </CardContent>
                   </Card>
                 </AnimatedSection>
-              </Grid>
-            ))}
+                </Grid>
+              ))}
           </Grid>
         </Container>
-      </Box>
+        </Box>
 
       {/* Education Section */}
       <Box id="education" sx={{ py: 10, backgroundColor: '#f9f9f9' }}>
@@ -1259,7 +1346,7 @@ function App() {
                   <Card sx={{ p: 4, position: 'relative', overflow: 'visible' }}>
                     <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 3 }}>
                       <Box
-                        sx={{
+                      sx={{
                           width: 56,
                           height: 56,
                           borderRadius: 2,
@@ -1304,7 +1391,7 @@ function App() {
             ))}
           </Grid>
         </Container>
-      </Box>
+                </Box>
 
       {/* Certifications Section */}
       <Box id="certifications" sx={{ py: 10, backgroundColor: '#ffffff' }}>
@@ -1330,7 +1417,7 @@ function App() {
                   <Card sx={{ p: 4, position: 'relative', overflow: 'visible' }}>
                     <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 3 }}>
                       <Box
-                    sx={{ 
+          sx={{
                           width: 56,
                           height: 56,
                           borderRadius: 2,
@@ -1346,10 +1433,10 @@ function App() {
                       <Box sx={{ flex: 1 }}>
                         <Typography variant="h5" sx={{ mb: 1, fontWeight: 600 }}>
                           {cert.title}
-                </Typography>
+                    </Typography>
                         <Typography variant="h6" sx={{ mb: 1, color: 'primary.main' }}>
                           {cert.organization}
-                </Typography>
+                    </Typography>
                         <Typography variant="body2" sx={{ mb: 2, color: 'text.secondary' }}>
                           {cert.period} • {cert.location}
                 </Typography>
@@ -1372,7 +1459,7 @@ function App() {
           <AnimatedSection>
             <Typography 
               variant="h2" 
-                    sx={{
+                          sx={{
                 mb: 8, 
                 textAlign: 'center',
                 color: 'text.primary',
@@ -1380,7 +1467,7 @@ function App() {
               }}
             >
               Awards & Recognition
-                      </Typography>
+                          </Typography>
           </AnimatedSection>
           
           <Grid container spacing={6} justifyContent="center">
@@ -1417,10 +1504,10 @@ function App() {
                       <Box sx={{ flex: 1 }}>
                         <Typography variant="h5" sx={{ mb: 1, fontWeight: 700, color: '#8b5000' }}>
                           {award.title}
-                        </Typography>
+                          </Typography>
                         <Typography variant="h6" sx={{ mb: 1, color: 'primary.main' }}>
                           {award.organization}
-                        </Typography>
+                          </Typography>
                         <Typography variant="body2" sx={{ mb: 3, color: 'text.secondary' }}>
                           {award.period} • {award.location}
                         </Typography>
@@ -1439,9 +1526,9 @@ function App() {
                     </Box>
                   </Card>
                 </AnimatedSection>
-                </Grid>
+                      </Grid>
               ))}
-          </Grid>
+                    </Grid>
         </Container>
         </Box>
 
@@ -1459,7 +1546,7 @@ function App() {
               }}
             >
               Experience
-            </Typography>
+                    </Typography>
           </AnimatedSection>
           
           <Grid container spacing={6} justifyContent="center">
@@ -1549,7 +1636,7 @@ function App() {
               }}
             >
               Technical Skills
-            </Typography>
+                    </Typography>
           </AnimatedSection>
           
           <Grid container spacing={{ xs: 2, md: 3 }}>
@@ -1561,12 +1648,12 @@ function App() {
                     placement="top"
                   >
                     <Card 
-                      sx={{ 
+                            sx={{
                         p: { xs: 2, md: 3 },
                         textAlign: 'center',
                         cursor: 'pointer',
                         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                        '&:hover': {
+                              '&:hover': {
                           transform: { xs: 'translateY(-4px)', md: 'translateY(-8px)' },
                           boxShadow: '0 20px 40px rgba(0, 122, 255, 0.15)',
                         }
@@ -1596,11 +1683,11 @@ function App() {
                     </Card>
                   </Tooltip>
                 </AnimatedSection>
-              </Grid>
-            ))}
-          </Grid>
+                        </Grid>
+                      ))}
+                    </Grid>
         </Container>
-      </Box>
+                  </Box>
 
       {/* Languages Section */}
       <Box id="languages" sx={{ py: 10, backgroundColor: '#f9f9f9' }}>
@@ -1719,7 +1806,7 @@ function App() {
           <AnimatedSection>
             <Typography 
               variant="h2" 
-              sx={{ 
+                    sx={{
                 mb: { xs: 6, md: 8 },
                 textAlign: 'center',
                 color: 'text.primary',
@@ -1728,7 +1815,7 @@ function App() {
               }}
             >
               Let's Work Together
-            </Typography>
+                    </Typography>
           </AnimatedSection>
           
           <Grid container spacing={{ xs: 4, md: 6 }} justifyContent="center">
