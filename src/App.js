@@ -20,11 +20,7 @@ import {
   Tooltip,
   Link as MuiLink,
   CircularProgress,
-  Stack,
-  Drawer,
-  List,
-  ListItem,
-  ListItemText
+  Stack
 } from '@mui/material';
 import {
   GitHub,
@@ -760,65 +756,187 @@ function App() {
         </Toolbar>
       </AppBar>
 
-      {/* Mobile Navigation Drawer */}
-      <Drawer
-        anchor="top"
-        open={mobileMenuOpen}
-        onClose={closeMobileMenu}
+      {/* Mobile Navigation Overlay */}
+      <Box
         sx={{
-          display: { xs: 'block', md: 'none' },
-          '& .MuiDrawer-paper': {
-            backgroundColor: 'rgba(255, 255, 255, 0.95)',
-            backdropFilter: 'blur(20px)',
-            borderRadius: '0 0 20px 20px',
-            borderTop: 'none',
-            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-            marginTop: '64px',
-            width: '100%',
-            maxHeight: '80vh',
-            overflow: 'auto'
-          }
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 1300,
+          visibility: mobileMenuOpen ? 'visible' : 'hidden',
+          display: { xs: 'block', md: 'none' }
         }}
       >
-        <List sx={{ py: 2 }}>
-          {[
-            { label: 'Projects', id: 'projects' },
-            { label: 'Education', id: 'education' },
-            { label: 'Certifications', id: 'certifications' },
-            { label: 'Awards', id: 'awards' },
-            { label: 'Experience', id: 'experience' },
-            { label: 'Skills', id: 'skills' },
-            { label: 'Languages', id: 'languages' },
-            { label: 'Interests', id: 'interests' },
-            { label: 'Contact', id: 'contact' }
-          ].map((item) => (
-            <ListItem
-              key={item.label}
-              onClick={() => handleMobileMenuItemClick(item.id)}
+        {/* Backdrop */}
+        <Box
+          onClick={closeMobileMenu}
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.4)',
+            opacity: mobileMenuOpen ? 1 : 0,
+            transition: 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            backdropFilter: 'blur(4px)'
+          }}
+        />
+        
+        {/* Navigation Panel */}
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: '280px',
+            maxWidth: '85vw',
+            backgroundColor: 'rgba(255, 255, 255, 0.95)',
+            backdropFilter: 'blur(40px)',
+            borderLeft: '1px solid rgba(255, 255, 255, 0.2)',
+            boxShadow: '-10px 0 40px rgba(0, 0, 0, 0.1)',
+            transform: mobileMenuOpen ? 'translateX(0)' : 'translateX(100%)',
+            transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+            display: 'flex',
+            flexDirection: 'column',
+            overflow: 'hidden'
+          }}
+        >
+          {/* Header */}
+          <Box
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              p: 3,
+              borderBottom: '1px solid rgba(0, 0, 0, 0.06)',
+              backgroundColor: 'rgba(255, 255, 255, 0.8)'
+            }}
+          >
+            <Typography
+              variant="h6"
               sx={{
-                cursor: 'pointer',
-                py: 1.5,
-                px: 3,
+                fontWeight: 600,
+                color: 'text.primary',
+                fontSize: '1.1rem'
+              }}
+            >
+              Navigation
+            </Typography>
+            <IconButton
+              onClick={closeMobileMenu}
+              sx={{
+                color: 'text.primary',
+                backgroundColor: 'rgba(0, 0, 0, 0.04)',
                 '&:hover': {
-                  backgroundColor: 'rgba(0, 122, 255, 0.04)',
-                  '& .MuiTypography-root': {
-                    color: 'primary.main'
-                  }
+                  backgroundColor: 'rgba(0, 0, 0, 0.08)'
                 }
               }}
             >
-              <ListItemText
-                primary={item.label}
-                primaryTypographyProps={{
-                  fontSize: '1.1rem',
-                  fontWeight: 500,
-                  color: 'text.primary'
+              <Close />
+            </IconButton>
+          </Box>
+          
+          {/* Navigation Links */}
+          <Box sx={{ flex: 1, overflow: 'auto', py: 2 }}>
+            {[
+              { label: 'Projects', id: 'projects' },
+              { label: 'Education', id: 'education' },
+              { label: 'Certifications', id: 'certifications' },
+              { label: 'Awards', id: 'awards' },
+              { label: 'Experience', id: 'experience' },
+              { label: 'Skills', id: 'skills' },
+              { label: 'Languages', id: 'languages' },
+              { label: 'Interests', id: 'interests' },
+              { label: 'Contact', id: 'contact' }
+            ].map((item, index) => (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ 
+                  opacity: mobileMenuOpen ? 1 : 0, 
+                  x: mobileMenuOpen ? 0 : 20 
                 }}
-              />
-            </ListItem>
-          ))}
-        </List>
-      </Drawer>
+                transition={{ 
+                  delay: mobileMenuOpen ? index * 0.05 : 0,
+                  duration: 0.3,
+                  ease: "easeOut"
+                }}
+              >
+                <Box
+                  onClick={() => handleMobileMenuItemClick(item.id)}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    py: 2,
+                    px: 3,
+                    mx: 2,
+                    borderRadius: '12px',
+                    cursor: 'pointer',
+                    transition: 'all 0.2s ease',
+                    '&:hover': {
+                      backgroundColor: 'rgba(0, 122, 255, 0.06)',
+                      transform: 'translateX(4px)',
+                      '& .nav-text': {
+                        color: 'primary.main'
+                      }
+                    },
+                    '&:active': {
+                      transform: 'translateX(2px)',
+                      backgroundColor: 'rgba(0, 122, 255, 0.1)'
+                    }
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: '4px',
+                      height: '4px',
+                      borderRadius: '50%',
+                      backgroundColor: 'primary.main',
+                      mr: 2,
+                      opacity: 0.6
+                    }}
+                  />
+                  <Typography
+                    className="nav-text"
+                    sx={{
+                      fontSize: '1rem',
+                      fontWeight: 500,
+                      color: 'text.primary',
+                      transition: 'color 0.2s ease'
+                    }}
+                  >
+                    {item.label}
+                  </Typography>
+                </Box>
+              </motion.div>
+            ))}
+          </Box>
+          
+          {/* Footer */}
+          <Box
+            sx={{
+              p: 3,
+              borderTop: '1px solid rgba(0, 0, 0, 0.06)',
+              backgroundColor: 'rgba(255, 255, 255, 0.8)'
+            }}
+          >
+            <Typography
+              variant="caption"
+              sx={{
+                color: 'text.secondary',
+                fontSize: '0.75rem',
+                fontWeight: 500
+              }}
+            >
+              © 2024 Butrint Bytyqi
+            </Typography>
+          </Box>
+        </Box>
+      </Box>
 
         {/* Hero Section */}
         <Box
