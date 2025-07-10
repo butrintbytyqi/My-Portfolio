@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.d4a9569f.css",
-    "main.js": "/static/js/main.726638fa.js",
-    "static/media/ButrintBytyqiCV.pdf": "/static/media/ButrintBytyqiCV.8912ac85f868234d7fbb.pdf",
+    "main.css": "/static/css/main.f2c64637.css",
+    "main.js": "/static/js/main.183a25fc.js",
+    "static/media/ButrintBytyqiCV.pdf": "/static/media/ButrintBytyqiCV.9b01999864d68336b48f.pdf",
     "index.html": "/index.html",
-    "main.d4a9569f.css.map": "/static/css/main.d4a9569f.css.map",
-    "main.726638fa.js.map": "/static/js/main.726638fa.js.map"
+    "main.f2c64637.css.map": "/static/css/main.f2c64637.css.map",
+    "main.183a25fc.js.map": "/static/js/main.183a25fc.js.map"
   },
   "entrypoints": [
-    "static/css/main.d4a9569f.css",
-    "static/js/main.726638fa.js"
+    "static/css/main.f2c64637.css",
+    "static/js/main.183a25fc.js"
   ]
 }
