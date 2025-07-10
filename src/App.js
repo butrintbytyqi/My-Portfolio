@@ -12,14 +12,11 @@ import {
   IconButton,
   AppBar,
   Toolbar,
-  Paper,
-  Divider,
   ThemeProvider,
   createTheme,
   CssBaseline,
   useScrollTrigger,
   Fade,
-  Avatar,
   Tooltip,
   Link as MuiLink,
   CircularProgress,
@@ -46,14 +43,12 @@ import {
   Build,
   Api,
   DesignServices,
-  Architecture,
   AutoAwesome,
   Terminal,
   DataObject,
   IntegrationInstructions
 } from '@mui/icons-material';
 import { motion, useAnimation, useInView } from 'framer-motion';
-import { TypeAnimation } from 'react-type-animation';
 import emailjs from '@emailjs/browser';
 import './App.css';
 import cv from './downloads/ButrintBytyqiCV.pdf';
@@ -599,7 +594,7 @@ function App() {
     error: false,
     message: ''
   });
-  const [selectedProject, setSelectedProject] = useState(null);
+
 
   // Handle form submission
   const handleSubmit = (e) => {
