@@ -1434,66 +1434,106 @@ function App() {
         </Container>
         </Box>
 
-      {/* Education Section */}
-      <Box id="education" sx={{ py: 10, backgroundColor: '#f9f9f9' }}>
-        <Container maxWidth="lg">
+            {/* Education Section */}
+      <Box id="education" sx={{ py: { xs: 8, md: 10 }, backgroundColor: '#f9f9f9' }}>
+        <Container maxWidth="lg" sx={{ px: { xs: 2, md: 3 } }}>
           <AnimatedSection>
             <Typography 
               variant="h2" 
               sx={{ 
-                mb: 8, 
+                mb: { xs: 6, md: 8 }, 
                 textAlign: 'center',
                 color: 'text.primary',
-                fontWeight: 700
+                fontWeight: 700,
+                fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }
               }}
             >
               Education
-                </Typography>
+            </Typography>
           </AnimatedSection>
           
-          <Grid container spacing={6} justifyContent="center">
+          <Grid container spacing={{ xs: 4, md: 6 }} justifyContent="center">
             {education.map((edu, index) => (
               <Grid item xs={12} md={10} key={index}>
                 <AnimatedSection delay={index * 0.2}>
-                  <Card sx={{ p: 4, position: 'relative', overflow: 'visible' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 3 }}>
-                      <Box
-                      sx={{
-                          width: 56,
-                          height: 56,
+                  <Card sx={{ p: { xs: 3, md: 4 }, position: 'relative', overflow: 'visible' }}>
+                    <Box sx={{ 
+                      display: 'flex', 
+                      alignItems: 'flex-start', 
+                      gap: { xs: 2, md: 3 },
+                      flexDirection: { xs: 'column', sm: 'row' },
+                      textAlign: { xs: 'center', sm: 'left' }
+                    }}>
+                                            <Box
+                        sx={{
+                          width: { xs: 48, md: 56 },
+                          height: { xs: 48, md: 56 },
                           borderRadius: 2,
                           backgroundColor: 'rgba(0, 122, 255, 0.1)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          flexShrink: 0
+                          flexShrink: 0,
+                          mx: { xs: 'auto', sm: 0 }
                         }}
                       >
                         {edu.icon}
                       </Box>
-                      <Box sx={{ flex: 1 }}>
-                        <Typography variant="h5" sx={{ mb: 1, fontWeight: 600 }}>
+                      <Box sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}>
+                        <Typography variant="h5" sx={{ 
+                          mb: 1, 
+                          fontWeight: 600,
+                          fontSize: { xs: '1.25rem', md: '1.5rem' }
+                        }}>
                           {edu.degree}
-                </Typography>
-                        <Typography variant="h6" sx={{ mb: 1, color: 'primary.main' }}>
+                        </Typography>
+                        <Typography variant="h6" sx={{ 
+                          mb: 1, 
+                          color: 'primary.main',
+                          fontSize: { xs: '1.125rem', md: '1.25rem' }
+                        }}>
                           {edu.school}
-                </Typography>
-                        <Typography variant="body2" sx={{ mb: 2, color: 'text.secondary' }}>
+                        </Typography>
+                        <Typography variant="body2" sx={{ 
+                          mb: { xs: 2, md: 2 }, 
+                          color: 'text.secondary',
+                          fontSize: { xs: '0.875rem', md: '0.875rem' }
+                        }}>
                           {edu.period} • {edu.location}
-                </Typography>
-                        <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.6 }}>
+                        </Typography>
+                        <Typography variant="body1" sx={{ 
+                          mb: { xs: 2, md: 3 }, 
+                          lineHeight: 1.6,
+                          fontSize: { xs: '0.95rem', md: '1rem' }
+                        }}>
                           {edu.description}
-                </Typography>
-                        <Box sx={{ p: 3, backgroundColor: 'rgba(0, 122, 255, 0.05)', borderRadius: 2 }}>
-                          <Typography variant="body2" sx={{ fontWeight: 600, mb: 1 }}>
+                        </Typography>
+                                                <Box sx={{ 
+                          p: { xs: 2, md: 3 }, 
+                          backgroundColor: 'rgba(0, 122, 255, 0.05)', 
+                          borderRadius: 2 
+                        }}>
+                          <Typography variant="body2" sx={{ 
+                            fontWeight: 600, 
+                            mb: 1,
+                            fontSize: { xs: '0.875rem', md: '0.875rem' }
+                          }}>
                             Thesis:
-                </Typography>
-                          <Typography variant="body2" sx={{ fontStyle: 'italic', mb: 1 }}>
+                          </Typography>
+                          <Typography variant="body2" sx={{ 
+                            fontStyle: 'italic', 
+                            mb: 1,
+                            fontSize: { xs: '0.875rem', md: '0.875rem' }
+                          }}>
                             {edu.thesis}
-                </Typography>
-                          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                          </Typography>
+                          <Typography variant="body2" sx={{ 
+                            color: 'text.secondary',
+                            fontSize: { xs: '0.875rem', md: '0.875rem' },
+                            lineHeight: 1.5
+                          }}>
                             {edu.thesisDescription}
-                </Typography>
+                          </Typography>
                         </Box>
                       </Box>
                     </Box>
@@ -1505,56 +1545,79 @@ function App() {
         </Container>
                 </Box>
 
-      {/* Certifications Section */}
-      <Box id="certifications" sx={{ py: 10, backgroundColor: '#ffffff' }}>
-        <Container maxWidth="lg">
+            {/* Certifications Section */}
+      <Box id="certifications" sx={{ py: { xs: 8, md: 10 }, backgroundColor: '#ffffff' }}>
+        <Container maxWidth="lg" sx={{ px: { xs: 2, md: 3 } }}>
           <AnimatedSection>
             <Typography 
               variant="h2" 
-                    sx={{ 
-                mb: 8, 
+              sx={{ 
+                mb: { xs: 6, md: 8 }, 
                 textAlign: 'center',
                 color: 'text.primary',
-                fontWeight: 700
+                fontWeight: 700,
+                fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }
               }}
             >
               Certifications
-                </Typography>
+            </Typography>
           </AnimatedSection>
           
-          <Grid container spacing={6} justifyContent="center">
+          <Grid container spacing={{ xs: 4, md: 6 }} justifyContent="center">
             {certifications.map((cert, index) => (
               <Grid item xs={12} md={10} key={index}>
                 <AnimatedSection delay={index * 0.2}>
-                  <Card sx={{ p: 4, position: 'relative', overflow: 'visible' }}>
-                    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 3 }}>
-                      <Box
-          sx={{
-                          width: 56,
-                          height: 56,
+                  <Card sx={{ p: { xs: 3, md: 4 }, position: 'relative', overflow: 'visible' }}>
+                    <Box sx={{ 
+                      display: 'flex', 
+                      alignItems: 'flex-start', 
+                      gap: { xs: 2, md: 3 },
+                      flexDirection: { xs: 'column', sm: 'row' },
+                      textAlign: { xs: 'center', sm: 'left' }
+                    }}>
+                                            <Box
+                        sx={{
+                          width: { xs: 48, md: 56 },
+                          height: { xs: 48, md: 56 },
                           borderRadius: 2,
                           backgroundColor: 'rgba(0, 122, 255, 0.1)',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          flexShrink: 0
+                          flexShrink: 0,
+                          mx: { xs: 'auto', sm: 0 }
                         }}
                       >
                         {cert.icon}
-                </Box>
-                      <Box sx={{ flex: 1 }}>
-                        <Typography variant="h5" sx={{ mb: 1, fontWeight: 600 }}>
+                      </Box>
+                      <Box sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}>
+                        <Typography variant="h5" sx={{ 
+                          mb: 1, 
+                          fontWeight: 600,
+                          fontSize: { xs: '1.25rem', md: '1.5rem' }
+                        }}>
                           {cert.title}
-                    </Typography>
-                        <Typography variant="h6" sx={{ mb: 1, color: 'primary.main' }}>
+                        </Typography>
+                        <Typography variant="h6" sx={{ 
+                          mb: 1, 
+                          color: 'primary.main',
+                          fontSize: { xs: '1.125rem', md: '1.25rem' }
+                        }}>
                           {cert.organization}
-                    </Typography>
-                        <Typography variant="body2" sx={{ mb: 2, color: 'text.secondary' }}>
+                        </Typography>
+                        <Typography variant="body2" sx={{ 
+                          mb: 2, 
+                          color: 'text.secondary',
+                          fontSize: { xs: '0.875rem', md: '0.875rem' }
+                        }}>
                           {cert.period} • {cert.location}
-                </Typography>
-                        <Typography variant="body1" sx={{ lineHeight: 1.6 }}>
+                        </Typography>
+                        <Typography variant="body1" sx={{ 
+                          lineHeight: 1.6,
+                          fontSize: { xs: '0.95rem', md: '1rem' }
+                        }}>
                           {cert.description}
-          </Typography>
+                        </Typography>
                       </Box>
                     </Box>
                   </Card>
@@ -1565,42 +1628,49 @@ function App() {
         </Container>
           </Box>
 
-      {/* Awards Section */}
-      <Box id="awards" sx={{ py: 10, backgroundColor: '#f9f9f9' }}>
-        <Container maxWidth="lg">
+            {/* Awards Section */}
+      <Box id="awards" sx={{ py: { xs: 8, md: 10 }, backgroundColor: '#f9f9f9' }}>
+        <Container maxWidth="lg" sx={{ px: { xs: 2, md: 3 } }}>
           <AnimatedSection>
             <Typography 
               variant="h2" 
-                          sx={{
-                mb: 8, 
+              sx={{ 
+                mb: { xs: 6, md: 8 }, 
                 textAlign: 'center',
                 color: 'text.primary',
-                fontWeight: 700
+                fontWeight: 700,
+                fontSize: { xs: '2rem', sm: '2.5rem', md: '3rem' }
               }}
             >
               Awards & Recognition
-                          </Typography>
+            </Typography>
           </AnimatedSection>
           
-          <Grid container spacing={6} justifyContent="center">
+          <Grid container spacing={{ xs: 4, md: 6 }} justifyContent="center">
             {awards.map((award, index) => (
               <Grid item xs={12} md={10} key={index}>
                 <AnimatedSection delay={index * 0.2}>
                   <Card sx={{ 
-                    p: 4, 
+                    p: { xs: 3, md: 4 }, 
                     position: 'relative', 
                     overflow: 'visible',
                     background: 'linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(255, 255, 255, 1) 100%)',
                     border: '2px solid rgba(255, 215, 0, 0.2)',
-                              '&:hover': {
+                    '&:hover': {
                       boxShadow: '0 20px 40px rgba(255, 215, 0, 0.15)',
                     }
                   }}>
-                    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 3 }}>
-                      <Box
-                          sx={{
-                          width: 64,
-                          height: 64,
+                    <Box sx={{ 
+                      display: 'flex', 
+                      alignItems: 'flex-start', 
+                      gap: { xs: 2, md: 3 },
+                      flexDirection: { xs: 'column', sm: 'row' },
+                      textAlign: { xs: 'center', sm: 'left' }
+                    }}>
+                                            <Box
+                        sx={{
+                          width: { xs: 56, md: 64 },
+                          height: { xs: 56, md: 64 },
                           borderRadius: 2,
                           background: 'linear-gradient(135deg, #ffd700 0%, #ffed4a 100%)',
                           display: 'flex',
@@ -1608,29 +1678,60 @@ function App() {
                           justifyContent: 'center',
                           flexShrink: 0,
                           color: '#8b5000',
-                          fontSize: '1.5rem'
+                          fontSize: { xs: '1.25rem', md: '1.5rem' },
+                          mx: { xs: 'auto', sm: 0 }
                         }}
                       >
                         🏆
                       </Box>
-                      <Box sx={{ flex: 1 }}>
-                        <Typography variant="h5" sx={{ mb: 1, fontWeight: 700, color: '#8b5000' }}>
+                      <Box sx={{ flex: 1, width: { xs: '100%', sm: 'auto' } }}>
+                        <Typography variant="h5" sx={{ 
+                          mb: 1, 
+                          fontWeight: 700, 
+                          color: '#8b5000',
+                          fontSize: { xs: '1.25rem', md: '1.5rem' }
+                        }}>
                           {award.title}
-                          </Typography>
-                        <Typography variant="h6" sx={{ mb: 1, color: 'primary.main' }}>
+                        </Typography>
+                        <Typography variant="h6" sx={{ 
+                          mb: 1, 
+                          color: 'primary.main',
+                          fontSize: { xs: '1.125rem', md: '1.25rem' }
+                        }}>
                           {award.organization}
-                          </Typography>
-                        <Typography variant="body2" sx={{ mb: 3, color: 'text.secondary' }}>
+                        </Typography>
+                        <Typography variant="body2" sx={{ 
+                          mb: { xs: 2, md: 3 }, 
+                          color: 'text.secondary',
+                          fontSize: { xs: '0.875rem', md: '0.875rem' }
+                        }}>
                           {award.period} • {award.location}
                         </Typography>
-                        <Typography variant="body1" sx={{ mb: 3, lineHeight: 1.6 }}>
+                        <Typography variant="body1" sx={{ 
+                          mb: { xs: 2, md: 3 }, 
+                          lineHeight: 1.6,
+                          fontSize: { xs: '0.95rem', md: '1rem' }
+                        }}>
                           {award.description}
                         </Typography>
-                        <Box sx={{ p: 3, backgroundColor: 'rgba(255, 215, 0, 0.08)', borderRadius: 2, border: '1px solid rgba(255, 215, 0, 0.2)' }}>
-                          <Typography variant="body2" sx={{ fontWeight: 600, mb: 1, color: '#8b5000' }}>
+                        <Box sx={{ 
+                          p: { xs: 2, md: 3 }, 
+                          backgroundColor: 'rgba(255, 215, 0, 0.08)', 
+                          borderRadius: 2, 
+                          border: '1px solid rgba(255, 215, 0, 0.2)' 
+                        }}>
+                          <Typography variant="body2" sx={{ 
+                            fontWeight: 600, 
+                            mb: 1, 
+                            color: '#8b5000',
+                            fontSize: { xs: '0.875rem', md: '0.875rem' }
+                          }}>
                             Achievement Details:
                           </Typography>
-                          <Typography variant="body2" sx={{ lineHeight: 1.6 }}>
+                          <Typography variant="body2" sx={{ 
+                            lineHeight: 1.6,
+                            fontSize: { xs: '0.875rem', md: '0.875rem' }
+                          }}>
                             {award.achievement}
                           </Typography>
                         </Box>
