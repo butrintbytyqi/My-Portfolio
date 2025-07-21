@@ -352,7 +352,7 @@ const experiences = [
     icon: <Business color="primary" />
   },
   {
-    title: 'Programming Trainer Intern',
+    title: 'Programming Trainer Assistant',
     company: 'Akademia JCoders',
     period: '06/2023 – 09/2023',
     location: 'Prizren, Kosovo',
