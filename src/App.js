@@ -430,7 +430,6 @@ const experiences = [
     status: 'In Development',
     icon: <Security />,
     color: '#34c759',
-    github: 'https://github.com/butrintbytyqi/ordinance-app'
   },
     {
     id: 4,
@@ -531,7 +530,7 @@ const experiences = [
     status: 'Completed',
     icon: <AutoAwesome />,
     color: '#ff6b6b',
-    github: 'https://github.com/butrintbytyqi/finance-manager',
+    github: 'https://github.com/butrintbytyqi/personal-finance-app',
     
   }
 ];
