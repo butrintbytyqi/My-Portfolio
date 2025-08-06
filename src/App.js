@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Container,
@@ -50,7 +50,7 @@ import {
   Menu as MenuIcon,
   Close
 } from '@mui/icons-material';
-import { motion, useAnimation, useInView } from 'framer-motion';
+import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import './App.css';
 import cv from './downloads/ButrintBytyqiCV.pdf';
@@ -219,27 +219,49 @@ import cv from './downloads/ButrintBytyqiCV.pdf';
   },
 });
 
-// Animated section component
-const AnimatedSection = ({ children, delay = 0 }) => {
-  const controls = useAnimation();
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-100px" });
-
-  useEffect(() => {
-    if (inView) {
-      controls.start({
-        opacity: 1,
-        y: 0,
-        transition: { duration: 0.8, delay, ease: "easeOut" }
-      });
+// Liquid Glass Animated section component
+const AnimatedSection = ({ children, delay = 0, duration = 0.6 }) => {
+  const glassVariants = {
+    hidden: {
+      opacity: 0,
+      scale: 0.95,
+      filter: 'blur(10px)',
+      rotateX: 10,
+      rotateY: 5,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      filter: 'blur(0px)',
+      rotateX: 0,
+      rotateY: 0,
+      transition: {
+        duration: duration,
+        delay: delay,
+        ease: [0.25, 0.46, 0.45, 0.94],
+        filter: {
+          duration: duration * 0.8,
+          delay: delay + 0.1,
+        }
+      }
     }
-  }, [controls, inView, delay]);
+  };
 
   return (
     <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 60 }}
-      animate={controls}
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-80px" }}
+      variants={glassVariants}
+      style={{
+        position: 'relative',
+        transformStyle: 'preserve-3d',
+        perspective: 1000,
+      }}
+      whileHover={{
+        scale: 1.01,
+        transition: { duration: 0.3, ease: "easeOut" }
+      }}
     >
       {children}
     </motion.div>
