@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/static/css/main.29e08246.css",
-    "main.js": "/static/js/main.d8972993.js",
+    "main.js": "/static/js/main.107000dc.js",
     "static/media/ButrintBytyqiCV.pdf": "/static/media/ButrintBytyqiCV.6ec3a7d7db8aaae8ae6d.pdf",
     "index.html": "/index.html",
     "main.29e08246.css.map": "/static/css/main.29e08246.css.map",
-    "main.d8972993.js.map": "/static/js/main.d8972993.js.map"
+    "main.107000dc.js.map": "/static/js/main.107000dc.js.map"
   },
   "entrypoints": [
     "static/css/main.29e08246.css",
-    "static/js/main.d8972993.js"
+    "static/js/main.107000dc.js"
   ]
 }
