@@ -42,7 +42,6 @@ import {
   Security,
   Build,
   Api,
-  DesignServices,
   AutoAwesome,
   Terminal,
   DataObject,
