@@ -4,7 +4,7 @@
 
 ## 🚀 About
 
-This is the professional portfolio of Butrint Bytyqi, a Full-Stack Software Engineer and Co-Founder & Executive Director at DOA (Digital Ordering Application). The portfolio features a modern, minimalist design inspired by Apple's design language, focusing on clean code, scalability, and innovation.
+This is the professional portfolio of Butrint Bytyqi, a Full-Stack Software Engineer. The portfolio features a modern, minimalist design inspired by Apple's design language, focusing on clean code, scalability, and innovation.
 
 ## ✨ Brand Identity
 
@@ -41,7 +41,7 @@ This is the professional portfolio of Butrint Bytyqi, a Full-Stack Software Engi
 
 ### 2. Featured Projects
 Real projects with detailed descriptions:
-- **DOA** - Digital ordering platform (Co-Founder & Executive Director)
+- **DOA** - Digital ordering platform (Junior Full Stack Developer)
 - **Hajde Folim** - AI-powered mental health chatbot
 - **Ordinance App** - Healthcare prescription management system
 - **Feedback App** - Real-time feedback collection platform
