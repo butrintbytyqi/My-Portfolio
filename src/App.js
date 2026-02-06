@@ -1163,6 +1163,20 @@ function App() {
                 <Typography
                   variant="body1"
                   sx={{
+                    mb: { xs: 2, md: 3 },
+                    fontSize: { xs: '1rem', md: '1.125rem' },
+                    lineHeight: 1.8,
+                    color: 'text.primary',
+                    textAlign: { xs: 'center', md: 'left' }
+                  }}
+                >
+                  I value growth over comfort and see every challenge as an opportunity to learn. I may not know
+                  everything yet, but I'm highly motivated to improve, take responsibility, and grow into a strong
+                  engineer through consistent effort and real work.
+                </Typography>
+                <Typography
+                  variant="body1"
+                  sx={{
                     mb: { xs: 4, md: 5 },
                     fontSize: { xs: '1rem', md: '1.125rem' },
                     lineHeight: 1.8,
