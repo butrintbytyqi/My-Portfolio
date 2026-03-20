@@ -49,6 +49,12 @@ import {
   Menu as MenuIcon,
   Close
 } from '@mui/icons-material';
+import TrendingUp from '@mui/icons-material/TrendingUp';
+import Psychology from '@mui/icons-material/Psychology';
+import AltRoute from '@mui/icons-material/AltRoute';
+import CloudQueue from '@mui/icons-material/CloudQueue';
+import Lock from '@mui/icons-material/Lock';
+import BarChart from '@mui/icons-material/BarChart';
 import { motion } from 'framer-motion';
 import emailjs from '@emailjs/browser';
 import './App.css';
@@ -270,24 +276,33 @@ const AnimatedSection = ({ children, delay = 0, duration = 0.6 }) => {
 // Tech stack data
 const techStack = [
   // Languages
+  { name: 'Python', icon: <Code /> },
   { name: 'TypeScript', icon: <DataObject /> },
   { name: 'JavaScript', icon: <Code /> },
-  { name: 'Python', icon: <Code /> },
+
+  // AI & Data
+  { name: 'AI Agents', icon: <Psychology /> },
+  { name: 'Vertex AI', icon: <Cloud /> },
+  { name: 'BigQuery', icon: <Storage /> },
+  { name: 'PostgreSQL', icon: <Storage /> },
+  { name: 'Data Pipelines', icon: <AltRoute /> },
+
+  // Cloud & Backend
+  { name: 'Google Cloud (GCP)', icon: <CloudQueue /> },
+  { name: 'Node.js', icon: <Terminal /> },
+  { name: 'REST APIs', icon: <Api /> },
+  { name: 'Authentication', icon: <Lock /> },
+
   // Frontend
   { name: 'React', icon: <IntegrationInstructions /> },
-  { name: 'HTML5', icon: <Code /> },
-  { name: 'CSS3', icon: <Code /> },
-  // Backend
-  { name: 'Node.js', icon: <Terminal /> },
-  { name: 'Express', icon: <Build /> },
-  { name: 'REST APIs', icon: <Api /> },
+
   // Databases
-  { name: 'SQL', icon: <Storage /> },
   { name: 'MongoDB', icon: <Storage /> },
-  // DevOps & Tools
+
+  // Tools
   { name: 'Docker', icon: <Cloud /> },
-  { name: 'CI/CD', icon: <Build /> },
   { name: 'Git & GitHub', icon: <GitHub /> },
+  { name: 'Looker Studio', icon: <BarChart /> }
 ];
 
 // Languages data
@@ -300,13 +315,37 @@ const languages = [
 
 // Professional interests data
 const interests = [
-  { name: 'Backend-Leaning Full-Stack', icon: <Terminal />, description: 'Backend-leaning full-stack development with Node.js/TypeScript + React' },
-  { name: 'Python Backend & Automation', icon: <Code />, description: 'Python for backend services and automation' },
-  { name: 'API-First Architecture', icon: <Api />, description: 'Designing and building API-first architectures' },
-  { name: 'Authentication & Security', icon: <Security />, description: 'Implementing secure authentication and authorization systems' },
-  { name: 'Database Design', icon: <Storage />, description: 'Designing efficient and scalable database schemas' },
+  {
+    name: 'AI Agents & Automation',
+    icon: <Psychology />,
+    description: 'Building intelligent agents and automation systems using LLMs and real-world data'
+  },
+  {
+    name: 'Cloud AI Systems (GCP)',
+    icon: <CloudQueue />,
+    description: 'Designing scalable AI systems using Vertex AI, BigQuery, and cloud infrastructure'
+  },
+  {
+    name: 'Data Pipelines & Analytics',
+    icon: <AltRoute />,
+    description: 'Creating data pipelines and analytics systems to measure performance and ROI'
+  },
+  {
+    name: 'Backend Systems & APIs',
+    icon: <Api />,
+    description: 'Designing robust backend architectures and API-first systems'
+  },
+  {
+    name: 'System Design & Scalability',
+    icon: <Storage />,
+    description: 'Building scalable systems with efficient data handling and architecture decisions'
+  },
+  {
+    name: 'AI for Business Impact',
+    icon: <TrendingUp />,
+    description: 'Applying AI systems to solve real business problems, optimize workflows, and deliver measurable ROI'
+  }
 ];
-
 // Education data
 const education = [
   {
@@ -376,6 +415,22 @@ const awards = [
 
 // Experience data
 const experiences = [
+  {
+    title: 'AI Data Engineer (Founding Engineer)',
+    company: 'Attanda',
+    period: '03/2026 – Present',
+    location: 'Vienna, Austria',
+    description: 'Working in an early-stage AI startup building agent-based automation systems for businesses using Google Cloud technologies.',
+    achievements: [
+      'Built grounded AI systems using Vertex AI Search to ensure accurate, citation-based responses',
+      'Designed and managed data pipelines using GCP services (Cloud Storage, BigQuery)',
+      'Contributed to AI agent development (text-to-text and speech-based automation)',
+      'Developed analytics dashboards in Looker Studio to track performance and ROI',
+      'Collaborated directly with founders in a fast-paced startup environment'
+    ],
+    technologies: ['Google Cloud Platform(GCP)', 'AI Agents', 'Vertex AI', 'BigQuery', 'Cloud Storage', 'Looker Studio', 'Python'],
+    icon: <Business color="primary" />
+  },
   {
     title: 'Junior Full Stack Developer',
     company: 'DOA – Digital Ordering Application',
@@ -1049,7 +1104,7 @@ function App() {
                   px: { xs: 1, md: 0 }
                 }}
               >
-                Full-Stack Software Engineer
+                AI Data Engineer
               </Typography>
             </motion.div>
 
@@ -1260,7 +1315,7 @@ function App() {
                       <School color="primary" />
                       <Box sx={{ textAlign: 'left' }}>
                         <Typography variant="body2" sx={{ fontWeight: 600, fontSize: { xs: '0.875rem', md: '1rem' } }}>Education</Typography>
-                        <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>BS Software Design, UPZ</Typography>
+                        <Typography variant="body2" color="text.secondary" sx={{ fontSize: { xs: '0.875rem', md: '1rem' } }}>MSc in Software Engineering, TU Wien</Typography>
                       </Box>
                     </Box>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
@@ -2252,11 +2307,10 @@ function App() {
                 Butrint Bytyqi
               </Typography>
               <Typography variant="body2" sx={{ opacity: 0.8, mb: 2 }}>
-                Full-Stack Software Engineer passionate about building scalable solutions
-                and innovative products that make a difference.
+                AI-focused Software Engineer building intelligent systems, data pipelines, and scalable cloud solutions using modern technologies.
               </Typography>
               <Typography variant="body2" sx={{ opacity: 0.6 }}>
-                © 2024 Butrint Bytyqi. Code with Precision.
+                © 2026 Butrint Bytyqi. 
               </Typography>
             </Grid>
             <Grid item xs={12} md={6}>
