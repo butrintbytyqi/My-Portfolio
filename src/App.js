@@ -1183,7 +1183,7 @@ function App() {
                     textAlign: { xs: 'center', md: 'left' }
                   }}
                 >
-                  Software Engineer | Problem Solver
+                  AI Data Engineer | Backend & Automation
                 </Typography>
                 <Typography
                   variant="body1"
