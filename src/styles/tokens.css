@@ -1,0 +1,45 @@
+/* Design tokens — editorial/Swiss system */
+:root {
+  /* color */
+  --paper: #FAF9F6;
+  --surface: #FFFFFF;
+  --ink: #131311;
+  --gray-700: #43433F;
+  --gray-500: #6F6F68;
+  --gray-300: #B9B8AF;
+  --rule: #E3E1DA;
+  --accent: #002FA7; /* International Klein Blue */
+
+  /* type families */
+  --font-display: 'Instrument Serif', Georgia, 'Times New Roman', serif;
+  --font-body: 'Schibsted Grotesk Variable', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* type scale (fluid) */
+  --text-display: clamp(3rem, 7vw + 1rem, 7rem);
+  --text-h2: clamp(2rem, 3vw + 1rem, 3.25rem);
+  --text-h3: 1.375rem;
+  --text-lg: 1.1875rem;
+  --text-base: 1.0625rem;
+  --text-sm: 0.9375rem;
+  --text-mono: 0.8125rem;
+
+  /* spacing (4px base) */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s6: 24px;
+  --s8: 32px;
+  --s12: 48px;
+  --s16: 64px;
+  --s24: 96px;
+  --s32: 128px;
+  --section-pad: clamp(6rem, 10vw, 10rem);
+
+  /* layout */
+  --container-max: 1160px;
+  --container-pad: clamp(20px, 4vw, 48px);
+  --grid-gap: clamp(16px, 2vw, 32px);
+  --nav-height: 64px;
+}

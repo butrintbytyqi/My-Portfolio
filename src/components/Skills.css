@@ -1,0 +1,27 @@
+.skills__cluster {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  gap: var(--grid-gap);
+  border-top: 1px solid var(--rule);
+  padding-block: var(--s8);
+}
+
+.skills__label {
+  color: var(--gray-500);
+  padding-top: var(--s2);
+}
+
+.skills__items {
+  font-size: clamp(1.25rem, 2vw, 1.625rem);
+  font-weight: 500;
+  line-height: 1.5;
+  max-width: none;
+}
+
+@media (max-width: 720px) {
+  .skills__cluster {
+    grid-template-columns: 1fr;
+    gap: var(--s3);
+    padding-block: var(--s6);
+  }
+}

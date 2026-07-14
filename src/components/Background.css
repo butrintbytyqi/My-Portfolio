@@ -1,0 +1,46 @@
+.bg__block {
+  grid-column: span 4;
+  border-top: 1px solid var(--rule);
+  padding-top: var(--s4);
+}
+
+.bg__label {
+  color: var(--gray-500);
+}
+
+.bg__entry {
+  margin-top: var(--s6);
+}
+
+.bg__title {
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.bg__issuer {
+  font-size: var(--text-sm);
+  color: var(--gray-700);
+  margin-top: var(--s1);
+}
+
+.bg__year {
+  color: var(--gray-500);
+  margin-top: var(--s2);
+}
+
+.bg__note {
+  font-size: var(--text-sm);
+  color: var(--gray-500);
+  margin-top: var(--s3);
+  line-height: 1.55;
+}
+
+@media (max-width: 720px) {
+  .bg__block {
+    grid-column: 1 / -1;
+  }
+
+  .bg__block + .bg__block {
+    margin-top: var(--s8);
+  }
+}
