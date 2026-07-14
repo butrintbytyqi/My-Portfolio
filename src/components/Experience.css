@@ -1,0 +1,70 @@
+.exp__row {
+  display: grid;
+  grid-template-columns: 2fr 7fr 3fr;
+  gap: var(--grid-gap);
+  border-top: 1px solid var(--rule);
+  padding-block: var(--s8);
+}
+
+.exp__period {
+  color: var(--gray-700);
+}
+
+.exp__location {
+  color: var(--gray-300);
+  margin-top: var(--s1);
+}
+
+.exp__role {
+  font-size: var(--text-h3);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.exp__company {
+  font-weight: 500;
+  color: var(--accent);
+  margin-top: var(--s1);
+}
+
+.exp__summary {
+  color: var(--gray-700);
+  margin-top: var(--s3);
+}
+
+.exp__points {
+  margin-top: var(--s4);
+}
+
+.exp__points li {
+  position: relative;
+  padding-left: var(--s6);
+  font-size: var(--text-sm);
+  color: var(--gray-700);
+  margin-top: var(--s2);
+}
+
+.exp__points li::before {
+  content: '—';
+  position: absolute;
+  left: 0;
+  color: var(--gray-300);
+}
+
+.exp__stack {
+  color: var(--gray-500);
+  text-align: right;
+}
+
+@media (max-width: 720px) {
+  .exp__row {
+    grid-template-columns: 1fr;
+    gap: var(--s3);
+    padding-block: var(--s6);
+  }
+
+  .exp__stack {
+    text-align: left;
+    margin-top: var(--s2);
+  }
+}
