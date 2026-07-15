@@ -3,7 +3,7 @@ export const profile = {
   headline: 'AI Agents & Business Process Automation',
   title: 'Software Engineer',
   location: 'Vienna, Austria',
-  email: 'butrint022@gmail.com',
+  email: 'butrinti022@gmail.com',
   phone: '+43 677 63817574',
   site: 'https://butrintbytyqi.com',
   github: 'https://github.com/butrintbytyqi',
@@ -11,7 +11,7 @@ export const profile = {
   cvUrl: 'ButrintBytyqiCV.pdf',
   meta: [
     { label: 'Based in', value: 'Vienna, AT' },
-    { label: 'Currently', value: 'Attanda — Founding AI Systems Engineer' },
+    { label: 'Currently', value: 'Attanda · Founding AI Systems Engineer' },
     { label: 'Studying', value: 'TU Wien, MSc' },
   ],
 };

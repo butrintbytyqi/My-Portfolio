@@ -45,7 +45,7 @@
 }
 
 .exp__points li::before {
-  content: '—';
+  content: '·';
   position: absolute;
   left: 0;
   color: var(--gray-300);

@@ -3,7 +3,7 @@ export const projects = [
   {
     title: 'Voice AI Lead Capture System',
     description:
-      'An AI-powered voice agent that captures, validates, and structures customer lead information — automating lead collection, reporting, and operational tracking while preserving system fields such as Call ID, date/time, and source.',
+      'An AI-powered voice agent that captures, validates, and structures customer lead information, automating lead collection, reporting, and operational tracking while preserving system fields such as Call ID, date/time, and source.',
     stack: ['Python', 'Vertex AI', 'Cloud Run', 'BigQuery', 'Webhooks'],
     year: '2026',
     status: 'Production',
@@ -11,7 +11,7 @@ export const projects = [
   {
     title: 'AI Agent & Business Automation Workflows',
     description:
-      'AI agent systems integrating cloud services, APIs, databases, and webhooks to automate data collection, validation, reporting, and monitoring — built for reliability, scalability, and production readiness.',
+      'AI agent systems integrating cloud services, APIs, databases, and webhooks to automate data collection, validation, reporting, and monitoring. Built for reliability, scalability, and production readiness.',
     stack: ['GCP', 'Vertex AI', 'Cloud SQL', 'n8n', 'REST APIs'],
     year: '2026',
     status: 'Production',
@@ -27,7 +27,7 @@ export const projects = [
   {
     title: 'Wolke7 Seeschlacht',
     description:
-      'A reservation system for a beach club client — designed and scoped end-to-end with full specification, data model, and build-plan documentation.',
+      'A reservation system for a beach club client, designed and scoped end-to-end with full specification, data model, and build-plan documentation.',
     stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma'],
     year: '2026',
     status: 'In Development',
@@ -45,7 +45,7 @@ export const projects = [
   {
     title: 'Ordinance App',
     description:
-      'A desktop application managing the full workflow of a medical practice — patient registration, appointment scheduling, visit tracking, prescriptions, and reporting — with separate interfaces for receptionists and doctors, role-based access control, and secure authentication.',
+      'A desktop application managing the full workflow of a medical practice: patient registration, appointment scheduling, visit tracking, prescriptions, and reporting. Separate interfaces for receptionists and doctors, with role-based access control and secure authentication.',
     stack: ['React', 'TypeScript', '.NET', 'SQL Server', 'Electron'],
     year: '2025',
     status: 'In Development',
