@@ -30,6 +30,6 @@ export const recognition = [
 ];
 
 export const additional = [
-  { title: 'TOEFL iBT: Advanced English Proficiency (C1, 97 points)', issuer: 'ETS', year: '2024' },
+  { title: 'TOEFL iBT: Advanced English Proficiency (C1, 97 points)', issuer: 'ETS', year: '2025' },
   { title: 'Programming Trainer Assistant', issuer: 'jCoders Academy, Prishtina', year: '2023' },
 ];
