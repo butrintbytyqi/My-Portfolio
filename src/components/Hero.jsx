@@ -20,7 +20,7 @@ export default function Hero() {
       <div className="container grid hero__grid">
         <div className="hero__headline">
           <motion.p className="mono-label hero__kicker" {...enter(0)}>
-            {profile.title} — {profile.location}
+            {profile.title} · {profile.location}
           </motion.p>
           <motion.h1 className="hero__title" {...enter(1)}>
             {profile.name}

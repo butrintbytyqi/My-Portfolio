@@ -9,7 +9,7 @@ export default function Footer() {
         <div className="footer__id">
           <p className="footer__name">Butrint Bytyqi<span aria-hidden="true">.</span></p>
           <p className="footer__tag">
-            Software engineer — AI agents &amp; business process automation.
+            Software engineer building AI agents &amp; business process automation.
           </p>
           <p className="mono-label footer__copy">© {new Date().getFullYear()}</p>
         </div>

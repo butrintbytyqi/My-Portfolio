@@ -1,13 +1,13 @@
-# Butrint Bytyqi — Portfolio
+# Butrint Bytyqi Portfolio
 
 Personal portfolio of Butrint Bytyqi, software engineer focused on AI agents and business process automation. Live at [butrintbytyqi.netlify.app](https://butrintbytyqi.netlify.app).
 
 ## Stack
 
-- **React 18** + **Vite** — single-page app, no router
-- **Hand-rolled CSS** — design tokens + plain component stylesheets, no UI framework
-- **framer-motion** — subtle scroll reveals, respects `prefers-reduced-motion`
-- **EmailJS** — contact form delivery
+- **React 18** + **Vite**: single-page app, no router
+- **Hand-rolled CSS**: design tokens + plain component stylesheets, no UI framework
+- **framer-motion**: subtle scroll reveals, respects `prefers-reduced-motion`
+- **EmailJS**: contact form delivery
 
 ## Design
 
@@ -21,7 +21,7 @@ Tokens live in `src/styles/tokens.css`; each component has a sibling stylesheet.
 
 ## Content
 
-All copy lives in plain data modules under `src/data/` (`profile`, `about`, `experience`, `projects`, `background`, `skills`, `nav`). Updating the site — adding a role, a project, a skill — is a data-only edit; no component changes needed. The downloadable CV is `public/ButrintBytyqiCV.pdf`.
+All copy lives in plain data modules under `src/data/` (`profile`, `about`, `experience`, `projects`, `background`, `skills`, `nav`). Updating the site (adding a role, a project, a skill) is a data-only edit; no component changes needed. The downloadable CV is `public/ButrintBytyqiCV.pdf`.
 
 ## Development
 

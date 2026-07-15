@@ -3,7 +3,7 @@ export const experiences = [
   {
     company: 'Attanda',
     role: 'Founding AI Systems Engineer',
-    period: 'Mar 2026 — Present',
+    period: 'Mar 2026 – Present',
     location: 'Vienna, Austria',
     summary:
       'Early-stage AI startup building agents and automation solutions for businesses on Google Cloud.',
@@ -18,10 +18,10 @@ export const experiences = [
   {
     company: 'DORA Consulting',
     role: 'Software Consultant & Full-Stack Engineer',
-    period: 'May 2026 — Present',
+    period: 'May 2026 – Present',
     location: 'Remote',
     summary:
-      'Production web applications for external clients — owning architecture, hosting decisions, and end-to-end implementation.',
+      'Production web applications for external clients, owning architecture, hosting decisions, and end-to-end implementation.',
     points: [
       'Built the DORA Platform, a Next.js, NestJS, and PostgreSQL application containerized with Docker, and led a hosting evaluation resulting in a GDPR- and ISO 27001-compliant EU deployment on Hetzner Cloud.',
       'Designed and scoped Wolke7 Seeschlacht, a reservation system for a beach club client, producing full specification, data model, and build-plan documentation.',
@@ -31,8 +31,8 @@ export const experiences = [
   },
   {
     company: 'Mercor Intelligence',
-    role: 'Generalist Expert — AI Evaluation',
-    period: 'Jul 2026 — Present',
+    role: 'Generalist Expert, AI Evaluation',
+    period: 'Jul 2026 – Present',
     location: 'Remote · Contract',
     summary:
       'Contracted as a domain expert on a large-scale AI model evaluation project.',
@@ -43,15 +43,15 @@ export const experiences = [
     stack: ['AI Evaluation', 'Prompt Engineering'],
   },
   {
-    company: 'DOA — Digital Ordering Application',
+    company: 'DOA (Digital Ordering Application)',
     role: 'Founder & Full-Stack Engineer',
-    period: 'Jul 2022 — Sep 2024',
+    period: 'Jul 2022 – Sep 2024',
     location: 'Remote',
     summary:
       'Co-founded a digital ordering platform automating restaurant operations through QR-based ordering.',
     points: [
       'Built REST APIs, authentication, dashboards, order-management workflows, and backend services, with integrations for order notifications, kitchen workflows, and reporting.',
-      'Owned product planning, technical implementation, and client needs — translating real business problems into practical software for restaurants, staff, and customers.',
+      'Owned product planning, technical implementation, and client needs, translating real business problems into practical software for restaurants, staff, and customers.',
       'Won 1st place at the IDEA TO SCALE startup competition (ITP Prizren, 2024).',
     ],
     stack: ['Node.js', 'Express', 'SQL', 'REST APIs', 'Auth & RBAC'],
