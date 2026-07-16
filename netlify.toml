@@ -3,6 +3,12 @@
 [build]
   command = "npm run build"
   publish = "dist"
+  functions = "netlify/functions"
 
 [build.environment]
   NODE_VERSION = "20"
+
+# `netlify dev` serves the Vite app and the functions together.
+[dev]
+  command = "npm run dev"
+  targetPort = 5173

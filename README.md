@@ -39,6 +39,28 @@ npm run preview   # serve the build locally
 
 `vite.config.js` uses `base: './'` so the same build works at both a domain root and a project path.
 
-## Contact form
+## Contact agent
 
-The form sends via EmailJS using its public browser credentials in `src/lib/email.js`. To limit abuse, restrict the public key to allowed origins in the EmailJS dashboard (Account → Security → Allowed origins) and keep an eye on the monthly quota. A honeypot field filters naive bots client-side.
+The contact form is handled by an autonomous serverless agent. On submit, the browser POSTs to a Netlify Function (`netlify/functions/contact.mjs`), which:
+
+1. Validates the input (honeypot, email format, length caps, soft per-IP rate limit).
+2. Asks **Google Gemini** (`gemini-2.5-flash`, free tier) to draft a concise, on-brand reply, grounded in a fixed profile. The visitor's message is passed as clearly delimited, untrusted data; the model only ever produces body text.
+3. Sends that reply to the visitor via **Resend** (from `hello@butrintbytyqi.com`, `Reply-To` = your Gmail, so a reply lands straight in your inbox), and sends you a copy of the exchange.
+
+Recipients and routing are hardcoded server-side — the model and the visitor's message can never redirect where mail goes. Every reply invites the visitor to reach Butrint directly. If Gemini is unavailable, a templated reply is sent instead; if Resend isn't configured, the UI shows the direct email address.
+
+### One-time setup
+
+All secrets live in Netlify environment variables (scoped to **Functions**) — never in the repo or the client bundle. See `.env.example`.
+
+1. **Resend** — create a free account at [resend.com](https://resend.com), then:
+   - Add your domain at **resend.com/domains** and create the DNS records it shows (DKIM `TXT`, SPF `TXT` on the `send` subdomain, the `send` `MX`, and a `_dmarc` `TXT`). Wait for **Verified**.
+   - Create an API key at **resend.com/api-keys** (starts with `re_`).
+2. **Gemini** — create a free key at [aistudio.google.com/apikey](https://aistudio.google.com/apikey) (no card required). Note: free-tier prompts may be used by Google to improve their products — fine for contact messages, but don't route confidential mail through the free tier.
+3. **Netlify** — under Site configuration → Environment variables (scope: Functions), add:
+   - `RESEND_API_KEY`
+   - `GEMINI_API_KEY`
+   - optional: `CONTACT_OWNER`, `CONTACT_FROM`, `GEMINI_MODEL`
+4. Redeploy. Test locally with `netlify dev` after `netlify link` (loads env + serves the function alongside Vite).
+
+Free-tier ceilings: Resend 100 emails/day (each submission sends 2), Gemini ~250 requests/day. For higher volume or stronger rate-limiting, move the per-IP guard to a shared store (e.g. Upstash Redis).

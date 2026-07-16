@@ -1,21 +1,31 @@
-import emailjs from '@emailjs/browser';
+// Sends the contact form to the Netlify serverless function, which drafts an
+// AI reply (Gemini) and delivers it via Resend. All secrets live server-side;
+// nothing sensitive is exposed here. See netlify/functions/contact.mjs.
+const CONTACT_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT || '/api/contact';
 
-// EmailJS browser credentials are public by design; abuse is limited via
-// the dashboard's origin allowlist (see README).
-export const EMAILJS_PUBLIC_KEY = 'r3gRnZ6XVat2N2Lsi';
-export const EMAILJS_SERVICE_ID = 'service_q02df5d';
-export const EMAILJS_TEMPLATE_ID = 'template_28odamw';
-
-let initialized = false;
-
-export function sendContactMessage({ name, email, message }) {
-  if (!initialized) {
-    emailjs.init(EMAILJS_PUBLIC_KEY);
-    initialized = true;
+export async function sendContactMessage({ name, email, message, company }) {
+  let res;
+  try {
+    res = await fetch(CONTACT_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, message, company }),
+    });
+  } catch {
+    throw new Error('network');
   }
-  return emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-    from_name: name,
-    from_email: email,
-    message,
-  });
+
+  let data = {};
+  try {
+    data = await res.json();
+  } catch {
+    /* non-JSON response */
+  }
+
+  if (!res.ok || !data.ok) {
+    const error = new Error(data.error || `request_failed_${res.status}`);
+    error.ownerEmail = data.ownerEmail;
+    throw error;
+  }
+  return data;
 }

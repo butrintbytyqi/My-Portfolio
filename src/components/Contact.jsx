@@ -31,20 +31,23 @@ export default function Contact() {
 
     // Honeypot: bots that fill the hidden field get a silent no-op.
     if (form.company) {
-      setStatus({ state: 'sent', message: 'Message sent. I’ll get back to you soon.' });
+      setStatus({ state: 'sent', message: 'Thanks — you’ll get a reply in your inbox shortly.' });
       return;
     }
 
     setStatus({ state: 'sending', message: 'Sending…' });
     try {
       await sendContactMessage(form);
-      setStatus({ state: 'sent', message: 'Message sent. I’ll get back to you soon.' });
+      setStatus({
+        state: 'sent',
+        message: 'Thanks — you’ll get a reply in your inbox shortly, and Butrint has been notified.',
+      });
       setForm({ name: '', email: '', message: '', company: '' });
     } catch (error) {
-      console.error('EmailJS error:', error);
+      const to = error.ownerEmail || profile.email;
       setStatus({
         state: 'error',
-        message: `Something went wrong. Email me directly at ${profile.email}.`,
+        message: `Couldn’t send just now. Please email me directly at ${to}.`,
       });
     }
   };
