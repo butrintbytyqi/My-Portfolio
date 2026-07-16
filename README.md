@@ -47,7 +47,7 @@ The contact form is handled by an autonomous serverless agent. On submit, the br
 2. Asks **Google Gemini** (`gemini-2.5-flash`, free tier) to draft a concise, on-brand reply, grounded in a fixed profile. The visitor's message is passed as clearly delimited, untrusted data; the model only ever produces body text.
 3. Sends that reply to the visitor via **Resend** (from `hello@butrintbytyqi.com`, `Reply-To` = your Gmail, so a reply lands straight in your inbox), and sends you a copy of the exchange.
 
-Recipients and routing are hardcoded server-side — the model and the visitor's message can never redirect where mail goes. Every reply invites the visitor to reach Butrint directly. If Gemini is unavailable, a templated reply is sent instead; if Resend isn't configured, the UI shows the direct email address.
+Recipients and routing are hardcoded server-side — the model and the visitor's message can never redirect where mail goes. The visitor message is fenced with a per-request nonce so it can't inject instructions. A **Cloudflare Turnstile** bot check is verified server-side before any AI/email call runs, closing off email-bombing and quota-burning. Every reply invites the visitor to reach Butrint directly. If Gemini is unavailable, a templated reply is sent instead; if Resend isn't configured, the UI shows the direct email address.
 
 ### One-time setup
 
@@ -57,10 +57,10 @@ All secrets live in Netlify environment variables (scoped to **Functions**) — 
    - Add your domain at **resend.com/domains** and create the DNS records it shows (DKIM `TXT`, SPF `TXT` on the `send` subdomain, the `send` `MX`, and a `_dmarc` `TXT`). Wait for **Verified**.
    - Create an API key at **resend.com/api-keys** (starts with `re_`).
 2. **Gemini** — create a free key at [aistudio.google.com/apikey](https://aistudio.google.com/apikey) (no card required). Note: free-tier prompts may be used by Google to improve their products — fine for contact messages, but don't route confidential mail through the free tier.
-3. **Netlify** — under Site configuration → Environment variables (scope: Functions), add:
-   - `RESEND_API_KEY`
-   - `GEMINI_API_KEY`
-   - optional: `CONTACT_OWNER`, `CONTACT_FROM`, `GEMINI_MODEL`
-4. Redeploy. Test locally with `netlify dev` after `netlify link` (loads env + serves the function alongside Vite).
+3. **Cloudflare Turnstile** — at [dash.cloudflare.com](https://dash.cloudflare.com) → Turnstile, add a widget for `butrintbytyqi.com`. It gives a **site key** (public) and a **secret key** (private). The bot check activates only once both keys below are set.
+4. **Netlify** — under Site configuration → Environment variables, add:
+   - Scope **Functions**: `RESEND_API_KEY`, `GEMINI_API_KEY`, `TURNSTILE_SECRET_KEY` (+ optional `CONTACT_OWNER`, `CONTACT_FROM`, `GEMINI_MODEL`)
+   - Scope **Builds** (baked into the frontend): `VITE_TURNSTILE_SITE_KEY`
+5. Redeploy. Test locally with `netlify dev` after `netlify link` (loads env + serves the function alongside Vite).
 
 Free-tier ceilings: Resend 100 emails/day (each submission sends 2), Gemini ~250 requests/day. For higher volume or stronger rate-limiting, move the per-IP guard to a shared store (e.g. Upstash Redis).

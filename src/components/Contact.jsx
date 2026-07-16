@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import SectionHeader from './SectionHeader';
 import Reveal from './Reveal';
 import { profile } from '../data/profile';
@@ -6,11 +6,50 @@ import { sendContactMessage } from '../lib/email';
 import './Contact.css';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY;
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '', company: '' });
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState({ state: 'idle', message: '' });
+  const [token, setToken] = useState('');
+  const widgetEl = useRef(null);
+  const widgetId = useRef(null);
+
+  // Render the Cloudflare Turnstile widget once its script is available.
+  // Skipped entirely when no site key is configured (form still works).
+  useEffect(() => {
+    if (!TURNSTILE_SITE_KEY) return undefined;
+    let cancelled = false;
+    const render = () => {
+      if (cancelled || widgetId.current !== null) return;
+      if (!window.turnstile || !widgetEl.current) return;
+      widgetId.current = window.turnstile.render(widgetEl.current, {
+        sitekey: TURNSTILE_SITE_KEY,
+        callback: (t) => setToken(t),
+        'expired-callback': () => setToken(''),
+        'error-callback': () => setToken(''),
+      });
+    };
+    render();
+    const poll = setInterval(() => {
+      if (window.turnstile) {
+        clearInterval(poll);
+        render();
+      }
+    }, 200);
+    return () => {
+      cancelled = true;
+      clearInterval(poll);
+    };
+  }, []);
+
+  const resetTurnstile = () => {
+    setToken('');
+    if (widgetId.current !== null && window.turnstile) {
+      window.turnstile.reset(widgetId.current);
+    }
+  };
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -29,6 +68,11 @@ export default function Contact() {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
+    if (TURNSTILE_SITE_KEY && !token) {
+      setStatus({ state: 'error', message: 'Please complete the verification below and try again.' });
+      return;
+    }
+
     // Honeypot: bots that fill the hidden field get a silent no-op.
     if (form.company) {
       setStatus({ state: 'sent', message: 'Thanks — you’ll get a reply in your inbox shortly.' });
@@ -37,18 +81,20 @@ export default function Contact() {
 
     setStatus({ state: 'sending', message: 'Sending…' });
     try {
-      await sendContactMessage(form);
+      await sendContactMessage({ ...form, token });
       setStatus({
         state: 'sent',
         message: 'Thanks — you’ll get a reply in your inbox shortly, and Butrint has been notified.',
       });
       setForm({ name: '', email: '', message: '', company: '' });
+      resetTurnstile();
     } catch (error) {
       const to = error.ownerEmail || profile.email;
       setStatus({
         state: 'error',
         message: `Couldn’t send just now. Please email me directly at ${to}.`,
       });
+      resetTurnstile();
     }
   };
 
@@ -135,6 +181,10 @@ export default function Contact() {
                   onChange={handleChange}
                 />
               </div>
+
+              {TURNSTILE_SITE_KEY && (
+                <div ref={widgetEl} className="contact__turnstile" />
+              )}
 
               <div className="contact__actions">
                 <button

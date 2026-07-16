@@ -3,13 +3,13 @@
 // nothing sensitive is exposed here. See netlify/functions/contact.mjs.
 const CONTACT_ENDPOINT = import.meta.env.VITE_CONTACT_ENDPOINT || '/api/contact';
 
-export async function sendContactMessage({ name, email, message, company }) {
+export async function sendContactMessage({ name, email, message, company, token }) {
   let res;
   try {
     res = await fetch(CONTACT_ENDPOINT, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, email, message, company }),
+      body: JSON.stringify({ name, email, message, company, token }),
     });
   } catch {
     throw new Error('network');

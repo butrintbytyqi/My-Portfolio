@@ -183,6 +183,28 @@ async function draftReply({ name, message }) {
   }
 }
 
+// Verify a Cloudflare Turnstile token. If no secret is configured the check
+// is skipped (keeps the form working before setup); once TURNSTILE_SECRET_KEY
+// is set, a valid token becomes mandatory.
+async function verifyTurnstile(token, ip) {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return true;
+  if (!token) return false;
+  const form = new URLSearchParams({ secret, response: token });
+  if (ip && ip !== 'unknown') form.append('remoteip', ip);
+  try {
+    const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+      method: 'POST',
+      body: form,
+    });
+    const data = await res.json();
+    return !!data.success;
+  } catch (err) {
+    console.error('Turnstile verify failed:', err.message);
+    return false;
+  }
+}
+
 async function sendEmail(payload) {
   const key = process.env.RESEND_API_KEY;
   if (!key) throw new Error('RESEND_API_KEY not set');
@@ -229,6 +251,12 @@ export default async (req, context) => {
   }
 
   const ip = context?.ip || req.headers.get('x-nf-client-connection-ip') || 'unknown';
+
+  // Bot check before any paid work (Gemini/Resend).
+  if (!(await verifyTurnstile(body.token, ip))) {
+    return json({ error: 'verification_failed', ownerEmail: OWNER_EMAIL }, 403, cors);
+  }
+
   if (
     windowed(IP_HITS, ip, RATE_WINDOW_MS, MAX_PER_IP) ||
     windowed(RECIPIENT_HITS, email, DAY_MS, MAX_PER_RECIPIENT) ||
