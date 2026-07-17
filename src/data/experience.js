@@ -29,19 +29,20 @@ export const experiences = [
     ],
     stack: ['Next.js', 'NestJS', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker', 'Hetzner'],
   },
-  {
-    company: 'Mercor Intelligence',
-    role: 'Generalist Expert, AI Evaluation',
-    period: 'Jul 2026 – Present',
-    location: 'Remote · Contract',
-    summary:
-      'Contracted as a domain expert on a large-scale AI model evaluation project.',
-    points: [
-      'Assesses model responses for correctness, reasoning quality, and instruction-following within strict compliance and tooling guidelines.',
-      'Contributes structured feedback and quality signals used to improve model performance.',
-    ],
-    stack: ['AI Evaluation', 'Prompt Engineering'],
-  },
+  // Temporarily hidden — uncomment to restore.
+  // {
+  //   company: 'Mercor Intelligence',
+  //   role: 'Generalist Expert, AI Evaluation',
+  //   period: 'Jul 2026 – Present',
+  //   location: 'Remote · Contract',
+  //   summary:
+  //     'Contracted as a domain expert on a large-scale AI model evaluation project.',
+  //   points: [
+  //     'Assesses model responses for correctness, reasoning quality, and instruction-following within strict compliance and tooling guidelines.',
+  //     'Contributes structured feedback and quality signals used to improve model performance.',
+  //   ],
+  //   stack: ['AI Evaluation', 'Prompt Engineering'],
+  // },
   {
     company: 'DOA (Digital Ordering Application)',
     role: 'Founder & Full-Stack Engineer',
