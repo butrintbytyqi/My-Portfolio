@@ -39,38 +39,43 @@ export default function Nav() {
   }, [open]);
 
   return (
-    <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
-      <div className="container nav__inner">
-        <a href="#top" className="nav__name" onClick={() => setOpen(false)}>
-          Butrint Bytyqi
-        </a>
+    <>
+      <header className={`nav ${scrolled ? 'nav--scrolled' : ''}`}>
+        <div className="container nav__inner">
+          <a href="#top" className="nav__name" onClick={() => setOpen(false)}>
+            Butrint Bytyqi
+          </a>
 
-        <nav className="nav__links" aria-label="Sections">
-          {navItems.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className={`mono-label nav__link ${active === item.id ? 'nav__link--active' : ''}`}
-            >
-              {item.label}
-              {active === item.id && (
-                <motion.span layoutId="nav-underline" className="nav__underline" />
-              )}
-            </a>
-          ))}
-        </nav>
+          <nav className="nav__links" aria-label="Sections">
+            {navItems.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={`mono-label nav__link ${active === item.id ? 'nav__link--active' : ''}`}
+              >
+                {item.label}
+                {active === item.id && (
+                  <motion.span layoutId="nav-underline" className="nav__underline" />
+                )}
+              </a>
+            ))}
+          </nav>
 
-        <button
-          type="button"
-          className="mono-label nav__toggle"
-          onClick={() => setOpen(!open)}
-          aria-expanded={open}
-          aria-controls="mobile-nav"
-        >
-          {open ? 'Close' : 'Menu'}
-        </button>
-      </div>
+          <button
+            type="button"
+            className="mono-label nav__toggle"
+            onClick={() => setOpen(!open)}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
+          >
+            {open ? 'Close' : 'Menu'}
+          </button>
+        </div>
+      </header>
 
+      {/* Kept outside <header>: the scrolled header's backdrop-filter would
+          otherwise become this fixed overlay's containing block, collapsing it
+          to the height of the bar instead of the viewport. */}
       <div id="mobile-nav" className={`nav__overlay ${open ? 'nav__overlay--open' : ''}`}>
         <nav aria-label="Sections">
           <ol className="container nav__overlay-list">
@@ -91,6 +96,6 @@ export default function Nav() {
           </ol>
         </nav>
       </div>
-    </header>
+    </>
   );
 }
