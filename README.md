@@ -6,7 +6,7 @@ Personal portfolio of Butrint Bytyqi, software engineer focused on AI agents and
 
 - **React 18** + **Vite**: single-page app, no router
 - **Hand-rolled CSS**: design tokens + plain component stylesheets, no UI framework
-- **framer-motion**: subtle scroll reveals, respects `prefers-reduced-motion`
+- **framer-motion**: the sliding nav underline indicator
 - **EmailJS**: contact form delivery
 
 ## Design

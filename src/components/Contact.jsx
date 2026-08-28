@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import SectionHeader from './SectionHeader';
-import Reveal from './Reveal';
 import { profile } from '../data/profile';
 import { sendContactMessage } from '../lib/email';
 import './Contact.css';
@@ -54,7 +53,7 @@ export default function Contact() {
       <div className="container">
         <SectionHeader number="06" label="Contact" title="Let’s work together" />
         <div className="grid">
-          <Reveal className="contact__intro">
+          <div className="contact__intro">
             <p className="contact__lead">
               Have a project, a role, or an idea worth automating?
               <em> I’d like to hear about it.</em>
@@ -63,9 +62,9 @@ export default function Contact() {
               <a className="contact__mail" href={`mailto:${profile.email}`}>{profile.email}</a>
               <span className="mono-label contact__phone">{profile.phone}</span>
             </p>
-          </Reveal>
+          </div>
 
-          <Reveal className="contact__form-wrap" delay={0.1}>
+          <div className="contact__form-wrap">
             <form className="contact__form" onSubmit={handleSubmit} noValidate>
               <div className="contact__field-group">
                 <label className="mono-label contact__label" htmlFor="contact-name">Name</label>
@@ -150,7 +149,7 @@ export default function Contact() {
                 </p>
               </div>
             </form>
-          </Reveal>
+          </div>
         </div>
       </div>
     </section>
