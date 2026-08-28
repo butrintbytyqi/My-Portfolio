@@ -1,35 +1,22 @@
-import { motion, useReducedMotion } from 'framer-motion';
 import { profile } from '../data/profile';
 import './Hero.css';
 
-const ease = [0.22, 1, 0.36, 1];
-
 export default function Hero() {
-  const reduceMotion = useReducedMotion();
-  const enter = (order) =>
-    reduceMotion
-      ? {}
-      : {
-          initial: { opacity: 0, y: 24 },
-          animate: { opacity: 1, y: 0 },
-          transition: { duration: 0.7, delay: 0.1 + order * 0.12, ease },
-        };
-
   return (
     <section id="top" className="hero">
       <div className="container grid hero__grid">
         <div className="hero__headline">
-          <motion.p className="mono-label hero__kicker" {...enter(0)}>
+          <p className="mono-label hero__kicker">
             {profile.title} · {profile.location}
-          </motion.p>
-          <motion.h1 className="hero__title" {...enter(1)}>
+          </p>
+          <h1 className="hero__title">
             {profile.name}
             <span className="hero__dot" aria-hidden="true">.</span>
             <em className="hero__em">{profile.headline}</em>
-          </motion.h1>
+          </h1>
         </div>
 
-        <motion.aside className="hero__meta" {...enter(2)}>
+        <aside className="hero__meta">
           <dl className="hero__facts">
             {profile.meta.map((fact) => (
               <div key={fact.label} className="hero__fact">
@@ -54,7 +41,7 @@ export default function Hero() {
               <a href={`mailto:${profile.email}`}>Email</a>
             </li>
           </ul>
-        </motion.aside>
+        </aside>
       </div>
       <div className="container">
         <hr className="rule" />

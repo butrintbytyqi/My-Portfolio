@@ -1,5 +1,4 @@
 import SectionHeader from './SectionHeader';
-import Reveal from './Reveal';
 import { about } from '../data/about';
 import './About.css';
 
@@ -9,15 +8,15 @@ export default function About() {
       <div className="container">
         <SectionHeader number="01" label="About" title="Profile" />
         <div className="grid">
-          <Reveal className="about__body">
+          <div className="about__body">
             {about.paragraphs.map((paragraph) => (
               <p key={paragraph.slice(0, 24)} className="about__para">
                 {paragraph}
               </p>
             ))}
-          </Reveal>
+          </div>
 
-          <Reveal className="about__aside" delay={0.1}>
+          <div className="about__aside">
             <dl className="about__facts">
               {about.quickFacts.map((fact) => (
                 <div key={fact.label} className="about__fact">
@@ -45,7 +44,7 @@ export default function About() {
               <h3 className="mono-label about__block-label">Interests</h3>
               <p className="about__interests">{about.interests.join(', ')}</p>
             </div>
-          </Reveal>
+          </div>
         </div>
       </div>
     </section>

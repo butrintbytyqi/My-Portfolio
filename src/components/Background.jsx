@@ -1,5 +1,4 @@
 import SectionHeader from './SectionHeader';
-import Reveal from './Reveal';
 import { education, recognition, additional } from '../data/background';
 import './Background.css';
 
@@ -9,7 +8,7 @@ export default function Background() {
       <div className="container">
         <SectionHeader number="04" label="Background" title="Education & recognition" />
         <div className="grid bg__grid">
-          <Reveal className="bg__block">
+          <div className="bg__block">
             <h3 className="mono-label bg__label">Education</h3>
             {education.map((entry) => (
               <article key={entry.degree} className="bg__entry">
@@ -21,9 +20,9 @@ export default function Background() {
                 {entry.note && <p className="bg__note">{entry.note}</p>}
               </article>
             ))}
-          </Reveal>
+          </div>
 
-          <Reveal className="bg__block" delay={0.08}>
+          <div className="bg__block">
             <h3 className="mono-label bg__label">Recognition</h3>
             {recognition.map((entry) => (
               <article key={entry.title} className="bg__entry">
@@ -33,9 +32,9 @@ export default function Background() {
                 {entry.note && <p className="bg__note">{entry.note}</p>}
               </article>
             ))}
-          </Reveal>
+          </div>
 
-          <Reveal className="bg__block" delay={0.16}>
+          <div className="bg__block">
             <h3 className="mono-label bg__label">Additional</h3>
             {additional.map((entry) => (
               <article key={entry.title} className="bg__entry">
@@ -44,7 +43,7 @@ export default function Background() {
                 <p className="mono-label bg__year">{entry.year}</p>
               </article>
             ))}
-          </Reveal>
+          </div>
         </div>
       </div>
     </section>
