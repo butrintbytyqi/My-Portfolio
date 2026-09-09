@@ -6,6 +6,7 @@ const statusClass = {
   'Production': 'proj__status--production',
   'In Development': 'proj__status--dev',
   'Completed': 'proj__status--done',
+  'Demo': 'proj__status--demo',
 };
 
 export default function Projects() {
@@ -37,7 +38,7 @@ export default function Projects() {
                       <span className={`proj__status ${statusClass[project.status] || ''}`}>
                         {project.status}
                       </span>
-                      <span className="proj__year"> · {project.year}</span>
+                      {project.year && <span className="proj__year"> · {project.year}</span>}
                       {project.github && project.live && (
                         <>
                           {' · '}

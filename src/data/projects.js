@@ -1,4 +1,5 @@
-// Curated set. Statuses: 'Production' | 'In Development' | 'Completed'
+// Curated set. Statuses: 'Production' | 'In Development' | 'Completed' | 'Demo'
+// `year`, `github` and `live` are optional.
 export const projects = [
   {
     title: 'Voice AI Lead Capture System',
@@ -31,6 +32,13 @@ export const projects = [
     stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma'],
     year: '2026',
     status: 'In Development',
+  },
+  {
+    title: 'Copilot for Lawyers',
+    description:
+      'A demo legal AI assistant, built with a small team, that analyzes uploaded PDF contracts and answers natural-language questions about them, highlighting potential GDPR, DORA, and contractual risk clauses. A retrieval pipeline parses and chunks contract text into embeddings stored in ChromaDB, then grounds LLaMA 3.3 70B through the Groq API with the most relevant sections, returning structured JSON for selected analyses.',
+    stack: ['Python', 'RAG', 'LLaMA 3.3 70B', 'Groq API', 'ChromaDB', 'Streamlit'],
+    status: 'Demo',
   },
   {
     title: 'Hajde Folim',
