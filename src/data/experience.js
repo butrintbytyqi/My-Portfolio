@@ -32,13 +32,13 @@ export const experiences = [
   {
     company: 'Mercor Intelligence',
     role: 'Generalist Expert, AI Evaluation',
-    period: 'Jul 2026 – Present',
+    period: 'Jul 2026 – Aug 2026',
     location: 'Remote · Contract',
     summary:
       'Contracted as a domain expert on a large-scale AI model evaluation project.',
     points: [
-      'Assesses model responses for correctness, reasoning quality, and instruction-following within strict compliance and tooling guidelines.',
-      'Contributes structured feedback and quality signals used to improve model performance.',
+      'Assessed model responses for correctness, reasoning quality, and instruction-following within strict compliance and tooling guidelines.',
+      'Contributed structured feedback and quality signals used to improve model performance.',
     ],
     stack: ['AI Evaluation', 'Prompt Engineering'],
   },
