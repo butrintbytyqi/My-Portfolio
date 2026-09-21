@@ -43,6 +43,18 @@ export const experiences = [
     stack: ['AI Evaluation', 'Prompt Engineering'],
   },
   {
+    company: 'Mercor Intelligence',
+    role: 'Software Engineering Expert',
+    period: 'Sep 2026 – Present',
+    location: 'Remote · Contract',
+    summary:
+      'Contracted as a software engineering expert on an AI training data project.',
+    points: [
+      'Creates software engineering training data used to train and improve AI models.',
+    ],
+    stack: ['AI Training Data', 'Software Engineering'],
+  },
+  {
     company: 'DOA (Digital Ordering Application)',
     role: 'Founder & Full-Stack Engineer',
     period: 'Jul 2022 – Sep 2024',
