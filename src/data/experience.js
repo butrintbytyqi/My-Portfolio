@@ -8,10 +8,10 @@ export const experiences = [
     summary:
       'Early-stage AI startup building agents and automation solutions for businesses on Google Cloud.',
     points: [
-      'Builds AI agents, voice AI systems, and workflow automations using Python, Vertex AI, BigQuery, Cloud SQL, Cloud Run, APIs, webhooks, and cloud-native services.',
+      'Build AI agents, voice AI systems, and workflow automations using Python, Vertex AI, BigQuery, Cloud SQL, Cloud Run, APIs, webhooks, and cloud-native services.',
       'Designed lead-capture and business automation workflows integrating AI services, databases, reporting systems, and operational dashboards.',
       'Developed backend services and automation pipelines for data processing, validation, monitoring, and operational visibility.',
-      'Works directly from business requirements to deliver end-to-end AI solutions, internal tools, and reliable automation systems.',
+      'Work directly from business requirements to deliver end-to-end AI solutions, internal tools, and reliable automation systems.',
     ],
     stack: ['Python', 'Vertex AI', 'BigQuery', 'Cloud SQL', 'Cloud Run', 'Webhooks'],
   },
@@ -25,7 +25,7 @@ export const experiences = [
     points: [
       'Built the DORA Platform, a Next.js, NestJS, and PostgreSQL application containerized with Docker, and led a hosting evaluation resulting in a GDPR- and ISO 27001-compliant EU deployment on Hetzner Cloud.',
       'Designed and scoped Wolke7 Seeschlacht, a reservation system for a beach club client, producing full specification, data model, and build-plan documentation.',
-      'Translates client business requirements into clean data models, reliable backend services, and maintainable full-stack systems.',
+      'Translate client business requirements into clean data models, reliable backend services, and maintainable full-stack systems.',
     ],
     stack: ['Next.js', 'NestJS', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker', 'Hetzner'],
   },
@@ -50,7 +50,9 @@ export const experiences = [
     summary:
       'Contracted as a software engineering expert on an AI training data project.',
     points: [
-      'Creates software engineering training data used to train and improve AI models.',
+      'Create and evaluate software engineering training data used to improve AI coding models and software engineering capabilities.',
+      'Review technical tasks, code changes, tests, and AI-generated solutions for correctness, robustness, and adherence to requirements.',
+      'Analyze AI coding-agent performance and provide structured technical evaluations based on software engineering evidence.',
     ],
     stack: ['AI Training Data', 'Software Engineering'],
   },
