@@ -48,11 +48,11 @@ export const experiences = [
     period: 'Sep 2026 – Present',
     location: 'Remote · Contract',
     summary:
-      'Contracted as a software engineering expert on an AI training data project.',
+      'Contracted as a software engineering expert on an AI training project.',
     points: [
-      'Creates software engineering training data used to train and improve AI models.',
+      'Creates software engineering evaluation data used for AI model training.',
     ],
-    stack: ['AI Training Data', 'Software Engineering'],
+    stack: ['Evaluation Data', 'AI Training', 'Software Engineering'],
   },
   {
     company: 'DOA (Digital Ordering Application)',
