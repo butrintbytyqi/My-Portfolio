@@ -11,7 +11,7 @@ export const profile = {
   cvUrl: 'ButrintBytyqiCV.pdf',
   meta: [
     { label: 'Based in', value: 'Vienna, AT' },
-    { label: 'Currently', value: 'Attanda · Founding AI Systems Engineer' },
+    { label: 'Currently', value: 'Attanda · AI Engineer' },
     { label: 'Studying', value: 'TU Wien, MSc' },
   ],
 };
