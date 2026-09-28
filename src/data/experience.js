@@ -2,7 +2,7 @@
 export const experiences = [
   {
     company: 'Attanda',
-    role: 'Founding AI Systems Engineer',
+    role: 'AI Engineer',
     period: 'Mar 2026 – Present',
     location: 'Vienna, Austria',
     summary:
