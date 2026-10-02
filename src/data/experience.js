@@ -21,10 +21,11 @@ export const experiences = [
     period: 'May 2026 – Present',
     location: 'Remote',
     summary:
-      'Production web applications for external clients, owning architecture, hosting decisions, and end-to-end implementation.',
+      'Production SaaS products and client web applications, owning architecture, hosting decisions, and end-to-end implementation.',
     points: [
+      'Designed and developed DORATECH, a SaaS control plane that onboards clients and automatically provisions isolated customer deployments, each with its own PostgreSQL database, credentials, secrets, storage, and runtime.',
+      'Developed DoraDine, a restaurant reservation and table-management platform that grew from a client booking system into a reusable product provisioned through DORATECH.',
       'Built the DORA Platform, a Next.js, NestJS, and PostgreSQL application containerized with Docker, and led a hosting evaluation resulting in a GDPR- and ISO 27001-compliant EU deployment on Hetzner Cloud.',
-      'Designed and scoped Wolke7 Seeschlacht, a reservation system for a beach club client, producing full specification, data model, and build-plan documentation.',
       'Translate client business requirements into clean data models, reliable backend services, and maintainable full-stack systems.',
     ],
     stack: ['Next.js', 'NestJS', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker', 'Hetzner'],
