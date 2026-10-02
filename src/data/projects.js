@@ -2,6 +2,22 @@
 // `year`, `github` and `live` are optional.
 export const projects = [
   {
+    title: 'DORATECH',
+    description:
+      'A SaaS control plane for automatically onboarding, provisioning, and managing isolated customer applications. It takes each client from payment to a running DoraDine installation with no manual server or database setup, giving every customer an isolated environment with its own PostgreSQL database, credentials, secrets, storage, and runtime. The full lifecycle was production-tested from onboarding through renewal and archive.',
+    stack: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker'],
+    year: '2026',
+    status: 'Production',
+  },
+  {
+    title: 'DoraDine',
+    description:
+      'A restaurant reservation and table-management platform with online booking, staff operations, and automated SaaS deployment. It covers public reservations, table and area management with automatic or manual assignment, reservation types, opening hours, staff roles, and a multilingual admin interface, and evolved from a real restaurant booking implementation into a reusable product provisioned through DORATECH.',
+    stack: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker'],
+    year: '2026',
+    status: 'Production',
+  },
+  {
     title: 'Voice AI Lead Capture System',
     description:
       'An AI-powered voice agent that captures, validates, and structures customer lead information, automating lead collection, reporting, and operational tracking while preserving system fields such as Call ID, date/time, and source.',
@@ -24,14 +40,6 @@ export const projects = [
     stack: ['Next.js', 'NestJS', 'PostgreSQL', 'Docker', 'Hetzner Cloud'],
     year: '2026',
     status: 'Production',
-  },
-  {
-    title: 'Wolke7 Seeschlacht',
-    description:
-      'A reservation system for a beach club client, designed and scoped end-to-end with full specification, data model, and build-plan documentation.',
-    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma'],
-    year: '2026',
-    status: 'In Development',
   },
   {
     title: 'Copilot for Lawyers',
