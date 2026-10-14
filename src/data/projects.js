@@ -56,10 +56,10 @@ export const projects = [
     year: '2025',
     status: 'In Development',
     github: 'https://github.com/butrintbytyqi/hajde-folim',
-    live: 'https://hajdefolim-1.onrender.com',
+    live: 'https://hajdefolim.com',
   },
   {
-    title: 'Ordinance App',
+    title: 'Clinic Management System',
     description:
       'A desktop application managing the full workflow of a medical practice: patient registration, appointment scheduling, visit tracking, prescriptions, and reporting. Separate interfaces for receptionists and doctors, with role-based access control and secure authentication.',
     stack: ['React', 'TypeScript', '.NET', 'SQL Server', 'Electron'],
