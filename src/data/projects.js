@@ -72,6 +72,5 @@ export const projects = [
     stack: ['React', 'Node.js', 'MongoDB', 'Express', 'Chart.js'],
     year: '2023',
     status: 'Completed',
-    github: 'https://github.com/butrintbytyqi/feedback-app',
   },
 ];
