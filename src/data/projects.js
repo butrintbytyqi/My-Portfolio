@@ -55,7 +55,6 @@ export const projects = [
     stack: ['JavaScript', 'Tailwind CSS', 'Node.js', 'MongoDB', 'OpenAI API'],
     year: '2025',
     status: 'In Development',
-    github: 'https://github.com/butrintbytyqi/hajde-folim',
     live: 'https://hajdefolim.com',
   },
   {
