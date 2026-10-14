@@ -79,7 +79,99 @@
   color: var(--accent);
 }
 
+/* Optional detail lines (role, problem, contribution, outcome). */
+.proj__facts {
+  margin-top: var(--s6);
+  max-width: 58ch;
+}
+
+.proj__fact {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: var(--s4);
+  border-top: 1px solid var(--rule);
+  padding-block: var(--s2);
+}
+
+.proj__fact dt {
+  color: var(--gray-500);
+  padding-top: 0.2em;
+}
+
+.proj__fact dd {
+  font-size: var(--text-sm);
+  color: var(--gray-700);
+}
+
+/* Earlier projects: a quiet, collapsed list below the selected work. */
+.proj__earlier {
+  border-top: 1px solid var(--rule);
+}
+
+.proj__earlier-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s4);
+  padding-block: var(--s6);
+  color: var(--gray-500);
+  cursor: pointer;
+  list-style: none;
+  transition: color 0.2s ease;
+}
+
+.proj__earlier-toggle::-webkit-details-marker {
+  display: none;
+}
+
+.proj__earlier-toggle::after {
+  content: '↓';
+}
+
+.proj__earlier[open] > .proj__earlier-toggle::after {
+  content: '↑';
+}
+
+.proj__earlier-toggle:hover,
+.proj__earlier[open] > .proj__earlier-toggle {
+  color: var(--ink);
+}
+
+.proj__earlier-item {
+  display: grid;
+  grid-template-columns: 3fr 9fr;
+  gap: var(--grid-gap);
+  border-top: 1px solid var(--rule);
+  padding-block: var(--s6);
+}
+
+.proj__earlier-title {
+  font-family: var(--font-display);
+  font-size: var(--text-h3);
+  line-height: 1.2;
+}
+
+.proj__earlier-title a:hover {
+  color: var(--accent);
+}
+
+.proj__earlier-desc {
+  color: var(--gray-700);
+  font-size: var(--text-sm);
+  max-width: 58ch;
+}
+
 @media (max-width: 720px) {
+  .proj__fact {
+    grid-template-columns: 1fr;
+    gap: var(--s1);
+  }
+
+  .proj__earlier-item {
+    grid-template-columns: 1fr;
+    gap: var(--s2);
+  }
+
   .proj__row,
   .proj__row--flip {
     grid-template-columns: 1fr;

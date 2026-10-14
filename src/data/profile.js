@@ -1,6 +1,6 @@
 export const profile = {
   name: 'Butrint Bytyqi',
-  headline: 'AI Agents & Business Process Automation',
+  headline: 'AI Systems · Backend Engineering · Cloud Infrastructure',
   title: 'Software Engineer',
   location: 'Vienna, Austria',
   email: 'butrinti022@gmail.com',
