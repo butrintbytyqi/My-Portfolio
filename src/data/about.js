@@ -1,8 +1,8 @@
 export const about = {
   paragraphs: [
-    'I’m a software engineer focused on AI agents and business process automation. I build full-stack web applications, backend services, cloud infrastructure, internal tools, and AI-powered automation systems, owning projects end-to-end across the frontend, backend, database, and cloud stack.',
-    'Currently I’m an AI engineer at Attanda in Vienna, building voice AI and workflow automation on Google Cloud; I consult on full-stack client projects at DORA Consulting; and I’m pursuing an MSc in Software Engineering & Internet Computing at TU Wien.',
-    'I value growth over comfort and see every challenge as an opportunity to learn. Always building, always exploring how technology can turn business requirements into reliable software that creates real-world value.',
+    'I’m a software engineer in Vienna. I build backend services, full stack web applications, and AI systems, and I deploy them on cloud infrastructure. I work on a project from database design and APIs through to containers, hosting, and production operation.',
+    'At Attanda I’m an AI engineer, building voice AI and workflow automation on Google Cloud. At DORA Consulting I design and develop SaaS products and client applications, including DORATECH, which provisions isolated customer deployments, and DoraDine, a restaurant reservation product. I’m also studying for an MSc in Software Engineering & Internet Computing at TU Wien.',
+    'I also work on contract as a software engineering expert at Mercor Intelligence, where I create and review software engineering training data for AI coding models.',
   ],
   quickFacts: [
     { label: 'Location', value: 'Vienna, Austria' },
@@ -15,5 +15,5 @@ export const about = {
     { name: 'English', level: 'Fluent' },
     { name: 'German', level: 'Basic' },
   ],
-  interests: ['AI Systems', 'AI Agents', 'Data Engineering', 'Backend Architecture'],
+  interests: ['AI Systems', 'AI Agents', 'Data Engineering', 'Backend Architecture', 'Cloud Infrastructure'],
 };

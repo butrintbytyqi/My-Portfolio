@@ -1,6 +1,6 @@
 # Butrint Bytyqi Portfolio
 
-Personal portfolio of Butrint Bytyqi, software engineer focused on AI agents and business process automation. Live at [butrintbytyqi.netlify.app](https://butrintbytyqi.netlify.app).
+Personal portfolio of Butrint Bytyqi, software engineer working on AI systems, backend engineering, and cloud infrastructure. Live at [butrintbytyqi.netlify.app](https://butrintbytyqi.netlify.app).
 
 ## Stack
 
@@ -22,6 +22,8 @@ Tokens live in `src/styles/tokens.css`; each component has a sibling stylesheet.
 ## Content
 
 All copy lives in plain data modules under `src/data/` (`profile`, `about`, `experience`, `projects`, `background`, `skills`, `nav`). Updating the site (adding a role, a project, a skill) is a data-only edit; no component changes needed. The downloadable CV is `public/ButrintBytyqiCV.pdf`.
+
+Projects live in `src/data/projects.js`. `projects` is the ordered selected work and `earlierProjects` fills the collapsed "Earlier projects" list. Each entry needs a title, description, stack, and status. `year`, `live`, `github`, `caseStudy`, and the short detail lines `role`, `challenge`, and `outcome` are optional and only render when they have text, so leave out anything that is not verified.
 
 ## Development
 

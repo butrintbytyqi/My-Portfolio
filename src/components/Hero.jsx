@@ -1,6 +1,13 @@
 import { profile } from '../data/profile';
 import './Hero.css';
 
+// Keep each term of the headline on one line, so it can only wrap after a
+// separator dot instead of splitting a term such as "Cloud Infrastructure".
+const headline = profile.headline
+  .split(' · ')
+  .map((term) => term.replace(/ /g, ' '))
+  .join(' · ');
+
 export default function Hero() {
   return (
     <section id="top" className="hero">
@@ -12,7 +19,7 @@ export default function Hero() {
           <h1 className="hero__title">
             {profile.name}
             <span className="hero__dot" aria-hidden="true">.</span>
-            <em className="hero__em">{profile.headline}</em>
+            <em className="hero__em">{headline}</em>
           </h1>
         </div>
 
