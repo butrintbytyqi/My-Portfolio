@@ -11,7 +11,7 @@ export const projects = [
   {
     title: 'DORATECH',
     description:
-      'Built a SaaS control plane where operators onboard customers, and once the first payment is recorded a worker provisions a separate DoraDine environment for each one. The worker runs queued provisioning jobs that create each customer’s own database, generated secrets, storage, and application containers, with safe retries and recovery from crashed jobs. Added operator tools for recording payments and renewals, archiving, time limited support access, and an audit log.',
+      'Built a SaaS control plane where operators onboard customers, and once the first payment is recorded a worker provisions a separate Diane’s Table environment for each one. The worker runs queued provisioning jobs that create each customer’s own database, generated secrets, storage, and application containers, with safe retries and recovery from crashed jobs. Added operator tools for recording payments and renewals, archiving, time limited support access, and an audit log.',
     stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker'],
     year: '2026',
     status: 'In Development',
@@ -22,13 +22,13 @@ export const projects = [
       'Tested the complete flow on a production host: client creation, payment, provisioning, administrator setup, support access, renewal, and archive.',
   },
   {
-    title: 'DORA Platform',
+    title: 'DORA Finance',
     description:
       'Built a financial back office platform that lets staff manage several client businesses in one system. Implemented outgoing invoices with generated PDFs, supplier invoice tracking, payments recorded in a cash and bank ledger, payroll, profit and loss reports, and document storage for each business. Worked on the application architecture, database design, role based permissions, and data isolation between businesses, and led the hosting evaluation for the production deployment.',
     stack: ['Next.js', 'NestJS', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker', 'Hetzner Cloud'],
     year: '2026',
     status: 'Production',
-    role: 'Full stack engineer at DORA Consulting.',
+    role: 'Software engineer at DORA Consulting.',
     challenge:
       'Keeping each client business’s financial data separate while staff work across several businesses.',
   },
@@ -39,12 +39,12 @@ export const projects = [
     stack: ['Python', 'Vertex AI', 'Cloud Run', 'BigQuery', 'Webhooks'],
     year: '2026',
     status: 'Completed',
-    role: 'AI engineer at Attanda.',
+    role: 'Founding AI systems engineer at Attanda.',
   },
   {
-    title: 'DoraDine',
+    title: 'Diane’s Table',
     description:
-      'Developed a reservation and table management application for restaurants, with a public booking flow for guests and an admin panel for staff. Implemented table assignment rules, a floor plan editor, opening hours and closures, staff roles, and language support for German, English, and Albanian. Integrated it with DORATECH so each customer can run their own isolated installation, with a one time administrator setup link and a secure support login.',
+      'Developed Diane’s Table, formerly DoraDine, a reservation and table management application for restaurants, with a public booking flow for guests and an admin panel for staff. Implemented table assignment rules, a floor plan editor, opening hours and closures, staff roles, and language support for German, English, and Albanian. Integrated it with DORATECH so each customer can run their own isolated installation, with a one time administrator setup link and a secure support login.',
     stack: ['Next.js', 'React', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker'],
     year: '2026',
     status: 'Production',
@@ -53,7 +53,7 @@ export const projects = [
       'Turning a booking system built for one venue into a product that DORATECH can install separately for each customer.',
   },
   {
-    title: 'Copilot for Lawyers',
+    title: 'Co-Pilot for Lawyers',
     description:
       'Built a demo legal document assistant with a small team to review uploaded contracts. Developed a retrieval pipeline that extracts text from PDF files, splits it into clauses, and stores them for semantic search. Used a hosted LLaMA model to flag potential GDPR, DORA, and contract risks and to answer questions about the contract.',
     stack: ['Python', 'RAG', 'LLaMA 3.3 70B', 'Groq API', 'ChromaDB', 'Streamlit'],
@@ -62,13 +62,13 @@ export const projects = [
     role: 'Technical implementation of the retrieval pipeline and application, in a small team.',
   },
   {
-    title: 'DOA Digital Ordering System',
+    title: 'DOA Digital Ordering Application',
     description:
       'Co founded a digital ordering platform for restaurants and worked on its backend and ordering features. Customers scan a table QR code, browse the menu, and place orders from their phones. Restaurant staff get order management, notifications, role based access, and business reporting.',
     stack: ['REST APIs', 'Auth & RBAC', 'SQL'],
     year: '2022 to 2024',
     status: 'Completed',
-    role: 'Co founder and full stack engineer.',
+    role: 'Full stack engineer.',
     outcome: 'Won first place at the IDEA TO SCALE startup competition at ITP Prizren in 2024.',
   },
 ];

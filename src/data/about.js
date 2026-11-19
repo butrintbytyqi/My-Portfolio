@@ -1,8 +1,8 @@
 export const about = {
   paragraphs: [
     'I’m a software engineer in Vienna. I build backend services, full stack web applications, and AI systems, and I deploy them on cloud infrastructure. I work on a project from database design and APIs through to containers, hosting, and production operation.',
-    'I currently work at DORA Consulting, where I design and develop SaaS products and client applications, including DORATECH, which provisions isolated customer deployments, and DoraDine, a restaurant reservation product. I’m also studying for an MSc in Software Engineering & Internet Computing at TU Wien.',
-    'I previously worked as an AI engineer at Attanda, building voice AI and workflow automation on Google Cloud, and as a software engineering expert at Mercor Intelligence, where I created and reviewed software engineering training data for AI coding models.',
+    'I currently work as a software engineer at DORA Consulting, where I design and develop SaaS products and client applications, including DORATECH, which provisions isolated customer deployments, and Diane’s Table, a restaurant reservation product. I’m also studying for an MSc in Software Engineering & Internet Computing at TU Wien.',
+    'I also work as an independent contractor at Mercor Intelligence, where I evaluate AI generated software solutions to support the evaluation of AI coding models. I previously worked as a founding AI systems engineer at Attanda, building voice and chat AI systems on Google Cloud.',
   ],
   quickFacts: [
     { label: 'Location', value: 'Vienna, Austria' },
