@@ -28,7 +28,7 @@ export const projects = [
     stack: ['Next.js', 'NestJS', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker', 'Hetzner Cloud'],
     year: '2026',
     status: 'Production',
-    role: 'Full stack engineer at DORA Consulting.',
+    role: 'Software engineer at DORA Consulting.',
     challenge:
       'Keeping each client business’s financial data separate while staff work across several businesses.',
   },
@@ -62,13 +62,13 @@ export const projects = [
     role: 'Technical implementation of the retrieval pipeline and application, in a small team.',
   },
   {
-    title: 'DOA Digital Ordering System',
+    title: 'DOA Digital Ordering Application',
     description:
       'Co founded a digital ordering platform for restaurants and worked on its backend and ordering features. Customers scan a table QR code, browse the menu, and place orders from their phones. Restaurant staff get order management, notifications, role based access, and business reporting.',
     stack: ['REST APIs', 'Auth & RBAC', 'SQL'],
     year: '2022 to 2024',
     status: 'Completed',
-    role: 'Co founder and full stack engineer.',
+    role: 'Full stack engineer.',
     outcome: 'Won first place at the IDEA TO SCALE startup competition at ITP Prizren in 2024.',
   },
 ];
