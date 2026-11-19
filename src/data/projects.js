@@ -38,7 +38,7 @@ export const projects = [
       'Built a voice AI system that collects and validates customer information during calls. Connected AI services with backend workflows that structure each lead, keep the call ID, date and time, and source with the record, and make the data available for reporting and follow up. Ran the services on Google Cloud.',
     stack: ['Python', 'Vertex AI', 'Cloud Run', 'BigQuery', 'Webhooks'],
     year: '2026',
-    status: 'Production',
+    status: 'Completed',
     role: 'AI engineer at Attanda.',
   },
   {
