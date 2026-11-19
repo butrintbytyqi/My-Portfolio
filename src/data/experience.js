@@ -1,72 +1,58 @@
 // One entry per role. New roles are a data-only edit: add an object here.
+// Titles, dates, and bullets follow the CV (public/ButrintBytyqiCV.pdf).
 export const experiences = [
   {
-    company: 'DORA Consulting',
-    role: 'Software Consultant & Full-Stack Engineer',
-    period: 'May 2026 – Present',
-    location: 'Remote',
-    summary:
-      'Production SaaS products and client web applications, owning architecture, hosting decisions, and end-to-end implementation.',
-    points: [
-      'Designed and developed DORATECH, a SaaS control plane that onboards clients and automatically provisions isolated customer deployments, each with its own PostgreSQL database, credentials, secrets, storage, and runtime.',
-      'Developed DoraDine, a restaurant reservation and table-management platform that grew from a client booking system into a reusable product provisioned through DORATECH.',
-      'Built the DORA Platform, a Next.js, NestJS, and PostgreSQL application containerized with Docker, and led a hosting evaluation resulting in a GDPR- and ISO 27001-compliant EU deployment on Hetzner Cloud.',
-      'Translate client business requirements into clean data models, reliable backend services, and maintainable full-stack systems.',
-    ],
-    stack: ['Next.js', 'NestJS', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker', 'Hetzner'],
-  },
-  {
     company: 'Mercor Intelligence',
-    role: 'Software Engineering Expert',
-    period: 'Sep 2026 – Nov 2026',
-    location: 'Remote · Contract',
+    role: 'Software Engineering Expert / Generalist Expert',
+    period: 'Jul 2026 – Present',
+    location: 'Remote · Independent Contractor',
     summary:
-      'Contracted as a software engineering expert on an AI training data project.',
+      'Independent contractor evaluating AI-generated software solutions and business deliverables.',
     points: [
-      'Created and evaluated software engineering training data used to improve AI coding models and software engineering capabilities.',
-      'Reviewed technical tasks, code changes, tests, and AI-generated solutions for correctness, robustness, and adherence to requirements.',
-      'Analyzed AI coding-agent performance and provided structured technical evaluations based on software engineering evidence.',
+      'Independently evaluate AI-generated software solutions, examining source code, test suites, and system requirements to identify correctness and reliability issues.',
+      'Investigate implementation defects, missing edge cases, and inadequate test coverage, documenting technical findings to support the evaluation of AI coding models.',
+      'Evaluated AI-generated business deliverables for accuracy, instruction compliance, and quality, applying consistent review standards across different tasks.',
     ],
-    stack: ['AI Training Data', 'Software Engineering'],
+    stack: ['AI Evaluation', 'Software Engineering'],
   },
   {
     company: 'Attanda',
-    role: 'AI Engineer',
+    role: 'Founding AI Systems Engineer',
     period: 'Mar 2026 – Nov 2026',
     location: 'Vienna, Austria',
     summary:
       'Early-stage AI startup building agents and automation solutions for businesses on Google Cloud.',
     points: [
-      'Built AI agents, voice AI systems, and workflow automations using Python, Vertex AI, BigQuery, Cloud SQL, Cloud Run, APIs, webhooks, and cloud-native services.',
-      'Designed lead-capture and business automation workflows integrating AI services, databases, reporting systems, and operational dashboards.',
-      'Developed backend services and automation pipelines for data processing, validation, monitoring, and operational visibility.',
-      'Worked directly from business requirements to deliver end-to-end AI solutions, internal tools, and reliable automation systems.',
+      'Drove the technical development of AI-powered voice and chat systems, translating business requirements into automated customer communication workflows.',
+      'Designed and implemented Python backend services that integrated AI models with business data, APIs, and external tools to automate customer interactions and routine tasks.',
+      'Managed deployment, monitoring, and improvement of AI services on Google Cloud, troubleshooting production issues and improving system reliability.',
     ],
     stack: ['Python', 'Vertex AI', 'BigQuery', 'Cloud SQL', 'Cloud Run', 'Webhooks'],
   },
   {
-    company: 'Mercor Intelligence',
-    role: 'Generalist Expert, AI Evaluation',
-    period: 'Jul 2026 – Aug 2026',
-    location: 'Remote · Contract',
+    company: 'DORA Consulting',
+    role: 'Software Engineer',
+    period: 'Jan 2026 – Present',
+    location: 'Remote',
     summary:
-      'Contracted as a domain expert on a large-scale AI model evaluation project.',
+      'Full-stack work on business software and SaaS platforms, including the DianeDigital production infrastructure, DORA Finance, and Diane’s Table.',
     points: [
-      'Assessed model responses for correctness, reasoning quality, and instruction-following within strict compliance and tooling guidelines.',
-      'Contributed structured feedback and quality signals used to improve model performance.',
+      'Own end-to-end development of business management features, delivering workflows for invoicing, payments, payroll, reporting, and customer and supplier management.',
+      'Design and implement backend APIs, PostgreSQL data models, and user-facing features using Next.js, NestJS, TypeScript, Prisma, and Docker.',
+      'Handle the software lifecycle from database design and implementation to testing, deployment, and production troubleshooting, resolving issues across the stack.',
     ],
-    stack: ['AI Evaluation', 'Prompt Engineering'],
+    stack: ['Next.js', 'NestJS', 'TypeScript', 'PostgreSQL', 'Prisma', 'Docker', 'Hetzner'],
   },
   {
     company: 'DOA (Digital Ordering Application)',
-    role: 'Founder & Full-Stack Engineer',
+    role: 'Full-Stack Engineer',
     period: 'Jul 2022 – Sep 2024',
     location: 'Remote',
     summary:
       'Co-founded a digital ordering platform automating restaurant operations through QR-based ordering.',
     points: [
-      'Built REST APIs, authentication, dashboards, order-management workflows, and backend services, with integrations for order notifications, kitchen workflows, and reporting.',
-      'Owned product planning, technical implementation, and client needs, translating real business problems into practical software for restaurants, staff, and customers.',
+      'Built a QR-based restaurant ordering system connecting customer orders with staff and kitchen operations, streamlining the ordering and fulfillment workflow.',
+      'Delivered backend APIs, payment integrations, order dashboards, real-time notifications, and analytics tools, enabling restaurants to manage orders and operations through a unified platform.',
       'Won 1st place at the IDEA TO SCALE startup competition (ITP Prizren, 2024).',
     ],
     stack: ['Node.js', 'Express', 'SQL', 'REST APIs', 'Auth & RBAC'],
