@@ -1,21 +1,6 @@
 // One entry per role. New roles are a data-only edit: add an object here.
 export const experiences = [
   {
-    company: 'Attanda',
-    role: 'AI Engineer',
-    period: 'Mar 2026 – Present',
-    location: 'Vienna, Austria',
-    summary:
-      'Early-stage AI startup building agents and automation solutions for businesses on Google Cloud.',
-    points: [
-      'Build AI agents, voice AI systems, and workflow automations using Python, Vertex AI, BigQuery, Cloud SQL, Cloud Run, APIs, webhooks, and cloud-native services.',
-      'Designed lead-capture and business automation workflows integrating AI services, databases, reporting systems, and operational dashboards.',
-      'Developed backend services and automation pipelines for data processing, validation, monitoring, and operational visibility.',
-      'Work directly from business requirements to deliver end-to-end AI solutions, internal tools, and reliable automation systems.',
-    ],
-    stack: ['Python', 'Vertex AI', 'BigQuery', 'Cloud SQL', 'Cloud Run', 'Webhooks'],
-  },
-  {
     company: 'DORA Consulting',
     role: 'Software Consultant & Full-Stack Engineer',
     period: 'May 2026 – Present',
@@ -32,6 +17,35 @@ export const experiences = [
   },
   {
     company: 'Mercor Intelligence',
+    role: 'Software Engineering Expert',
+    period: 'Sep 2026 – Nov 2026',
+    location: 'Remote · Contract',
+    summary:
+      'Contracted as a software engineering expert on an AI training data project.',
+    points: [
+      'Created and evaluated software engineering training data used to improve AI coding models and software engineering capabilities.',
+      'Reviewed technical tasks, code changes, tests, and AI-generated solutions for correctness, robustness, and adherence to requirements.',
+      'Analyzed AI coding-agent performance and provided structured technical evaluations based on software engineering evidence.',
+    ],
+    stack: ['AI Training Data', 'Software Engineering'],
+  },
+  {
+    company: 'Attanda',
+    role: 'AI Engineer',
+    period: 'Mar 2026 – Nov 2026',
+    location: 'Vienna, Austria',
+    summary:
+      'Early-stage AI startup building agents and automation solutions for businesses on Google Cloud.',
+    points: [
+      'Built AI agents, voice AI systems, and workflow automations using Python, Vertex AI, BigQuery, Cloud SQL, Cloud Run, APIs, webhooks, and cloud-native services.',
+      'Designed lead-capture and business automation workflows integrating AI services, databases, reporting systems, and operational dashboards.',
+      'Developed backend services and automation pipelines for data processing, validation, monitoring, and operational visibility.',
+      'Worked directly from business requirements to deliver end-to-end AI solutions, internal tools, and reliable automation systems.',
+    ],
+    stack: ['Python', 'Vertex AI', 'BigQuery', 'Cloud SQL', 'Cloud Run', 'Webhooks'],
+  },
+  {
+    company: 'Mercor Intelligence',
     role: 'Generalist Expert, AI Evaluation',
     period: 'Jul 2026 – Aug 2026',
     location: 'Remote · Contract',
@@ -42,20 +56,6 @@ export const experiences = [
       'Contributed structured feedback and quality signals used to improve model performance.',
     ],
     stack: ['AI Evaluation', 'Prompt Engineering'],
-  },
-  {
-    company: 'Mercor Intelligence',
-    role: 'Software Engineering Expert',
-    period: 'Sep 2026 – Present',
-    location: 'Remote · Contract',
-    summary:
-      'Contracted as a software engineering expert on an AI training data project.',
-    points: [
-      'Create and evaluate software engineering training data used to improve AI coding models and software engineering capabilities.',
-      'Review technical tasks, code changes, tests, and AI-generated solutions for correctness, robustness, and adherence to requirements.',
-      'Analyze AI coding-agent performance and provide structured technical evaluations based on software engineering evidence.',
-    ],
-    stack: ['AI Training Data', 'Software Engineering'],
   },
   {
     company: 'DOA (Digital Ordering Application)',
